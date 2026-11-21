@@ -7,13 +7,13 @@
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <br>
   <img src="https://img.shields.io/github/issues/looomix/Node-Configs?style=flat-square" alt="GitHub Issues" />
-  <img src="https://img.shields.io/badge/Configs-2381-blue?style=flat-square" alt="Total Configs" />
+  <img src="https://img.shields.io/badge/Configs-2044-blue?style=flat-square" alt="Total Configs" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="GitHub Stars" />
   <img src="https://img.shields.io/badge/status-active-brightgreen?style=flat-square" alt="Project Status" />
   <img src="https://img.shields.io/badge/language-中文%20%26%20English-007EC6?style=flat-square" alt="Language" />
 </p>
 
-## 最后更新: 14:51 2026-11-21
+## 最后更新: 03:01 2026-11-22
 
 ---
 
@@ -46,28 +46,28 @@
 
 | 指标 | 数值 |
 |:---|:---:|
-| 分享链接总数 | 2381 |
-| 无法转换的链接 | 16 |
-| 重复节点（已合并） | 509 |
-| **可转换唯一节点** | **1856** |
+| 分享链接总数 | 2044 |
+| 无法转换的链接 | 20 |
+| 重复节点（已合并） | 372 |
+| **可转换唯一节点** | **1652** |
 
 > 无法转换的链接通常是因为该协议暂不支持生成 Clash / sing-box 结构（如 WireGuard），原始链接仍在 `configs/protocols/` 中可用。
 
 ---
 
 ## 📁 协议配置
-目前有 2381 个配置可用。
+目前有 2044 个配置可用。
 
 <div align="center">
 
 | 协议 | 数量 | 下载链接 |
 |:-------:|:-----:|:------------:|
-| **汇总** | **2381** | [`AllProtocols.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) |
-| Hysteria2 | 32 | [`Hysteria2.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Hysteria2.txt) |
-| ShadowSocks | 254 | [`ShadowSocks.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/ShadowSocks.txt) |
-| Trojan | 122 | [`Trojan.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Trojan.txt) |
-| Vless | 1849 | [`Vless.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Vless.txt) |
-| Vmess | 124 | [`Vmess.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Vmess.txt) |
+| **汇总** | **2044** | [`AllProtocols.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) |
+| Hysteria2 | 18 | [`Hysteria2.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Hysteria2.txt) |
+| ShadowSocks | 240 | [`ShadowSocks.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/ShadowSocks.txt) |
+| Trojan | 116 | [`Trojan.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Trojan.txt) |
+| Vless | 1556 | [`Vless.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Vless.txt) |
+| Vmess | 114 | [`Vmess.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Vmess.txt) |
 </div>
 
 ---
