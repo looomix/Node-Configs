@@ -491,11 +491,6 @@ def generate_readme(protocol_counts, convert_stats=None,
     total_configs = sum(protocol_counts.values())
     convert_stats = convert_stats or {}
     converted = convert_stats.get('converted', 0)
-    skipped = convert_stats.get('skipped', {})
-    skipped_total = sum(skipped.values())
-    merged_duplicates = max(total_configs - converted - skipped_total, 0)
-    sources_ok = convert_stats.get('sources_ok', 0)
-    sources_total = convert_stats.get('sources_total', 0)
 
     md = f"""# 🧩 Node-Configs
 
@@ -527,15 +522,6 @@ def generate_readme(protocol_counts, convert_stats=None,
 
 - Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) — 可作为 `proxy-provider`
 - sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) — 可合并进已有配置
-
-## 📊 数据概览
-
-| 分享链接 | 可转换节点 | 重复已合并 | 无法转换 | 数据源可用 |
-|:---:|:---:|:---:|:---:|:---:|
-| {total_configs} | **{converted}** | {merged_duplicates} | {skipped_total} | {sources_ok} / {sources_total} |
-
-> 无法转换多为该协议无法表达为 Clash / sing-box 结构（如 WireGuard），原始链接仍保留在 `configs/protocols/`。
-> 本项目不做存活检测，节点可用性随时变化，请以客户端实测结果为准。
 
 ## 🛠️ 客户端配置
 
@@ -776,8 +762,7 @@ async def main():
     sources_ok = sum(1 for _, text in fetched_pages if text)
 
     convert_stats = {'converted': len(nodes), 'clash': clash_count,
-                     'singbox': singbox_count, 'skipped': skipped,
-                     'sources_ok': sources_ok, 'sources_total': len(urls)}
+                     'singbox': singbox_count, 'skipped': skipped}
     generate_readme(protocol_counts, convert_stats=convert_stats,
                     github_repo_path=GITHUB_REPO_PATH, github_branch=GITHUB_BRANCH)
 

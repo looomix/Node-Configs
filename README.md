@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/looomix/Node-Configs/main.yml?style=flat-square&label=update" alt="Update Status" />
-  <img src="https://img.shields.io/badge/nodes-2353-blue?style=flat-square" alt="Nodes" />
-  <img src="https://img.shields.io/badge/links-3181-informational?style=flat-square" alt="Links" />
+  <img src="https://img.shields.io/badge/nodes-1907-blue?style=flat-square" alt="Nodes" />
+  <img src="https://img.shields.io/badge/links-2379-informational?style=flat-square" alt="Links" />
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="Stars" />
@@ -11,7 +11,7 @@
 
 <p align="center">
   从公开来源自动聚合网络节点，转换成 <b>Clash / mihomo</b> 与 <b>sing-box</b> 可直接导入的订阅配置<br>
-  每 12 小时自动更新 · 最后更新 <b>2026-11-23 15:41</b>
+  每 12 小时自动更新 · 最后更新 <b>2026-11-23 15:48</b>
 </p>
 
 ## ⚡ 快速订阅
@@ -28,15 +28,6 @@
 
 - Clash： [`proxies.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/proxies.yaml) — 可作为 `proxy-provider`
 - sing-box： [`outbounds.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/outbounds.json) — 可合并进已有配置
-
-## 📊 数据概览
-
-| 分享链接 | 可转换节点 | 重复已合并 | 无法转换 | 数据源可用 |
-|:---:|:---:|:---:|:---:|:---:|
-| 3181 | **2353** | 817 | 11 | 13 / 13 |
-
-> 无法转换多为该协议无法表达为 Clash / sing-box 结构（如 WireGuard），原始链接仍保留在 `configs/protocols/`。
-> 本项目不做存活检测，节点可用性随时变化，请以客户端实测结果为准。
 
 ## 🛠️ 客户端配置
 
