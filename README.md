@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/looomix/Node-Configs/main.yml?style=flat-square&label=update" alt="Update Status" />
-  <img src="https://img.shields.io/badge/nodes-2353-blue?style=flat-square" alt="Nodes" />
-  <img src="https://img.shields.io/badge/links-3181-informational?style=flat-square" alt="Links" />
+  <img src="https://img.shields.io/badge/nodes-2156-blue?style=flat-square" alt="Nodes" />
+  <img src="https://img.shields.io/badge/links-2887-informational?style=flat-square" alt="Links" />
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="Stars" />
@@ -11,7 +11,7 @@
 
 <p align="center">
   从公开来源自动聚合网络节点，转换成 <b>Clash / mihomo</b> 与 <b>sing-box</b> 可直接导入的订阅配置<br>
-  每 12 小时自动更新 · 最后更新 <b>2026-11-23 15:50</b>
+  每 12 小时自动更新 · 最后更新 <b>2026-11-24 07:44</b>
 </p>
 
 ## ⚡ 快速订阅

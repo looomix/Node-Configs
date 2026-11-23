@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-11-23 15:50:31",
-  "links": 3181,
-  "converted": 2353,
-  "clash": 2353,
-  "singbox": 2353,
+  "updated_at": "2026-11-24 07:44:49",
+  "links": 2887,
+  "converted": 2156,
+  "clash": 2156,
+  "singbox": 2156,
   "sources_ok": 13,
   "sources_total": 13,
   "skipped": {
     "Vmess": 1,
-    "ShadowSocks": 9,
+    "ShadowSocks": 13,
     "Hysteria2": 1
   }
 }
