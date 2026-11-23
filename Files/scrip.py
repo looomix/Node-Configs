@@ -339,8 +339,13 @@ def assign_unique_names(nodes):
     比任何猜测都准）与协议信息，序号按协议 + 地址 + 端口稳定排序生成，
     保证每次运行同一节点拿到的名字不变，Clash 与 sing-box 两边也一致。
     """
-    nodes.sort(key=lambda node: (node['type'], node['server'], node['port'],
-                                 str(node.get('path') or '')))
+    def sort_key(node):
+        # 参数参与排序，避免同地址同端口但凭据不同的节点序号在两次运行间互换
+        params = tuple(sorted((key, str(value)) for key, value in node.items()
+                              if key != 'name'))
+        return (node['type'], node['server'], node['port'], params)
+
+    nodes.sort(key=sort_key)
     counters = {}
     for node in nodes:
         proto = TYPE_LABELS.get(node['type'], node['type'])
