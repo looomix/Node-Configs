@@ -162,28 +162,19 @@ proxies:
   sni: bgsg2.hikigo.com
   obfs: salamander
   obfs-password: sj1awrdwnn5lbuno
-- name: 🇩🇪 DE-Hy2-025
-  type: hysteria2
-  server: dga1de.mateflora.com
-  port: 40120
-  password: 57beeeb0-03fc-4fc9-94da-7604488a7134
-  sni: psstatic.cdn.bcebos.com
-  skip-cert-verify: true
-  obfs: salamander
-  obfs-password: pz7lyeav76a5wqzb
-- name: 🇺🇸 US-Hy2-026
+- name: 🇺🇸 US-Hy2-025
   type: hysteria2
   server: germanyafterpool.fun
   port: 443
   password: 9a9f167d-b461-466f-be50-f0ffd598a6f8
   sni: germanyafterpool.fun
-- name: Hy2-027
+- name: Hy2-026
   type: hysteria2
   server: rebecca.nikanesalamat.ir
   port: 2096
   password: 2a767d49fd18caeb37aebe7c49fb4d44
   sni: rebecca.nikanesalamat.ir
-- name: 🇷🇺 RU-Hy2-028
+- name: 🇷🇺 RU-Hy2-027
   type: hysteria2
   server: srv-17e124.21freedom.net
   port: 11592
@@ -22028,10 +22019,9 @@ proxy-groups:
   - 🇵🇱 PL-Hy2-022
   - Hy2-023
   - Hy2-024
-  - 🇩🇪 DE-Hy2-025
-  - 🇺🇸 US-Hy2-026
-  - Hy2-027
-  - 🇷🇺 RU-Hy2-028
+  - 🇺🇸 US-Hy2-025
+  - Hy2-026
+  - 🇷🇺 RU-Hy2-027
   - 🇿🇦 ZA-SS-001
   - SS-002
   - SS-003
@@ -23936,10 +23926,9 @@ proxy-groups:
   - 🇵🇱 PL-Hy2-022
   - Hy2-023
   - Hy2-024
-  - 🇩🇪 DE-Hy2-025
-  - 🇺🇸 US-Hy2-026
-  - Hy2-027
-  - 🇷🇺 RU-Hy2-028
+  - 🇺🇸 US-Hy2-025
+  - Hy2-026
+  - 🇷🇺 RU-Hy2-027
   - 🇿🇦 ZA-SS-001
   - SS-002
   - SS-003

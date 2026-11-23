@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-11-23 15:18:01",
-  "links": 2380,
-  "converted": 1902,
-  "clash": 1902,
-  "singbox": 1902,
-  "sources_ok": 12,
-  "sources_total": 14,
+  "updated_at": "2026-11-23 15:27:35",
+  "links": 2379,
+  "converted": 1901,
+  "clash": 1901,
+  "singbox": 1901,
+  "sources_ok": 11,
+  "sources_total": 11,
   "skipped": {
     "Vmess": 1,
     "ShadowSocks": 9
