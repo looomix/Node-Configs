@@ -23,6 +23,22 @@ SS_CIPHERS = {
 
 SUPPORTED_TYPES = ('vmess', 'vless', 'trojan', 'ss', 'ssr', 'hysteria2', 'tuic')
 
+# sing-box 不支持 SSR，一旦写进 outbounds 会让整份配置校验失败（不是跳过该节点），
+# 因此输出前必须按白名单过滤。
+SINGBOX_TYPES = {'vmess', 'vless', 'trojan', 'ss', 'hysteria2', 'tuic'}
+
+# sing-box 的 shadowsocks 插件只认这几种（写入前已归一为这里的名字）
+SINGBOX_SS_PLUGINS = {'', 'obfs-local', 'v2ray-plugin'}
+
+# 插件名归一：不同客户端/机场写法不一样
+SS_PLUGIN_ALIASES = {
+    'obfs': 'obfs-local',
+    'obfs-local': 'obfs-local',
+    'simple-obfs': 'obfs-local',
+    'v2ray-plugin': 'v2ray-plugin',
+    'shadow-tls': 'shadow-tls',
+}
+
 
 def _b64decode(data):
     if not data:
@@ -270,8 +286,19 @@ def _parse_ss(uri):
 
     node['method'] = method
     node['password'] = password
-    node['plugin'] = query.get('plugin', '')
-    node['plugin_opts'] = query.get('plugin_opts') or query.get('plugin-opts') or ''
+
+    # 插件参数形如 plugin=v2ray-plugin;mode=websocket;host=a.com;path=/ws
+    # 整串塞给客户端会直接失效，这里拆成插件名与参数两部分
+    raw_plugin = (query.get('plugin') or '').strip()
+    plugin_name, plugin_opts = '', ''
+    if raw_plugin:
+        pieces = raw_plugin.split(';')
+        plugin_name = pieces[0].strip()
+        plugin_opts = ';'.join(pieces[1:]).strip()
+    if not plugin_opts:
+        plugin_opts = (query.get('plugin_opts') or query.get('plugin-opts') or '').strip()
+    node['plugin'] = plugin_name
+    node['plugin_opts'] = plugin_opts
     return node
 
 
@@ -318,6 +345,7 @@ _PARSERS = {
     'ssr': _parse_ssr,
     'hysteria2': _parse_hysteria2,
     'tuic': _parse_tuic,
+    'tuic5': _parse_tuic,
 }
 
 
@@ -393,8 +421,69 @@ def _clash_tls(proxy, node):
         proxy['reality-opts'] = reality
 
 
+def _ss_plugin_options(node):
+    """把 plugin_opts 的 `k=v;k2=v2` 解析成字典，无值的裸键（如 tls）记为 true。"""
+    options = {}
+    for item in (node.get('plugin_opts') or '').split(';'):
+        item = item.strip()
+        if not item:
+            continue
+        if '=' in item:
+            key, value = item.split('=', 1)
+            options[key.strip().lower()] = value.strip()
+        else:
+            options[item.lower()] = 'true'
+    return options
+
+
+def _clash_ss_plugin(proxy, node):
+    """处理 Shadowsocks 插件；返回 False 表示该插件 Clash 无法表达。"""
+    raw = (node.get('plugin') or '').strip().lower()
+    if not raw:
+        return True
+
+    plugin = SS_PLUGIN_ALIASES.get(raw)
+    if not plugin:
+        # 认不出的插件不能降级成裸 SS，否则客户端连得上端口却握手失败
+        return False
+
+    options = _ss_plugin_options(node)
+
+    if plugin == 'obfs-local':
+        proxy['plugin'] = 'obfs'
+        plugin_opts = {'mode': options.get('obfs') or options.get('mode') or 'http'}
+        host = options.get('obfs-host') or options.get('host')
+        if host:
+            plugin_opts['host'] = host
+        proxy['plugin-opts'] = plugin_opts
+        return True
+
+    if plugin == 'v2ray-plugin':
+        proxy['plugin'] = 'v2ray-plugin'
+        mode = (options.get('mode') or 'websocket').lower()
+        plugin_opts = {'mode': 'websocket' if mode in ('ws', 'websocket') else mode}
+        for key in ('host', 'path'):
+            if options.get(key):
+                plugin_opts[key] = options[key]
+        if _truthy(options.get('tls', '')) or options.get('tls') in ('1', 'true'):
+            plugin_opts['tls'] = True
+        proxy['plugin-opts'] = plugin_opts
+        return True
+
+    if plugin == 'shadow-tls':
+        proxy['plugin'] = 'shadow-tls'
+        plugin_opts = {}
+        for key in ('host', 'password', 'version'):
+            if options.get(key):
+                plugin_opts[key] = options[key]
+        proxy['plugin-opts'] = plugin_opts
+        return True
+
+    return False
+
+
 def clash_proxy(node):
-    """节点字典 -> Clash proxy 条目。"""
+    """节点字典 -> Clash proxy 条目；返回 None 表示 Clash 无法表达。"""
     name = node['name']
     proxy = {'name': name, 'type': node['type'],
              'server': node['server'], 'port': node['port']}
@@ -426,17 +515,9 @@ def clash_proxy(node):
         proxy['cipher'] = node['method']
         proxy['password'] = node['password']
         proxy['udp'] = True
-        plugin = (node.get('plugin') or '').lower()
-        if plugin.startswith('obfs') or plugin.startswith('simple-obfs'):
-            options = {}
-            for item in (node.get('plugin_opts') or '').split(';'):
-                if '=' in item:
-                    key, value = item.split('=', 1)
-                    options[key.strip()] = value.strip()
-            proxy['plugin'] = 'obfs'
-            proxy['plugin-opts'] = {'mode': options.get('obfs', 'http')}
-            if options.get('obfs-host'):
-                proxy['plugin-opts']['host'] = options['obfs-host']
+        # 插件映射失败时不能降级成裸 SS（会连不上），直接放弃这个节点
+        if not _clash_ss_plugin(proxy, node):
+            return None
 
     elif node_type == 'ssr':
         proxy['cipher'] = node['method']
@@ -518,7 +599,10 @@ def _singbox_transport(node):
 
 
 def singbox_outbound(node):
-    """节点字典 -> sing-box outbound。"""
+    """节点字典 -> sing-box outbound；返回 None 表示 sing-box 无法表达。"""
+    if node['type'] not in SINGBOX_TYPES:
+        return None
+
     outbound = {'type': node['type'], 'tag': node['name'],
                 'server': node['server'], 'server_port': node['port']}
     node_type = node['type']
@@ -539,21 +623,18 @@ def singbox_outbound(node):
     elif node_type == 'ss':
         outbound['method'] = node['method']
         outbound['password'] = node['password']
-        if node.get('plugin'):
-            outbound['plugin'] = node['plugin']
-            if node.get('plugin_opts'):
-                outbound['plugin_opts'] = node['plugin_opts']
-
-    elif node_type == 'ssr':
-        outbound['type'] = 'shadowsocksr'
-        outbound['method'] = node['method']
-        outbound['password'] = node['password']
-        outbound['protocol'] = node.get('protocol') or 'origin'
-        outbound['obfs'] = node.get('obfs') or 'plain'
-        if node.get('protocol_param'):
-            outbound['protocol_param'] = node['protocol_param']
-        if node.get('obfs_param'):
-            outbound['obfs_param'] = node['obfs_param']
+        raw_plugin = (node.get('plugin') or '').strip().lower()
+        plugin = SS_PLUGIN_ALIASES.get(raw_plugin) or ''
+        if raw_plugin and not plugin:
+            # 认不出的插件不写入，否则 sing-box 会因未知 plugin 拒绝启动
+            return None
+        if plugin not in SINGBOX_SS_PLUGINS:
+            # shadow-tls 等插件 sing-box 不支持，带上会导致配置校验失败
+            return None
+        if plugin:
+            outbound['plugin'] = plugin
+        if node.get('plugin_opts'):
+            outbound['plugin_opts'] = node['plugin_opts']
 
     elif node_type == 'hysteria2':
         outbound['password'] = node['password']

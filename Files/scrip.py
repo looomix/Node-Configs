@@ -25,12 +25,17 @@ PROTOCOL_OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'configs/protocols')
 CLASH_OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'configs/clash')
 SINGBOX_OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'configs/singbox')
 README_FILE = os.path.join(PROJECT_ROOT, 'README.md')
+STATS_FILE = os.path.join(PROJECT_ROOT, 'stats.json')
 
 REQUEST_TIMEOUT = 20
 CONCURRENT_REQUESTS = 10
 FETCH_RETRIES = 3
 MAX_CONFIG_LENGTH = 1500
 MIN_PERCENT25_COUNT = 15
+
+# 熔断参数：节点数低于上次的 60% 且上次已超过 300 个时视为异常，直接中止
+MIN_NODE_RATIO = float(os.environ.get('MIN_NODE_RATIO', '0.6'))
+MIN_NODE_FLOOR = int(os.environ.get('MIN_NODE_FLOOR', '300'))
 
 GITHUB_REPO_PATH = 'looomix/Node-Configs'
 GITHUB_BRANCH = 'main'
@@ -298,27 +303,67 @@ def collect_nodes(final_configs):
     return nodes, skipped
 
 
+FLAG_PATTERN = re.compile(r'[\U0001F1E6-\U0001F1FF]{2}')
+REGIONAL_BASE = 0x1F1E6
+
+TYPE_LABELS = {
+    'vmess': 'Vmess',
+    'vless': 'Vless',
+    'trojan': 'Trojan',
+    'ss': 'SS',
+    'ssr': 'SSR',
+    'hysteria2': 'Hy2',
+    'tuic': 'Tuic',
+}
+
+
+def _country_code(name):
+    """从节点名里的国旗 emoji 还原国家/地区代码（🇺🇸 -> US）。"""
+    match = FLAG_PATTERN.search(name or '')
+    if not match:
+        return ''
+    letters = ''.join(chr(ord(ch) - REGIONAL_BASE + ord('A'))
+                      for ch in match.group(0))
+    return letters if letters.isalpha() else ''
+
+
+def _flag_emoji(code):
+    return ''.join(chr(REGIONAL_BASE + ord(ch) - ord('A')) for ch in code)
+
+
 def assign_unique_names(nodes):
-    """Clash / sing-box 都要求节点名唯一，这里做去重加后缀。"""
-    symbol_only = re.compile(r'^[^A-Za-z0-9\u4e00-\u9fff]+$')
-    used = set()
+    """把节点名规范成 `🇺🇸 US-Vless-001` 这种可读且唯一的形式。
+
+    源站给的节点名里混着大量广告（t.me 频道、机场推广）、纯编号和时间戳，
+    直接显示在客户端里既难看也无法分辨。这里只保留国旗（服务商自己标的，
+    比任何猜测都准）与协议信息，序号按协议 + 地址 + 端口稳定排序生成，
+    保证每次运行同一节点拿到的名字不变，Clash 与 sing-box 两边也一致。
+    """
+    nodes.sort(key=lambda node: (node['type'], node['server'], node['port'],
+                                 str(node.get('path') or '')))
+    counters = {}
     for node in nodes:
-        base = (node.get('name') or '').strip()
-        # 名字只有国旗/符号时补上地址，避免在客户端里全是分不清的图标
-        if not base or symbol_only.match(base):
-            base = f"{base} {node['server']}:{node['port']}".strip()
-        name = base
-        suffix = 2
-        while name.lower() in used:
-            name = f"{base} #{suffix}"
-            suffix += 1
-        used.add(name.lower())
-        node['name'] = name
+        proto = TYPE_LABELS.get(node['type'], node['type'])
+        index = counters.get(node['type'], 0) + 1
+        counters[node['type']] = index
+
+        code = _country_code(node.get('name'))
+        prefix = f"{_flag_emoji(code)} {code}-" if code else ''
+        node['name'] = f"{prefix}{proto}-{index:03d}"
     return nodes
 
 
 def write_clash_config(nodes):
-    proxies = [clash_proxy(node) for node in nodes]
+    proxies = []
+    dropped = 0
+    for node in nodes:
+        proxy = clash_proxy(node)
+        if proxy is None:
+            dropped += 1
+            continue
+        proxies.append(proxy)
+    if dropped:
+        logging.warning(f"跳过 {dropped} 个 Clash 无法表达的节点")
     names = [proxy['name'] for proxy in proxies]
 
     groups = [{'name': '🚀 节点选择', 'type': 'select',
@@ -368,7 +413,18 @@ def write_clash_config(nodes):
 
 
 def write_singbox_config(nodes):
-    tags = [node['name'] for node in nodes]
+    outbounds_nodes = []
+    dropped = 0
+    for node in nodes:
+        outbound = singbox_outbound(node)
+        if outbound is None:
+            dropped += 1
+            continue
+        outbounds_nodes.append(outbound)
+    if dropped:
+        logging.warning(f"跳过 {dropped} 个 sing-box 不支持的节点（如 SSR / shadow-tls 插件）")
+
+    tags = [outbound['tag'] for outbound in outbounds_nodes]
 
     outbounds = []
     outbounds.append({'type': 'selector', 'tag': '🚀 节点选择',
@@ -378,7 +434,7 @@ def write_singbox_config(nodes):
                           'outbounds': tags,
                           'url': 'https://www.gstatic.com/generate_204',
                           'interval': '5m', 'tolerance': 50})
-    outbounds.extend(singbox_outbound(node) for node in nodes)
+    outbounds.extend(outbounds_nodes)
     outbounds.append({'type': 'direct', 'tag': 'DIRECT'})
     outbounds.append({'type': 'block', 'tag': 'BLOCK'})
 
@@ -524,6 +580,60 @@ def generate_readme(protocol_counts, convert_stats=None,
         logging.error(f"Failed to write {README_FILE}: {e}")
 
 
+def load_previous_converted():
+    """读取上一次成功运行写下的节点数，用于判断本次是否异常。"""
+    try:
+        with open(STATS_FILE, 'r', encoding='utf-8') as f:
+            return int(json.load(f).get('converted') or 0)
+    except (OSError, ValueError, TypeError):
+        return 0
+
+
+def enforce_node_floor(converted, links):
+    """节点数较上次骤降时中止。
+
+    上游源集体挂掉时脚本仍会「成功」产出几百个节点，若直接提交就会把仓库里
+    上千个有效节点覆盖成残缺版本，而且没有任何告警。这里做一道熔断。
+    """
+    previous = load_previous_converted()
+    if previous < MIN_NODE_FLOOR:
+        logging.info(f"上次节点数 {previous} 低于熔断基线 {MIN_NODE_FLOOR}，跳过检查")
+        return
+
+    ratio = converted / previous
+    if ratio < MIN_NODE_RATIO:
+        logging.critical(
+            f"熔断：节点数从 {previous} 降到 {converted}（{ratio:.0%}，"
+            f"阈值 {MIN_NODE_RATIO:.0%}），疑似上游源大面积失败。"
+            "本次未写入任何文件，也不会提交。"
+            f"确认是真实下降可删除 {os.path.basename(STATS_FILE)} 或调低 MIN_NODE_RATIO 后重跑。")
+        raise SystemExit(3)
+
+    logging.info(f"熔断检查通过：{converted} 个节点（上次 {previous}，{ratio:.0%}，"
+                 f"链接 {links} 条）")
+
+
+def save_stats(links, converted, clash_count, singbox_count, sources_ok,
+               sources_total, skipped):
+    payload = {
+        'updated_at': datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S'),
+        'links': links,
+        'converted': converted,
+        'clash': clash_count,
+        'singbox': singbox_count,
+        'sources_ok': sources_ok,
+        'sources_total': sources_total,
+        'skipped': skipped,
+    }
+    try:
+        with open(STATS_FILE, 'w', encoding='utf-8', newline='\n') as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2, sort_keys=False)
+            f.write('\n')
+        logging.info(f"Saved stats to {STATS_FILE}")
+    except Exception as e:
+        logging.error(f"Failed to write {STATS_FILE}: {e}")
+
+
 async def main():
     if not os.path.exists(URLS_FILE) or not os.path.exists(KEYWORDS_FILE):
         logging.critical("Input files not found.")
@@ -585,6 +695,16 @@ async def main():
         logging.info(f"Reclassified {filter_totals['reclassified']} mislabeled "
                      f"ss:// configs as vless://")
 
+    # 汇总所有协议（先算总数，供熔断判断用）
+    all_protocols_combined = set()
+    for configs in final_configs.values():
+        all_protocols_combined.update(configs)
+
+    # 解析出统一节点结构；先做熔断判断，异常时一个文件都不写
+    nodes, skipped = collect_nodes(final_configs)
+    assign_unique_names(nodes)
+    enforce_node_floor(len(nodes), len(all_protocols_combined))
+
     if os.path.exists(PROTOCOL_OUTPUT_DIR):
         shutil.rmtree(PROTOCOL_OUTPUT_DIR)
     os.makedirs(PROTOCOL_OUTPUT_DIR, exist_ok=True)
@@ -595,16 +715,9 @@ async def main():
         count = save_to_file(PROTOCOL_OUTPUT_DIR, category, final_configs.get(category, set()))
         if count:
             protocol_counts[category] = count
-
-    # 汇总所有协议到一个文件
-    all_protocols_combined = set()
-    for configs in final_configs.values():
-        all_protocols_combined.update(configs)
     save_to_file(PROTOCOL_OUTPUT_DIR, "AllProtocols", all_protocols_combined)
 
     # 生成 Clash / sing-box 配置
-    nodes, skipped = collect_nodes(final_configs)
-    assign_unique_names(nodes)
     clash_count = write_clash_config(nodes)
     singbox_count = write_singbox_config(nodes)
 
@@ -617,8 +730,13 @@ async def main():
     generate_readme(protocol_counts, convert_stats=convert_stats,
                     github_repo_path=GITHUB_REPO_PATH, github_branch=GITHUB_BRANCH)
 
+    sources_ok = sum(1 for _, text in fetched_pages if text)
+    save_stats(len(all_protocols_combined), len(nodes), clash_count,
+               singbox_count, sources_ok, len(urls), skipped)
+
     logging.info(f"Total unique links: {len(all_protocols_combined)}")
     logging.info(f"Converted nodes: {len(nodes)} (clash={clash_count}, sing-box={singbox_count})")
+    logging.info(f"Sources: {sources_ok}/{len(urls)} fetched")
     logging.info("--- Script Finished ---")
 
 
