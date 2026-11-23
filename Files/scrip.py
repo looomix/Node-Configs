@@ -491,26 +491,6 @@ def generate_readme(protocol_counts, convert_stats=None,
 
 ---
 
-## 📁 协议配置
-{f'目前有 {total_configs} 个配置可用。' if total_configs else '未找到任何协议配置。'}
-
-<div align="center">
-
-| 协议 | 数量 | 下载链接 |
-|:-------:|:-----:|:------------:|
-| **汇总** | **{total_configs}** | [`AllProtocols.txt`]({raw_protocols}/AllProtocols.txt) |
-"""
-
-    if protocol_counts:
-        for name, count in sorted(protocol_counts.items()):
-            md += f"| {name} | {count} | [`{name}.txt`]({raw_protocols}/{name}.txt) |\n"
-    else:
-        md += "| - | - | - |\n"
-
-    md += f"""</div>
-
----
-
 ## 🛠️ 使用方法
 
 **Clash / mihomo**
@@ -523,7 +503,7 @@ def generate_readme(protocol_counts, convert_stats=None,
 2. 启动后本地 `127.0.0.1:2080` 即为 mixed 代理端口（HTTP + SOCKS5）。
 
 **v2rayN / v2rayNG / NekoRay / Karing**
-1. 下载 `AllProtocols.txt` 或对应协议文件；
+1. 使用上面的 `AllProtocols.txt` 链接订阅，或到 `configs/protocols/` 目录按协议取对应文件；
 2. 在客户端「从剪贴板导入 / 订阅」中导入。
 
 > **建议**: 为获得最佳性能，请定期更新订阅。

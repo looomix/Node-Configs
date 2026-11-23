@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/language-中文%20%26%20English-007EC6?style=flat-square" alt="Language" />
 </p>
 
-## 最后更新: 03:26 2026-11-23
+## 最后更新: 15:00 2026-11-23
 
 ---
 
@@ -55,23 +55,6 @@
 
 ---
 
-## 📁 协议配置
-目前有 1856 个配置可用。
-
-<div align="center">
-
-| 协议 | 数量 | 下载链接 |
-|:-------:|:-----:|:------------:|
-| **汇总** | **1856** | [`AllProtocols.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) |
-| Hysteria2 | 20 | [`Hysteria2.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Hysteria2.txt) |
-| ShadowSocks | 168 | [`ShadowSocks.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/ShadowSocks.txt) |
-| Trojan | 130 | [`Trojan.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Trojan.txt) |
-| Vless | 1452 | [`Vless.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Vless.txt) |
-| Vmess | 86 | [`Vmess.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/Vmess.txt) |
-</div>
-
----
-
 ## 🛠️ 使用方法
 
 **Clash / mihomo**
@@ -84,7 +67,7 @@
 2. 启动后本地 `127.0.0.1:2080` 即为 mixed 代理端口（HTTP + SOCKS5）。
 
 **v2rayN / v2rayNG / NekoRay / Karing**
-1. 下载 `AllProtocols.txt` 或对应协议文件；
+1. 使用上面的 `AllProtocols.txt` 链接订阅，或到 `configs/protocols/` 目录按协议取对应文件；
 2. 在客户端「从剪贴板导入 / 订阅」中导入。
 
 > **建议**: 为获得最佳性能，请定期更新订阅。
