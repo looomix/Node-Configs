@@ -7,13 +7,13 @@
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <br>
   <img src="https://img.shields.io/github/issues/looomix/Node-Configs?style=flat-square" alt="GitHub Issues" />
-  <img src="https://img.shields.io/badge/Configs-2361-blue?style=flat-square" alt="Total Configs" />
+  <img src="https://img.shields.io/badge/Configs-2380-blue?style=flat-square" alt="Total Configs" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="GitHub Stars" />
   <img src="https://img.shields.io/badge/status-active-brightgreen?style=flat-square" alt="Project Status" />
   <img src="https://img.shields.io/badge/language-中文%20%26%20English-007EC6?style=flat-square" alt="Language" />
 </p>
 
-## 最后更新: 15:01 2026-11-23
+## 最后更新: 15:15 2026-11-23
 
 ---
 
@@ -46,10 +46,10 @@
 
 | 指标 | 数值 |
 |:---|:---:|
-| 分享链接总数 | 2361 |
+| 分享链接总数 | 2380 |
 | 无法转换的链接 | 10 |
-| 重复节点（已合并） | 465 |
-| **可转换唯一节点** | **1886** |
+| 重复节点（已合并） | 468 |
+| **可转换唯一节点** | **1902** |
 
 > 无法转换的链接通常是因为该协议暂不支持生成 Clash / sing-box 结构（如 WireGuard），原始链接仍在 `configs/protocols/` 中可用。
 
