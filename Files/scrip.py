@@ -523,6 +523,11 @@ def generate_readme(protocol_counts, convert_stats=None,
 - Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) — 可作为 `proxy-provider`
 - sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) — 可合并进已有配置
 
+> **连不上 `raw.githubusercontent.com`？**（Android 端常报 `EOF` / `connection reset`，并非配置错误）
+> 在链接前加镜像前缀 `https://gh-proxy.com/` 即可，例如 Clash：
+> `https://gh-proxy.com/https://raw.githubusercontent.com/{github_repo_path}/main/configs/clash/config.yaml`
+> 备选：`https://ghfast.top/` 前缀，或 jsDelivr `https://cdn.jsdelivr.net/gh/{github_repo_path}@main/configs/clash/config.yaml`
+
 ## 🛠️ 客户端配置
 
 **Clash / mihomo** —— 混合端口 `7890`，控制面板 `127.0.0.1:9090`
