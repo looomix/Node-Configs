@@ -8,24 +8,102 @@ import json
 import re
 from urllib.parse import parse_qs, unquote, urlsplit
 
-# 合法的 Shadowsocks 加密方式；不在表内的凭据说明这条 ss:// 是错标的
-SS_CIPHERS = {
+# 各客户端真正认识的 Shadowsocks 加密方式。
+#
+# 这里必须逐字匹配客户端实现的枚举：名字写错时 mihomo / sing-box 不会「跳过这个
+# 节点」，而是在**解析配置**阶段报错并拒绝整份文件，用户那边看到的就是
+# 「无法导入」。典型例子是 chacha20-poly1305 —— 这个名字 mihomo 不认识，
+# 正式名称是 chacha20-ietf-poly1305（机场/订阅里两种写法都很常见）。
+CLASH_SS_CIPHERS = frozenset({
     'aes-128-gcm', 'aes-192-gcm', 'aes-256-gcm',
     'aes-128-cfb', 'aes-192-cfb', 'aes-256-cfb',
     'aes-128-ctr', 'aes-192-ctr', 'aes-256-ctr',
-    'chacha20-ietf-poly1305', 'xchacha20-ietf-poly1305', 'chacha20-poly1305',
-    'chacha20', 'chacha20-ietf', 'xchacha20',
-    'rc4-md5', 'rc4', 'bf-cfb', 'camellia-128-cfb', 'camellia-192-cfb',
-    'camellia-256-cfb', 'salsa20', 'none', 'plain',
+    'rc4-md5', 'chacha20', 'chacha20-ietf', 'xchacha20',
+    'chacha20-ietf-poly1305', 'xchacha20-ietf-poly1305',
     '2022-blake3-aes-128-gcm', '2022-blake3-aes-256-gcm',
     '2022-blake3-chacha20-poly1305',
+    'none',
+})
+
+# sing-box 支持的范围更窄一些（没有裸 chacha20）
+SINGBOX_SS_CIPHERS = frozenset({
+    'aes-128-gcm', 'aes-192-gcm', 'aes-256-gcm',
+    'aes-128-cfb', 'aes-192-cfb', 'aes-256-cfb',
+    'aes-128-ctr', 'aes-192-ctr', 'aes-256-ctr',
+    'rc4-md5', 'chacha20-ietf', 'xchacha20',
+    'chacha20-ietf-poly1305', 'xchacha20-ietf-poly1305',
+    '2022-blake3-aes-128-gcm', '2022-blake3-aes-256-gcm',
+    '2022-blake3-chacha20-poly1305',
+    'none',
+})
+
+# 解析阶段的可接受集合：只有两个客户端之一能认的才算「有用节点」，
+# 剩下的（bf-cfb / camellia / salsa20 / rc4 …）写进任何配置都会加载失败
+SS_CIPHERS = CLASH_SS_CIPHERS | SINGBOX_SS_CIPHERS
+
+# 客户端互为别名/旧名的写法，统一收敛成规范名
+SS_CIPHER_ALIASES = {
+    'chacha20-poly1305': 'chacha20-ietf-poly1305',
+    'chacha20-poly1305-ietf': 'chacha20-ietf-poly1305',
+    'aead-chacha20-poly1305': 'chacha20-ietf-poly1305',
+    'xchacha20-poly1305': 'xchacha20-ietf-poly1305',
+    'xchacha20-poly1305-ietf': 'xchacha20-ietf-poly1305',
+    'aes-128-gcm-2022': '2022-blake3-aes-128-gcm',
+    'aes-256-gcm-2022': '2022-blake3-aes-256-gcm',
+    'plain': 'none',
+    'dummy': 'none',
 }
 
 SUPPORTED_TYPES = ('vmess', 'vless', 'trojan', 'ss', 'ssr', 'hysteria2', 'tuic')
 
+# mihomo 的 transport 白名单。Xray/sing-box 的写法跟 mihomo 不完全一致
+# （raw / gun / splithttp …），出现不认识的值时 mihomo 会直接
+# 「unsupported network」整份配置加载失败，所以先归一、再按白名单过滤。
+CLASH_NETWORKS = frozenset({'tcp', 'ws', 'grpc', 'h2', 'httpupgrade'})
+
+NETWORK_ALIASES = {
+    'raw': 'tcp',
+    'none': 'tcp',
+    'http': 'h2',
+    'websocket': 'ws',
+    'gun': 'grpc',
+    'splithttp': 'xhttp',
+}
+
+
+def normalize_network(value, default='tcp'):
+    """把各内核的 transport 写法收敛成统一名字。"""
+    text = str(value or '').strip().lower()
+    if not text:
+        return default
+    return NETWORK_ALIASES.get(text, text)
+
+
+# uTLS 指纹白名单（mihomo 与 sing-box 的交集偏保守）
+CLASH_FINGERPRINTS = ('chrome', 'firefox', 'safari', 'ios', 'android',
+                      'edge', '360', 'qq', 'random', 'randomized')
+
+CLASH_FLOWS = frozenset({'xtls-rprx-vision', 'xtls-rprx-vision-udp443'})
+SINGBOX_FLOWS = frozenset({'xtls-rprx-vision'})
+HY2_OBFS_TYPES = frozenset({'salamander'})
+TUIC_CONGESTION = frozenset({'cubic', 'new_reno', 'bbr'})
+TUIC_UDP_RELAY = frozenset({'native', 'quic'})
+V2RAY_SECURITY = frozenset({
+    'auto', 'none', 'zero', 'aes-128-gcm', 'chacha20-poly1305', 'aes-128-ctr',
+})
+
+_UUID_DASHED = re.compile(
+    r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-'
+    r'[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')
+_UUID_BARE = re.compile(r'^[0-9a-fA-F]{32}$')
+
 # sing-box 不支持 SSR，一旦写进 outbounds 会让整份配置校验失败（不是跳过该节点），
 # 因此输出前必须按白名单过滤。
 SINGBOX_TYPES = {'vmess', 'vless', 'trojan', 'ss', 'hysteria2', 'tuic'}
+
+# sing-box 的 outbound 类型名跟协议名并不完全一致：Shadowsocks 必须写
+# `shadowsocks`，写成 `ss` 会被判定为 unknown outbound type 而拒绝启动。
+SINGBOX_TYPE_NAMES = {'ss': 'shadowsocks'}
 
 # sing-box 的 shadowsocks 插件只认这几种（写入前已归一为这里的名字）
 SINGBOX_SS_PLUGINS = {'', 'obfs-local', 'v2ray-plugin'}
@@ -82,6 +160,70 @@ def _truthy(value):
     return str(value).strip().lower() in ('1', 'true', 'yes', 'on')
 
 
+def normalize_ss_method(method):
+    """把各家写法不一的加密方式收敛成客户端认识的规范名。"""
+    method = str(method or '').strip().lower()
+    return SS_CIPHER_ALIASES.get(method, method)
+
+
+def normalize_uuid(value):
+    """校验并规范化 UUID；不是合法 UUID 时返回空串。
+
+    mihomo 解析 vmess/vless 时会 `uuid.FromString`，格式不对就直接报错，
+    同样是「一个节点拖垮整份配置」，所以必须在解析阶段拦住。
+    """
+    text = str(value or '').strip().lower()
+    if _UUID_DASHED.match(text):
+        return text
+    if _UUID_BARE.match(text):
+        return (f'{text[0:8]}-{text[8:12]}-{text[12:16]}-'
+                f'{text[16:20]}-{text[20:32]}')
+    return ''
+
+
+_SHORT_ID = re.compile(r'^(?:[0-9a-fA-F]{2}){0,8}$')
+
+
+def normalize_short_id(value):
+    """REALITY 的 short-id 必须是偶数位十六进制；写错 mihomo 会整份配置报错。"""
+    text = str(value or '').strip()
+    return text.lower() if _SHORT_ID.match(text) else ''
+
+
+def normalize_fingerprint(value):
+    """把 sing-box 风格的指纹名映射到 uTLS 认识的名字；认不出返回空串。"""
+    text = str(value or '').strip().lower()
+    if not text:
+        return ''
+    if text in CLASH_FINGERPRINTS:
+        return text
+    # hello<浏览器>_<版本> 这类写法在源站很常见，取内含的浏览器名
+    for name in sorted(CLASH_FINGERPRINTS, key=len, reverse=True):
+        if name in text:
+            return name
+    return ''
+
+
+def _b64_byte_len(value):
+    text = re.sub(r'\s+', '', str(value or ''))
+    if not text:
+        return -1
+    text = text.replace('-', '+').replace('_', '/')
+    text += '=' * (-len(text) % 4)
+    try:
+        return len(base64.b64decode(text, validate=True))
+    except Exception:
+        return -1
+
+
+def ss_key_len_ok(method, password):
+    """2022-blake3 系列对密钥字节数有硬性要求，长度不对客户端会拒绝启动。"""
+    if not method.startswith('2022-blake3'):
+        return True
+    need = 16 if 'aes-128' in method else 32
+    return _b64_byte_len(password) == need
+
+
 def _name_from_fragment(fragment):
     return unquote(fragment or '').strip()
 
@@ -123,10 +265,12 @@ def _parse_vmess(uri):
     if not node or not data.get('id'):
         return None
 
-    node['uuid'] = str(data.get('id')).strip()
+    node['uuid'] = normalize_uuid(data.get('id'))
+    if not node['uuid']:
+        return None
     node['alter_id'] = _as_int(data.get('aid'), 0)
     node['cipher'] = str(data.get('scy') or 'auto').strip() or 'auto'
-    node['network'] = str(data.get('net') or 'tcp').strip().lower() or 'tcp'
+    node['network'] = normalize_network(data.get('net'))
     node['path'] = str(data.get('path') or '').strip()
     node['host'] = str(data.get('host') or '').strip()
     node['service_name'] = node['path'] if node['network'] == 'grpc' else ''
@@ -145,9 +289,11 @@ def _parse_vless(uri):
         return None
 
     query = _query_dict(parts)
-    node['uuid'] = unquote(parts.username).strip()
+    node['uuid'] = normalize_uuid(unquote(parts.username))
+    if not node['uuid']:
+        return None
     node['flow'] = _first(query, 'flow')
-    node['network'] = (_first(query, 'type') or 'tcp').lower()
+    node['network'] = normalize_network(_first(query, 'type'))
     node['path'] = _first(query, 'path') or '/'
     node['host'] = _first(query, 'host')
     node['service_name'] = _first(query, 'serviceName', 'servicename') or (
@@ -159,7 +305,7 @@ def _parse_vless(uri):
     security = (_first(query, 'security') or 'none').lower()
     node['tls'] = security in ('tls', 'reality', 'xtls')
     node['reality_pbk'] = _first(query, 'pbk')
-    node['reality_sid'] = _first(query, 'sid')
+    node['reality_sid'] = normalize_short_id(_first(query, 'sid'))
     if node['reality_pbk']:
         node['tls'] = True
     return node
@@ -178,7 +324,7 @@ def _parse_trojan(uri):
     if parts.password:
         password = f"{password}:{unquote(parts.password)}"
     node['password'] = password.strip()
-    node['network'] = (_first(query, 'type') or 'tcp').lower()
+    node['network'] = normalize_network(_first(query, 'type'))
     node['path'] = _first(query, 'path') or '/'
     node['host'] = _first(query, 'host')
     node['service_name'] = _first(query, 'serviceName') or (
@@ -280,7 +426,7 @@ def _parse_ss(uri):
     if not node:
         return None
 
-    method = method.strip().lower()
+    method = normalize_ss_method(method)
     if method not in SS_CIPHERS:
         return None
 
@@ -319,7 +465,7 @@ def _parse_ssr(uri):
     if not node:
         return None
 
-    method = method.strip().lower()
+    method = normalize_ss_method(method)
     if method not in SS_CIPHERS:
         return None
 
@@ -385,16 +531,23 @@ def is_valid_ss(uri):
 
 def _clash_transport(proxy, node):
     network = node.get('network', 'tcp')
-    if network in ('ws', 'httpupgrade'):
+    if network == 'ws':
         proxy['network'] = 'ws'
         opts = {'path': node.get('path') or '/'}
+        if node.get('host'):
+            opts['headers'] = {'Host': node['host']}
+        proxy['ws-opts'] = opts
+    elif network == 'httpupgrade':
+        # mihomo 没有独立的 httpupgrade transport，等价写法是 ws + v2ray-http-upgrade
+        proxy['network'] = 'ws'
+        opts = {'path': node.get('path') or '/', 'v2ray-http-upgrade': True}
         if node.get('host'):
             opts['headers'] = {'Host': node['host']}
         proxy['ws-opts'] = opts
     elif network == 'grpc':
         proxy['network'] = 'grpc'
         proxy['grpc-opts'] = {'grpc-service-name': node.get('service_name') or ''}
-    elif network in ('h2', 'http'):
+    elif network == 'h2':
         proxy['network'] = 'h2'
         opts = {'path': node.get('path') or '/'}
         if node.get('host'):
@@ -571,19 +724,27 @@ def _singbox_tls(node):
         tls['insecure'] = True
     if node.get('alpn'):
         tls['alpn'] = node['alpn']
-    if node.get('fp'):
-        tls['utls'] = {'enabled': True, 'fingerprint': node['fp']}
+    fingerprint = normalize_fingerprint(node.get('fp'))
+    if fingerprint:
+        tls['utls'] = {'enabled': True, 'fingerprint': fingerprint}
     if node.get('reality_pbk'):
         reality = {'enabled': True, 'public_key': node['reality_pbk']}
         if node.get('reality_sid'):
             reality['short_id'] = node['reality_sid']
         tls['reality'] = reality
+        # sing-box 的 REALITY 必须搭配 uTLS，缺指纹会直接拒绝启动
+        tls.setdefault('utls', {'enabled': True, 'fingerprint': 'chrome'})
     return tls
 
 
 def _singbox_transport(node):
     network = node.get('network', 'tcp')
-    if network in ('ws', 'httpupgrade'):
+    if network == 'httpupgrade':
+        transport = {'type': 'httpupgrade', 'path': node.get('path') or '/'}
+        if node.get('host'):
+            transport['host'] = node['host']
+        return transport
+    if network == 'ws':
         transport = {'type': 'ws', 'path': node.get('path') or '/'}
         if node.get('host'):
             transport['headers'] = {'Host': node['host']}
@@ -603,7 +764,8 @@ def singbox_outbound(node):
     if node['type'] not in SINGBOX_TYPES:
         return None
 
-    outbound = {'type': node['type'], 'tag': node['name'],
+    outbound = {'type': SINGBOX_TYPE_NAMES.get(node['type'], node['type']),
+                'tag': node['name'],
                 'server': node['server'], 'server_port': node['port']}
     node_type = node['type']
 
@@ -660,3 +822,173 @@ def singbox_outbound(node):
             outbound['transport'] = transport
 
     return outbound
+
+
+# --------------------------------------------------------------------------
+# 出口前的最后一道闸
+#
+# 两个客户端对「不认识的字段值」都是**整份配置拒绝加载**，而不是跳过单条：
+# 加密方式写错、UUID 非法、2022 密钥长度不对、transport 不认识……任意一条都会让
+# 用户看到「导入失败」。所以每个节点在写入前都要过一遍白名单校验，宁可丢一条，
+# 也不能让 2000 条配置全部作废。
+# --------------------------------------------------------------------------
+
+def _port_ok(port):
+    try:
+        return 0 < int(port) < 65536
+    except (TypeError, ValueError):
+        return False
+
+
+def sanitize_clash_proxy(proxy, node):
+    """校验并修正 Clash proxy；返回 (proxy, '') 或 (None, 丢弃原因)。"""
+    if not proxy:
+        return None, 'unsupported'
+
+    node_type = str(proxy.get('type') or '')
+    if not str(proxy.get('server') or '').strip():
+        return None, 'server'
+    if not _port_ok(proxy.get('port')):
+        return None, 'port'
+    if not str(proxy.get('name') or '').strip():
+        return None, 'name'
+
+    if node_type in ('vmess', 'vless', 'trojan'):
+        if (node.get('network') or 'tcp').lower() not in CLASH_NETWORKS:
+            return None, f"network:{node.get('network')}"
+
+    if node_type in ('vmess', 'vless'):
+        if not _UUID_DASHED.match(str(proxy.get('uuid') or '')):
+            return None, 'uuid'
+        if node_type == 'vmess':
+            security = str(proxy.get('cipher') or 'auto').lower()
+            proxy['cipher'] = security if security in V2RAY_SECURITY else 'auto'
+
+    if node_type in ('ss', 'ssr'):
+        cipher = str(proxy.get('cipher') or '').lower()
+        if cipher not in CLASH_SS_CIPHERS:
+            return None, f'cipher:{cipher}'
+        if not str(proxy.get('password') or ''):
+            return None, 'password'
+        if not ss_key_len_ok(cipher, proxy['password']):
+            return None, f'key:{cipher}'
+
+    if node_type in ('trojan', 'hysteria2', 'tuic'):
+        if not str(proxy.get('password') or ''):
+            return None, 'password'
+
+    fingerprint = proxy.get('client-fingerprint')
+    if fingerprint:
+        normalized = normalize_fingerprint(fingerprint)
+        if normalized:
+            proxy['client-fingerprint'] = normalized
+        else:
+            proxy.pop('client-fingerprint', None)
+
+    reality = proxy.get('reality-opts') or {}
+    if reality.get('public-key') is not None:
+        if _b64_byte_len(reality.get('public-key')) != 32:
+            return None, 'reality-key'
+        short_id = reality.get('short-id')
+        if short_id is not None and not _SHORT_ID.match(str(short_id)):
+            reality.pop('short-id', None)
+
+    if proxy.get('flow') and proxy['flow'] not in CLASH_FLOWS:
+        proxy.pop('flow', None)
+
+    if node_type == 'hysteria2':
+        if proxy.get('obfs') not in HY2_OBFS_TYPES or \
+                not str(proxy.get('obfs-password') or ''):
+            proxy.pop('obfs', None)
+            proxy.pop('obfs-password', None)
+
+    if node_type == 'tuic':
+        if proxy.get('congestion-controller') not in TUIC_CONGESTION:
+            proxy.pop('congestion-controller', None)
+        if proxy.get('udp-relay-mode') not in TUIC_UDP_RELAY:
+            proxy.pop('udp-relay-mode', None)
+
+    alpn = proxy.get('alpn')
+    if alpn:
+        cleaned = [str(item).strip() for item in alpn if str(item).strip()]
+        if cleaned:
+            proxy['alpn'] = cleaned
+        else:
+            proxy.pop('alpn', None)
+
+    return proxy, ''
+
+
+def sanitize_singbox_outbound(outbound, node):
+    """校验并修正 sing-box outbound；返回 (outbound, '') 或 (None, 丢弃原因)。"""
+    if not outbound:
+        return None, 'unsupported'
+
+    # outbound 里的 type 是 sing-box 的写法（ss -> shadowsocks），协议判断用原始类型
+    node_type = str(node.get('type') or '')
+    if not str(outbound.get('server') or '').strip():
+        return None, 'server'
+    if not _port_ok(outbound.get('server_port')):
+        return None, 'port'
+    if not str(outbound.get('tag') or '').strip():
+        return None, 'tag'
+
+    if node_type in ('vmess', 'vless', 'trojan'):
+        if (node.get('network') or 'tcp').lower() not in CLASH_NETWORKS:
+            return None, f"network:{node.get('network')}"
+
+    if node_type in ('vmess', 'vless'):
+        if not _UUID_DASHED.match(str(outbound.get('uuid') or '')):
+            return None, 'uuid'
+        if node_type == 'vmess':
+            security = str(outbound.get('security') or 'auto').lower()
+            outbound['security'] = security if security in V2RAY_SECURITY else 'auto'
+
+    if node_type == 'ss':
+        method = str(outbound.get('method') or '').lower()
+        if method not in SINGBOX_SS_CIPHERS:
+            return None, f'method:{method}'
+        if not str(outbound.get('password') or ''):
+            return None, 'password'
+        if not ss_key_len_ok(method, outbound['password']):
+            return None, f'key:{method}'
+
+    if node_type in ('trojan', 'hysteria2', 'tuic'):
+        if not str(outbound.get('password') or ''):
+            return None, 'password'
+
+    if outbound.get('flow') and outbound['flow'] not in SINGBOX_FLOWS:
+        outbound.pop('flow', None)
+
+    tls = outbound.get('tls') or {}
+    if isinstance(tls, dict) and tls:
+        utls = tls.get('utls')
+        if isinstance(utls, dict):
+            normalized = normalize_fingerprint(utls.get('fingerprint'))
+            if normalized:
+                utls['fingerprint'] = normalized
+            else:
+                tls.pop('utls', None)
+        reality = tls.get('reality')
+        if isinstance(reality, dict) and _b64_byte_len(reality.get('public_key')) != 32:
+            return None, 'reality-key'
+        if isinstance(reality, dict):
+            short_id = reality.get('short_id')
+            if short_id is not None and not _SHORT_ID.match(str(short_id)):
+                reality.pop('short_id', None)
+            # REALITY 必须启用 uTLS，否则 sing-box 报 "uTLS is required by reality client"
+            if not isinstance(tls.get('utls'), dict):
+                tls['utls'] = {'enabled': True, 'fingerprint': 'chrome'}
+
+    obfs = outbound.get('obfs')
+    if isinstance(obfs, dict):
+        if obfs.get('type') not in HY2_OBFS_TYPES or not str(obfs.get('password') or ''):
+            outbound.pop('obfs', None)
+
+    if node_type == 'tuic':
+        if outbound.get('congestion_control') not in TUIC_CONGESTION:
+            outbound.pop('congestion_control', None)
+        if outbound.get('udp_relay_mode') not in TUIC_UDP_RELAY:
+            outbound.pop('udp_relay_mode', None)
+
+    return outbound, ''

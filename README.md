@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/looomix/Node-Configs/main.yml?style=flat-square&label=update" alt="Update Status" />
-  <img src="https://img.shields.io/badge/nodes-2390-blue?style=flat-square" alt="Nodes" />
-  <img src="https://img.shields.io/badge/links-3152-informational?style=flat-square" alt="Links" />
+  <img src="https://img.shields.io/badge/nodes-1931-blue?style=flat-square" alt="Nodes" />
+  <img src="https://img.shields.io/badge/links-2391-informational?style=flat-square" alt="Links" />
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="Stars" />
@@ -11,7 +11,7 @@
 
 <p align="center">
   从公开来源自动聚合网络节点，转换成 <b>Clash / mihomo</b> 与 <b>sing-box</b> 可直接导入的订阅配置<br>
-  每 12 小时自动更新 · 最后更新 <b>2026-11-24 10:22</b>
+  每 12 小时自动更新 · 最后更新 <b>2026-11-24 10:39</b>
 </p>
 
 ## ⚡ 快速订阅
@@ -80,6 +80,7 @@ Node-Configs/
 - `schedule` 每 12 小时跑一次，也可在 Actions 页手动 `workflow_dispatch`；
 - 修改 `Files/**` 或工作流本身会立即触发一次重建；
 - 提交前有熔断：本次节点数低于上次 60% 时直接失败退出，不写入、不提交，避免上游集体失败把仓库覆盖成残缺版本；
+- 提交前还有两道校验：`Files/check_config.py` 按客户端白名单检查每个字段，随后用 mihomo 与 sing-box 的真实内核各跑一次配置加载，任何一条节点会让整份配置拒绝加载时 CI 直接失败；
 - 想加源只需编辑 `Files/urls.txt`（每行一个地址，支持 base64 订阅与纯文本），推送后自动生效。
 
 ## ❓ 常见问题
@@ -103,9 +104,17 @@ Clash 改 `mixed-port`（默认 `7890`）与 `external-controller`（默认 `909
 </details>
 
 <details>
+<summary><b>导入时报 <code>unknown method</code> / <code>invalid REALITY short ID</code> 之类的错误？</b></summary>
+
+这两个客户端遇到不认识的字段值是**拒绝加载整份配置**，而不是跳过单个节点。本仓库在生成时会按 mihomo / sing-box 的白名单过滤（加密方式、UUID、REALITY 密钥、传输层类型等），并在提交前用真实内核跑一遍校验，所以正常情况下不会再有这类报错。
+
+如果仍然遇到，说明拿到的是旧缓存：raw 链接加 `?t=时间戳`，jsDelivr 链接把 `@main` 换成 `@latest` 或稍等 12 小时缓存过期。
+</details>
+
+<details>
 <summary><b>为什么某些协议没有出现？</b></summary>
 
-只保留能解析为合法 URI 的节点；sing-box 不支持 SSR，因此 SSR 只出现在 Clash 与原始 txt 中。个别源站把两条链接粘在一起或截断，这类残片会被丢弃并计入「无法转换」。
+只保留能解析为合法 URI 且能被目标客户端表达的节点：sing-box 不支持 SSR，Clash 不支持 XHTTP 传输层，这类节点会分别跳过；加密方式、密钥长度不合法的也一并丢弃，避免一条坏节点拖垮整份配置。个别源站把两条链接粘在一起或截断，这类残片会被丢弃并计入「无法转换」。
 </details>
 
 ## ⚠️ 免责声明

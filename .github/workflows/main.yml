@@ -59,6 +59,37 @@ jobs:
           echo "Checking for README.md:"
           ls -la README.md || echo "README.md does not exist"
 
+      - name: 🧪 Validate generated configs
+        run: |
+          python Files/check_config.py || { echo "生成的配置无法被客户端加载，已阻止提交"; exit 1; }
+
+      - name: 🔬 Validate with real kernels
+        run: |
+          set -u
+          MIHOMO_TAG=v1.19.34
+          SINGBOX_TAG=1.14.4
+
+          if curl -fsSL --retry 3 --retry-delay 2 -o /tmp/mihomo.gz \
+            "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_TAG}/mihomo-linux-amd64-compatible-${MIHOMO_TAG}.gz"; then
+            gunzip -f /tmp/mihomo.gz && chmod +x /tmp/mihomo
+            mkdir -p /tmp/mihomo-home
+            /tmp/mihomo -t -d /tmp/mihomo-home -f configs/clash/config.yaml \
+              || { echo "mihomo 内核拒绝加载 configs/clash/config.yaml"; exit 1; }
+            echo "mihomo 校验通过"
+          else
+            echo "::warning::mihomo 下载失败，跳过真实内核校验（Python 自检已通过）"
+          fi
+
+          if curl -fsSL --retry 3 --retry-delay 2 -o /tmp/sing-box.tar.gz \
+            "https://github.com/SagerNet/sing-box/releases/download/v${SINGBOX_TAG}/sing-box-${SINGBOX_TAG}-linux-amd64.tar.gz"; then
+            tar -xzf /tmp/sing-box.tar.gz -C /tmp
+            "/tmp/sing-box-${SINGBOX_TAG}-linux-amd64/sing-box" check -c configs/singbox/config.json \
+              || { echo "sing-box 内核拒绝加载 configs/singbox/config.json"; exit 1; }
+            echo "sing-box 校验通过"
+          else
+            echo "::warning::sing-box 下载失败，跳过真实内核校验（Python 自检已通过）"
+          fi
+
       - name: 🛠️ Create configs if not exists
         run: |
           mkdir -p configs

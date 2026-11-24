@@ -12,7 +12,9 @@ import pytz
 import yaml
 from bs4 import BeautifulSoup
 
-from converters import clash_proxy, is_valid_ss, parse_uri, singbox_outbound
+from converters import (clash_proxy, is_valid_ss, parse_uri,
+                        sanitize_clash_proxy, sanitize_singbox_outbound,
+                        singbox_outbound)
 
 # 获取当前脚本所在目录的绝对路径
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,6 +41,30 @@ MIN_NODE_FLOOR = int(os.environ.get('MIN_NODE_FLOOR', '300'))
 
 GITHUB_REPO_PATH = 'looomix/Node-Configs'
 GITHUB_BRANCH = 'main'
+
+# 形如数字 / 布尔 / null 的字符串必须显式加引号。
+# PyYAML 按 YAML 1.1 判断要不要加引号，而 mihomo 用的是 YAML 1.2：
+# `short-id: 08` 在 1.1 里是字符串、在 1.2 里是整数 8，客户端解码十六进制失败后
+# 直接拒绝加载整份配置。密码、short-id 这类字段经常是纯数字，必须兜住。
+RISKY_SCALAR = re.compile(
+    r'^(?:'
+    r'[-+]?(?:\d[\d_]*(?:\.[\d_]*)?|\.[\d_]+)(?:[eE][-+]?\d+)?'
+    r'|y|n|yes|no|true|false|on|off|null|none|~'
+    r')$',
+    re.IGNORECASE,
+)
+
+
+class ConfigDumper(yaml.SafeDumper):
+    """字符串一律安全输出，避免被读成数字/布尔。"""
+
+
+def _represent_str(dumper, data):
+    style = '"' if RISKY_SCALAR.match(data) or data != data.strip() else None
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style=style)
+
+
+ConfigDumper.add_representer(str, _represent_str)
 
 USER_AGENT = 'Mozilla/5.0 (compatible; Node-Configs/2.0; +https://github.com/looomix/Node-Configs)'
 
@@ -360,15 +386,16 @@ def assign_unique_names(nodes):
 
 def write_clash_config(nodes):
     proxies = []
-    dropped = 0
+    reasons = {}
     for node in nodes:
-        proxy = clash_proxy(node)
+        proxy, reason = sanitize_clash_proxy(clash_proxy(node), node)
         if proxy is None:
-            dropped += 1
+            reasons[reason] = reasons.get(reason, 0) + 1
             continue
         proxies.append(proxy)
-    if dropped:
-        logging.warning(f"跳过 {dropped} 个 Clash 无法表达的节点")
+    if reasons:
+        detail = ", ".join(f"{k}={v}" for k, v in sorted(reasons.items()))
+        logging.warning(f"跳过 {sum(reasons.values())} 个会让 mihomo 拒绝加载的节点（{detail}）")
     names = [proxy['name'] for proxy in proxies]
 
     groups = [{'name': '🚀 节点选择', 'type': 'select',
@@ -404,14 +431,15 @@ def write_clash_config(nodes):
     config_path = os.path.join(CLASH_OUTPUT_DIR, 'config.yaml')
     with open(config_path, 'w', encoding='utf-8', newline='\n') as f:
         f.write('# Node-Configs 自动生成，配合 mihomo / Clash.Meta 内核使用\n')
-        yaml.safe_dump(config, f, allow_unicode=True, sort_keys=False,
-                       default_flow_style=False, width=4096)
+        yaml.dump(config, f, Dumper=ConfigDumper, allow_unicode=True,
+                  sort_keys=False, default_flow_style=False, width=4096)
 
     provider_path = os.path.join(CLASH_OUTPUT_DIR, 'proxies.yaml')
     with open(provider_path, 'w', encoding='utf-8', newline='\n') as f:
         f.write('# Node-Configs 自动生成，可作为 proxy-provider 引用\n')
-        yaml.safe_dump({'proxies': proxies}, f, allow_unicode=True,
-                       sort_keys=False, default_flow_style=False, width=4096)
+        yaml.dump({'proxies': proxies}, f, Dumper=ConfigDumper,
+                  allow_unicode=True, sort_keys=False, default_flow_style=False,
+                  width=4096)
 
     logging.info(f"Saved {len(proxies)} proxies to {config_path}")
     return len(proxies)
@@ -419,15 +447,16 @@ def write_clash_config(nodes):
 
 def write_singbox_config(nodes):
     outbounds_nodes = []
-    dropped = 0
+    reasons = {}
     for node in nodes:
-        outbound = singbox_outbound(node)
+        outbound, reason = sanitize_singbox_outbound(singbox_outbound(node), node)
         if outbound is None:
-            dropped += 1
+            reasons[reason] = reasons.get(reason, 0) + 1
             continue
         outbounds_nodes.append(outbound)
-    if dropped:
-        logging.warning(f"跳过 {dropped} 个 sing-box 不支持的节点（如 SSR / shadow-tls 插件）")
+    if reasons:
+        detail = ", ".join(f"{k}={v}" for k, v in sorted(reasons.items()))
+        logging.warning(f"跳过 {sum(reasons.values())} 个 sing-box 不支持的节点（{detail}）")
 
     tags = [outbound['tag'] for outbound in outbounds_nodes]
 
@@ -473,7 +502,7 @@ def write_singbox_config(nodes):
         json.dump({'outbounds': outbounds}, f, ensure_ascii=False, indent=2)
         f.write('\n')
 
-    logging.info(f"Saved {len(nodes)} outbounds to {config_path}")
+    logging.info(f"Saved {len(outbounds_nodes)} outbounds to {config_path}")
     return len(nodes)
 
 
@@ -579,6 +608,7 @@ Node-Configs/
 - `schedule` 每 12 小时跑一次，也可在 Actions 页手动 `workflow_dispatch`；
 - 修改 `Files/**` 或工作流本身会立即触发一次重建；
 - 提交前有熔断：本次节点数低于上次 60% 时直接失败退出，不写入、不提交，避免上游集体失败把仓库覆盖成残缺版本；
+- 提交前还有两道校验：`Files/check_config.py` 按客户端白名单检查每个字段，随后用 mihomo 与 sing-box 的真实内核各跑一次配置加载，任何一条节点会让整份配置拒绝加载时 CI 直接失败；
 - 想加源只需编辑 `Files/urls.txt`（每行一个地址，支持 base64 订阅与纯文本），推送后自动生效。
 
 ## ❓ 常见问题
@@ -602,9 +632,17 @@ Clash 改 `mixed-port`（默认 `7890`）与 `external-controller`（默认 `909
 </details>
 
 <details>
+<summary><b>导入时报 <code>unknown method</code> / <code>invalid REALITY short ID</code> 之类的错误？</b></summary>
+
+这两个客户端遇到不认识的字段值是**拒绝加载整份配置**，而不是跳过单个节点。本仓库在生成时会按 mihomo / sing-box 的白名单过滤（加密方式、UUID、REALITY 密钥、传输层类型等），并在提交前用真实内核跑一遍校验，所以正常情况下不会再有这类报错。
+
+如果仍然遇到，说明拿到的是旧缓存：raw 链接加 `?t=时间戳`，jsDelivr 链接把 `@main` 换成 `@latest` 或稍等 12 小时缓存过期。
+</details>
+
+<details>
 <summary><b>为什么某些协议没有出现？</b></summary>
 
-只保留能解析为合法 URI 的节点；sing-box 不支持 SSR，因此 SSR 只出现在 Clash 与原始 txt 中。个别源站把两条链接粘在一起或截断，这类残片会被丢弃并计入「无法转换」。
+只保留能解析为合法 URI 且能被目标客户端表达的节点：sing-box 不支持 SSR，Clash 不支持 XHTTP 传输层，这类节点会分别跳过；加密方式、密钥长度不合法的也一并丢弃，避免一条坏节点拖垮整份配置。个别源站把两条链接粘在一起或截断，这类残片会被丢弃并计入「无法转换」。
 </details>
 
 ## ⚠️ 免责声明
