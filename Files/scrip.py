@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 from converters import (clash_proxy, is_valid_ss, parse_uri,
                         sanitize_clash_proxy, sanitize_singbox_outbound,
                         singbox_outbound)
+import health
 
 # 获取当前脚本所在目录的绝对路径
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +26,9 @@ URLS_FILE = os.path.join(SCRIPT_DIR, 'urls.txt')
 KEYWORDS_FILE = os.path.join(SCRIPT_DIR, 'key.json')
 PROTOCOL_OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'configs/protocols')
 CLASH_OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'configs/clash')
+CLASH_SPLIT_DIR = os.path.join(PROJECT_ROOT, 'configs/clash/split')
 SINGBOX_OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'configs/singbox')
+STATUS_FILE = os.path.join(PROJECT_ROOT, 'configs/status.json')
 README_FILE = os.path.join(PROJECT_ROOT, 'README.md')
 STATS_FILE = os.path.join(PROJECT_ROOT, 'stats.json')
 
@@ -35,7 +38,10 @@ FETCH_RETRIES = 3
 MAX_CONFIG_LENGTH = 1500
 MIN_PERCENT25_COUNT = 15
 
-# 熔断参数：节点数低于上次的 60% 且上次已超过 300 个时视为异常，直接中止
+# 分片：单文件节点太多时手机端解析会明显变慢，按协议切成每片不超过 N 个
+SPLIT_CHUNK = int(os.environ.get('SPLIT_CHUNK', '300'))
+
+# 熔断参数：可用节点数低于上次的 60% 且上次已超过 300 个时视为异常，直接中止
 MIN_NODE_RATIO = float(os.environ.get('MIN_NODE_RATIO', '0.6'))
 MIN_NODE_FLOOR = int(os.environ.get('MIN_NODE_FLOOR', '300'))
 
@@ -170,7 +176,7 @@ def is_mislabeled_ss(config):
     body = config[len('ss://'):]
     if '@' not in body:
         return False
-    userinfo = re.split(r'@', body, 1)[0]
+    userinfo = re.split(r'@', body, maxsplit=1)[0]
     if not UUID_PATTERN.match(userinfo):
         return False
 
@@ -419,7 +425,8 @@ def assign_unique_names(nodes):
     return nodes
 
 
-def write_clash_config(nodes):
+def build_clash_proxies(nodes):
+    """节点 -> Clash proxy 列表，每个都过了白名单闸。"""
     proxies = []
     reasons = {}
     for node in nodes:
@@ -431,6 +438,11 @@ def write_clash_config(nodes):
     if reasons:
         detail = ", ".join(f"{k}={v}" for k, v in sorted(reasons.items()))
         logging.warning(f"跳过 {sum(reasons.values())} 个会让 mihomo 拒绝加载的节点（{detail}）")
+    return proxies
+
+
+def clash_document(proxies):
+    """把节点列表包成一份完整的 Clash 配置（含策略组与规则）。"""
     names = [proxy['name'] for proxy in proxies]
 
     groups = [{'name': '🚀 节点选择', 'type': 'select',
@@ -443,7 +455,7 @@ def write_clash_config(nodes):
     groups.append({'name': '🐟 漏网之鱼', 'type': 'select',
                    'proxies': ['🚀 节点选择', 'DIRECT']})
 
-    config = {
+    return {
         'mixed-port': 7890,
         'allow-lan': False,
         'mode': 'rule',
@@ -462,25 +474,75 @@ def write_clash_config(nodes):
         ],
     }
 
-    os.makedirs(CLASH_OUTPUT_DIR, exist_ok=True)
-    config_path = os.path.join(CLASH_OUTPUT_DIR, 'config.yaml')
-    with open(config_path, 'w', encoding='utf-8', newline='\n') as f:
-        f.write('# Node-Configs 自动生成，配合 mihomo / Clash.Meta 内核使用\n')
-        yaml.dump(config, f, Dumper=ConfigDumper, allow_unicode=True,
+
+def dump_clash(document, path, header):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8', newline='\n') as f:
+        if header:
+            f.write(header)
+        yaml.dump(document, f, Dumper=ConfigDumper, allow_unicode=True,
                   sort_keys=False, default_flow_style=False, width=4096)
 
-    provider_path = os.path.join(CLASH_OUTPUT_DIR, 'proxies.yaml')
-    with open(provider_path, 'w', encoding='utf-8', newline='\n') as f:
-        f.write('# Node-Configs 自动生成，可作为 proxy-provider 引用\n')
-        yaml.dump({'proxies': proxies}, f, Dumper=ConfigDumper,
-                  allow_unicode=True, sort_keys=False, default_flow_style=False,
-                  width=4096)
 
-    logging.info(f"Saved {len(proxies)} proxies to {config_path}")
-    return len(proxies)
+def write_clash_config(proxies, path=None, write_provider=True):
+    """写出 Clash 配置；proxies 已经过白名单闸，这里只负责落盘。"""
+    if path is None:
+        path = os.path.join(CLASH_OUTPUT_DIR, 'config.yaml')
+    if write_provider:
+        # 主配置旁边同时留一份仅节点的 provider 文件
+        dump_clash({'proxies': proxies},
+                   os.path.join(CLASH_OUTPUT_DIR, 'proxies.yaml'),
+                   '# Node-Configs 自动生成，可作为 proxy-provider 引用\n')
+    dump_clash(clash_document(proxies), path,
+               '# Node-Configs 自动生成，配合 mihomo / Clash.Meta 内核使用\n')
+    logging.info(f"Saved {len(proxies)} proxies to {path}")
+    return path
 
 
-def write_singbox_config(nodes):
+def write_clash_splits(proxies, chunk=None):
+    """按协议把节点切成若干片，供 proxy-provider 分批加载。
+
+    单文件两千多个节点在 iOS 的 Stash / Shadowrocket 里解析会明显卡顿，
+    切成每片 ≤300 个后可以只订阅自己需要的协议。
+    """
+    chunk = max(1, int(chunk or SPLIT_CHUNK))
+    if not proxies:
+        return []
+    if os.path.isdir(CLASH_SPLIT_DIR):
+        shutil.rmtree(CLASH_SPLIT_DIR)
+    os.makedirs(CLASH_SPLIT_DIR, exist_ok=True)
+
+    buckets = {}
+    for proxy in proxies:
+        buckets.setdefault(proxy['type'], []).append(proxy)
+
+    written = []
+    for ptype in sorted(buckets):
+        items = buckets[ptype]
+        for part_index, start in enumerate(range(0, len(items), chunk), 1):
+            part = items[start:start + chunk]
+            name = f'{ptype}-{part_index}.yaml'
+            dump_clash({'proxies': part}, os.path.join(CLASH_SPLIT_DIR, name),
+                       f'# Node-Configs 分片 {ptype} 第 {part_index} 片，'
+                       f'{len(part)} 个节点，可作为 proxy-provider\n')
+            written.append((name, len(part)))
+    logging.info(f"生成 {len(written)} 个分片，共覆盖 {len(proxies)} 个节点")
+    return written
+
+
+# 移动端轻量版保留的协议：hysteria2 / tuic 走 QUIC，弱网下握手成功率最高；
+# vless 只留 REALITY（不需要自签证书，被中间设备干扰的概率最低）。
+LIGHT_TYPES = frozenset({'hysteria2', 'tuic'})
+
+
+def select_light_nodes(nodes):
+    return [node for node in nodes
+            if node['type'] in LIGHT_TYPES
+            or (node['type'] == 'vless' and node.get('reality_pbk'))]
+
+
+def build_singbox_outbounds(nodes):
+    """节点 -> sing-box outbound 列表，每个都过了白名单闸。"""
     outbounds_nodes = []
     reasons = {}
     for node in nodes:
@@ -492,12 +554,14 @@ def write_singbox_config(nodes):
     if reasons:
         detail = ", ".join(f"{k}={v}" for k, v in sorted(reasons.items()))
         logging.warning(f"跳过 {sum(reasons.values())} 个 sing-box 不支持的节点（{detail}）")
+    return outbounds_nodes
 
+
+def singbox_document(outbounds_nodes):
     tags = [outbound['tag'] for outbound in outbounds_nodes]
 
-    outbounds = []
-    outbounds.append({'type': 'selector', 'tag': '🚀 节点选择',
-                      'outbounds': ((['♻️ 自动选择'] if tags else []) + ['DIRECT'] + tags)})
+    outbounds = [{'type': 'selector', 'tag': '🚀 节点选择',
+                  'outbounds': ((['♻️ 自动选择'] if tags else []) + ['DIRECT'] + tags)}]
     if tags:
         outbounds.append({'type': 'urltest', 'tag': '♻️ 自动选择',
                           'outbounds': tags,
@@ -507,7 +571,7 @@ def write_singbox_config(nodes):
     outbounds.append({'type': 'direct', 'tag': 'DIRECT'})
     outbounds.append({'type': 'block', 'tag': 'BLOCK'})
 
-    config = {
+    return {
         'log': {'level': 'info', 'timestamp': True},
         'inbounds': [
             {'type': 'mixed', 'tag': 'mixed-in',
@@ -525,20 +589,25 @@ def write_singbox_config(nodes):
         'experimental': {'cache_file': {'enabled': True}},
     }
 
-    os.makedirs(SINGBOX_OUTPUT_DIR, exist_ok=True)
-    config_path = os.path.join(SINGBOX_OUTPUT_DIR, 'config.json')
-    with open(config_path, 'w', encoding='utf-8', newline='\n') as f:
-        json.dump(config, f, ensure_ascii=False, indent=2)
+
+def dump_singbox(document, path):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(document, f, ensure_ascii=False, indent=2)
         f.write('\n')
 
-    # 只导出 outbounds，方便合并进已有配置
-    outbounds_path = os.path.join(SINGBOX_OUTPUT_DIR, 'outbounds.json')
-    with open(outbounds_path, 'w', encoding='utf-8', newline='\n') as f:
-        json.dump({'outbounds': outbounds}, f, ensure_ascii=False, indent=2)
-        f.write('\n')
 
-    logging.info(f"Saved {len(outbounds_nodes)} outbounds to {config_path}")
-    return len(outbounds_nodes)
+def write_singbox_config(outbounds_nodes, path=None, write_provider=True):
+    """写出 sing-box 配置；outbounds_nodes 已过白名单闸。"""
+    if path is None:
+        path = os.path.join(SINGBOX_OUTPUT_DIR, 'config.json')
+    if write_provider:
+        # 只导出 outbounds，方便合并进已有配置
+        dump_singbox({'outbounds': singbox_document(outbounds_nodes)['outbounds']},
+                     os.path.join(SINGBOX_OUTPUT_DIR, 'outbounds.json'))
+    dump_singbox(singbox_document(outbounds_nodes), path)
+    logging.info(f"Saved {len(outbounds_nodes)} outbounds to {path}")
+    return path
 
 
 def generate_readme(protocol_counts, convert_stats=None,
@@ -564,6 +633,44 @@ def generate_readme(protocol_counts, convert_stats=None,
     # 徽章展示真正写进配置的节点数：解析出来但被客户端白名单拦掉的节点
     # （xhttp 传输层、2022 密钥长度不对等）不该算进「可用节点」。
     available = convert_stats.get('clash') or converted
+    light_count = convert_stats.get('light') or 0
+    xhttp_count = convert_stats.get('xhttp') or 0
+
+    health = convert_stats.get('health') or {}
+    reason = health.get('skipped_reason')
+    if reason == 'disabled':
+        health_line = "本次运行未启用存活探测"
+    elif reason == 'probe-unreliable':
+        health_line = ("本次存活探测的连通率过低，判定为探测环境异常，"
+                       "已跳过按探测结果剔除（节点数未受影响）")
+    elif reason == 'too-many-dead':
+        health_line = (f"本次探测有 {health.get('unreachable', 0)}/{health.get('checked', 0)} "
+                       f"个地址拒绝连接，超过阈值，按探测环境异常处理，未剔除")
+    elif reason == 'too-few-nodes':
+        health_line = "节点样本过少，跳过存活探测剔除"
+    elif health.get('checked'):
+        ratio = health.get('alive_ratio') or 0
+        health_line = (
+            f"最近一次 TCP 探测：{health.get('alive', 0)}/{health.get('checked', 0)} 可连通"
+            f"（<b>{ratio:.0%}</b>），已剔除 {health.get('dropped', 0)} 个拒绝连接的地址")
+    else:
+        health_line = "本次运行未启用存活探测"
+
+    if xhttp_count:
+        xhttp_note = (
+            f"> 配置里含 <b>{xhttp_count}</b> 个 `network: xhttp` 节点（Xray 的 splithttp 传输）。\n"
+            "> **需要 mihomo ≥ 1.19**（Clash Verge Rev 1.7+、FlClash 0.8+ 均已内置）；\n"
+            "> 低于这个版本的客户端会因 `unsupported network` 拒绝加载整份配置，"
+            "请改用「轻量版」。\n")
+        xhttp_faq = (
+            f"配置里有 {xhttp_count} 个 xhttp（splithttp）节点，需要 mihomo ≥ 1.19。"
+            "老版本客户端遇到不认识的传输层会**拒绝加载整份配置**，改用 "
+            f"[`light.yaml`]({raw_clash}/light.yaml)（不含 xhttp）即可，"
+            "或升级到 Clash Verge Rev 1.7+ / FlClash 0.8+。")
+    else:
+        xhttp_note = ""
+        xhttp_faq = ("本批节点里没有 xhttp 传输层的节点，任何 mihomo 版本都能直接导入。"
+                     f"如需规避个别协议的兼容问题，可以改用 [`light.yaml`]({raw_clash}/light.yaml)。")
 
     md = f"""# 🧩 Node-Configs
 
@@ -578,7 +685,8 @@ def generate_readme(protocol_counts, convert_stats=None,
 
 <p align="center">
   从公开来源自动聚合网络节点，转换成 <b>Clash / mihomo</b> 与 <b>sing-box</b> 可直接导入的订阅配置<br>
-  每 12 小时自动更新 · 最后更新 <b>{date_str} {time_str}</b>
+  每 12 小时自动更新 · 最后更新 <b>{date_str} {time_str}</b><br>
+  <sub>{health_line}</sub>
 </p>
 
 ## ⚡ 快速订阅
@@ -590,11 +698,13 @@ def generate_readme(protocol_counts, convert_stats=None,
 | **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`]({raw_clash}/config.yaml) | [`config.yaml`]({proxy_clash}/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
 | **sing-box** | [`config.json`]({raw_singbox}/config.json) | [`config.json`]({proxy_singbox}/config.json) | mixed 入站 + selector / urltest 出站 |
 | **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`]({raw_protocols}/AllProtocols.txt) | [`AllProtocols.txt`]({proxy_protocols}/AllProtocols.txt) | 原始分享链接 |
+| **轻量版**（{light_count} 节点）<br><sub>只含 hy2 / tuic / vless-reality</sub> | [`light.yaml`]({raw_clash}/light.yaml) · [`light.json`]({raw_singbox}/light.json) | [Clash]({proxy_clash}/light.yaml) · [sing-box]({proxy_singbox}/light.json) | 弱网 / 移动端首选，解析最快 |
 
 如果只想复用节点、不想用本项目提供的规则：
 
 - Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) · [镜像]({proxy_clash}/proxies.yaml) — 可作为 `proxy-provider`
 - sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) · [镜像]({proxy_singbox}/outbounds.json) — 可合并进已有配置
+- 分片： `configs/clash/split/<协议>-<序号>.yaml`，每片 ≤300 个节点，适合按协议单独订阅
 
 > **raw 链接导入报 `EOF` / `connection reset`？** 这不是配置错误，是国内直连
 > `raw.githubusercontent.com` 被中断。用右边那列 **gh-proxy 镜像**即可，它的规则就是
@@ -609,10 +719,12 @@ def generate_readme(protocol_counts, convert_stats=None,
 2. 策略组选 `🚀 节点选择`（手动）或 `♻️ 自动选择`（每 5 分钟测速取最快）；
 3. 规则为「局域网与国内直连，其余走 `🐟 漏网之鱼`」。
 
+{xhttp_note}
 **sing-box** —— mixed 入站 `127.0.0.1:2080`（HTTP + SOCKS5）
 
 1. 直接使用 `config.json`，或用 `outbounds.json` 替换已有配置的出站部分；
-2. 修改端口只需改 `inbounds[0].listen_port`。
+2. 修改端口只需改 `inbounds[0].listen_port`；
+3. sing-box 不支持 xhttp 与 SSR，这两类节点只会出现在 Clash 配置里。
 
 **v2rayN / v2rayNG / NekoRay / Karing**
 
@@ -626,17 +738,24 @@ Node-Configs/
 ├── configs/
 │   ├── clash/
 │   │   ├── config.yaml      # 完整配置：节点 + 策略组 + 规则
-│   │   └── proxies.yaml     # 仅节点，可作 proxy-provider
+│   │   ├── light.yaml       # 轻量版：只含 hy2 / tuic / vless-reality
+│   │   ├── proxies.yaml     # 仅节点，可作 proxy-provider
+│   │   └── split/           # 按协议分片，每片 ≤300 节点
 │   ├── singbox/
 │   │   ├── config.json      # 完整配置：mixed 入站 + 出站
+│   │   ├── light.json       # 轻量版
 │   │   └── outbounds.json   # 仅出站，可合并进已有配置
-│   └── protocols/           # 原始分享链接，按协议分文件
-│       ├── AllProtocols.txt
-│       ├── Vless.txt / Vmess.txt / Trojan.txt
-│       └── ShadowSocks.txt / Hysteria2.txt
+│   ├── protocols/           # 原始分享链接，按协议分文件
+│   │   ├── AllProtocols.txt
+│   │   ├── Vless.txt / Vmess.txt / Trojan.txt
+│   │   └── ShadowSocks.txt / Hysteria2.txt
+│   └── status.json          # 最近一次存活探测结果（按协议分列）
 ├── Files/
 │   ├── scrip.py             # 抓取、解析、生成入口
 │   ├── converters.py        # 分享链接 → Clash / sing-box 结构
+│   ├── health.py            # 节点 TCP 连通性探测
+│   ├── check_config.py      # 提交前字段自检
+│   ├── tests/               # pytest 用例
 │   ├── key.json             # 各协议正则
 │   └── urls.txt             # 节点来源列表
 ├── stats.json               # 最近一次运行统计（供熔断对比）
@@ -647,8 +766,14 @@ Node-Configs/
 
 - `schedule` 每 12 小时跑一次，也可在 Actions 页手动 `workflow_dispatch`；
 - 修改 `Files/**` 或工作流本身会立即触发一次重建；
-- 提交前有熔断：本次节点数低于上次 60% 时直接失败退出，不写入、不提交，避免上游集体失败把仓库覆盖成残缺版本；
-- 提交前还有两道校验：`Files/check_config.py` 按客户端白名单检查每个字段，随后用 mihomo 与 sing-box 的真实内核各跑一次配置加载，任何一条节点会让整份配置拒绝加载时 CI 直接失败；
+- **存活探测**：生成配置前对每个节点做一次 TCP 连接（3 秒超时、并发 100），
+  只做 TCP 不握 TLS —— REALITY 节点会主动拒绝指纹不对的 ClientHello，
+  TLS 结果反而会误杀好节点。端口拒绝 / 域名解析失败的直接剔除；
+  超时的保留（可能是探测环境问题）。剔除比例超过 50% 时判定为探测环境异常，整批保留；
+- **熔断**：本次可用节点数低于上次 60% 时直接失败退出，不写入、不提交；
+- **源健康度**：每个源解析出的节点数记录在 `stats.json`，连续 2 次为 0 会在 Actions 日志里标红；
+- **校验**：`pytest` 跑转换器单测 → `check_config.py` 按客户端白名单检查每个字段 →
+  用 mihomo 与 sing-box 真实内核各加载一次。任何一步失败都阻止提交；
 - 想加源只需编辑 `Files/urls.txt`（每行一个地址，支持 base64 订阅与纯文本），推送后自动生效。
 
 ## ❓ 常见问题
@@ -656,7 +781,13 @@ Node-Configs/
 <details>
 <summary><b>导入后节点大面积超时？</b></summary>
 
-公开节点存活周期很短，换节点或稍后重新订阅通常即可恢复。建议先用 `♻️ 自动选择`，它会自动挑当前延迟最低的节点。
+公开节点存活周期很短，换节点或稍后重新订阅通常即可恢复。建议先用 `♻️ 自动选择`，它会自动挑当前延迟最低的节点。项目每 12 小时会做一次 TCP 探测并把结果写进 `configs/status.json`，可以先看那里的存活率再判断是不是上游整体挂了。
+</details>
+
+<details>
+<summary><b>报 <code>unsupported network: xhttp</code> 怎么办？</b></summary>
+
+{xhttp_faq}
 </details>
 
 <details>
@@ -683,7 +814,7 @@ Clash 改 `mixed-port`（默认 `7890`）与 `external-controller`（默认 `909
 <details>
 <summary><b>为什么某些协议没有出现？</b></summary>
 
-只保留能解析为合法 URI 且能被目标客户端表达的节点：sing-box 不支持 SSR，Clash 不支持 XHTTP 传输层，这类节点会分别跳过；加密方式、密钥长度不合法的也一并丢弃，避免一条坏节点拖垮整份配置。个别源站把两条链接粘在一起或截断，这类残片会被丢弃并计入「无法转换」。
+只保留能解析为合法 URI 且能被目标客户端表达的节点：sing-box 不支持 SSR 与 xhttp，这两类只进 Clash 配置；加密方式、密钥长度不合法的节点会被两侧同时丢弃，避免一条坏节点拖垮整份配置。个别源站把两条链接粘在一起或截断，这类残片会被丢弃并计入「无法转换」。
 </details>
 
 ## ⚠️ 免责声明
@@ -702,41 +833,88 @@ Clash 改 `mixed-port`（默认 `7890`）与 `external-controller`（默认 `909
         logging.error(f"Failed to write {README_FILE}: {e}")
 
 
-def load_previous_converted():
-    """读取上一次成功运行写下的节点数，用于判断本次是否异常。"""
+def load_previous_stats():
+    """读取上一次成功运行的统计，用于熔断对比与源健康度累计。"""
     try:
         with open(STATS_FILE, 'r', encoding='utf-8') as f:
-            return int(json.load(f).get('converted') or 0)
+            data = json.load(f)
     except (OSError, ValueError, TypeError):
-        return 0
+        return {}
+    return data if isinstance(data, dict) else {}
 
 
-def enforce_node_floor(converted, links):
-    """节点数较上次骤降时中止。
+def _stat_int(stats, *keys):
+    for key in keys:
+        try:
+            value = int(stats.get(key) or 0)
+        except (TypeError, ValueError):
+            continue
+        if value:
+            return value
+    return 0
 
+
+def enforce_node_floor(available, links, previous_stats=None):
+    """可用节点数较上次骤降时中止。
+
+    口径是「真正写进 Clash 配置的节点数」。之前比的是解析数，出现白名单一次性
+    拦掉几百个节点、或者新加的存活探测清掉一批时，熔断完全没反应，等于没装。
     上游源集体挂掉时脚本仍会「成功」产出几百个节点，若直接提交就会把仓库里
-    上千个有效节点覆盖成残缺版本，而且没有任何告警。这里做一道熔断。
+    上千个有效节点覆盖成残缺版本，所以这道闸必须在写文件之前。
     """
-    previous = load_previous_converted()
+    stats = previous_stats if previous_stats is not None else load_previous_stats()
+    previous = _stat_int(stats, 'clash', 'converted')
     if previous < MIN_NODE_FLOOR:
-        logging.info(f"上次节点数 {previous} 低于熔断基线 {MIN_NODE_FLOOR}，跳过检查")
+        logging.info(f"上次可用节点数 {previous} 低于熔断基线 {MIN_NODE_FLOOR}，跳过检查")
         return
 
-    ratio = converted / previous
+    ratio = available / previous
     if ratio < MIN_NODE_RATIO:
         logging.critical(
-            f"熔断：节点数从 {previous} 降到 {converted}（{ratio:.0%}，"
-            f"阈值 {MIN_NODE_RATIO:.0%}），疑似上游源大面积失败。"
+            f"熔断：可用节点数从 {previous} 降到 {available}（{ratio:.0%}，"
+            f"阈值 {MIN_NODE_RATIO:.0%}），疑似上游源大面积失败或探测环境异常。"
             "本次未写入任何文件，也不会提交。"
             f"确认是真实下降可删除 {os.path.basename(STATS_FILE)} 或调低 MIN_NODE_RATIO 后重跑。")
         raise SystemExit(3)
 
-    logging.info(f"熔断检查通过：{converted} 个节点（上次 {previous}，{ratio:.0%}，"
-                 f"链接 {links} 条）")
+    logging.info(f"熔断检查通过：{available} 个可用节点（上次 {previous}，"
+                 f"{ratio:.0%}，链接 {links} 条）")
+
+
+def report_source_health(source_counts, previous_stats):
+    """累计每个源连续零产出的次数，并把问题源标进 Actions 日志。
+
+    `sources_ok` 只看「有没有返回内容」，返回一页 404/HTML 也算成功，
+    源悄悄失效时没有任何信号。这里按「解析出的节点数」判断：
+    连续 2 次为 0 就用 error 注解标红，单次为 0 给一条 warning。
+    """
+    streaks = previous_stats.get('source_zero_streak')
+    streaks = streaks if isinstance(streaks, dict) else {}
+
+    new_streaks = {}
+    for url, count in source_counts.items():
+        try:
+            streak = int(streaks.get(url) or 0)
+        except (TypeError, ValueError):
+            streak = 0
+        if count:
+            new_streaks[url] = 0
+            continue
+        streak += 1
+        new_streaks[url] = streak
+        if streak >= 2:
+            logging.error(f"源连续 {streak} 次解析出 0 个节点：{url}")
+            print(f"::error::节点源连续 {streak} 次解析出 0 个节点：{url}")
+        else:
+            logging.warning(f"源本次解析出 0 个节点：{url}")
+            print(f"::warning::节点源本次解析出 0 个节点：{url}")
+    return new_streaks
 
 
 def save_stats(links, converted, clash_count, singbox_count, sources_ok,
-               sources_total, skipped):
+               sources_total, skipped, source_counts=None, source_streaks=None,
+               health_summary=None, splits=None, light_count=0):
+    health_summary = health_summary or {}
     payload = {
         'updated_at': datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S'),
         'links': links,
@@ -747,6 +925,26 @@ def save_stats(links, converted, clash_count, singbox_count, sources_ok,
         'sources_total': sources_total,
         'skipped': skipped,
     }
+    if health_summary:
+        payload['health'] = {
+            'checked': health_summary.get('checked', 0),
+            'alive': health_summary.get('alive', 0),
+            'unreachable': health_summary.get('unreachable', 0),
+            'unknown': health_summary.get('unknown', 0),
+            'alive_ratio': health_summary.get('alive_ratio', 0),
+            'dropped': health_summary.get('dropped', 0),
+        }
+        if health_summary.get('skipped_reason'):
+            payload['health']['skipped_reason'] = health_summary['skipped_reason']
+    if light_count:
+        payload['light'] = light_count
+    if splits:
+        payload['splits'] = len(splits)
+    if source_counts:
+        payload['sources'] = dict(sorted(source_counts.items()))
+    if source_streaks is not None:
+        payload['source_zero_streak'] = dict(sorted(source_streaks.items()))
+
     try:
         with open(STATS_FILE, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(payload, f, ensure_ascii=False, indent=2, sort_keys=False)
@@ -795,6 +993,10 @@ async def main():
     filter_totals = {'i_love_': 0, 'percent25': 0, 'too_long': 0,
                      'double_encoded': 0, 'reclassified': 0}
 
+    # 每个源解析出的节点数：0 条意味着源失效，退回 HTML / 空订阅，
+    # 只看「有没有返回内容」是发现不了的
+    source_counts = {url: 0 for url in urls}
+
     logging.info("Processing pages for config extraction...")
     for url, text in fetched_pages:
         if not text:
@@ -809,6 +1011,7 @@ async def main():
         for key, value in stats.items():
             filter_totals[key] += value
 
+        source_counts[url] = page_total
         logging.info(f"Parsed {page_total} configs from {url}")
 
     filtered = {k: v for k, v in filter_totals.items() if k != 'reclassified' and v}
@@ -823,10 +1026,21 @@ async def main():
     for configs in final_configs.values():
         all_protocols_combined.update(configs)
 
-    # 解析出统一节点结构；先做熔断判断，异常时一个文件都不写
+    previous_stats = load_previous_stats()
+    source_streaks = report_source_health(source_counts, previous_stats)
+
+    # 解析出统一节点结构
     nodes, skipped = collect_nodes(final_configs)
     assign_unique_names(nodes)
-    enforce_node_floor(len(nodes), len(all_protocols_combined))
+
+    # 存活探测：只剔除「端口拒绝 / 域名解析失败」的地址，探测环境异常时整批保留
+    nodes, health_summary = await health.check(nodes)
+
+    # 先算可用节点数（Clash 实际写入量）再做熔断，异常时一个文件都不写
+    proxies = build_clash_proxies(nodes)
+    outbounds_nodes = build_singbox_outbounds(nodes)
+    enforce_node_floor(len(proxies), len(all_protocols_combined), previous_stats)
+    health.save_status(health_summary, STATUS_FILE)
 
     if os.path.exists(PROTOCOL_OUTPUT_DIR):
         shutil.rmtree(PROTOCOL_OUTPUT_DIR)
@@ -841,8 +1055,21 @@ async def main():
     save_to_file(PROTOCOL_OUTPUT_DIR, "AllProtocols", all_protocols_combined)
 
     # 生成 Clash / sing-box 配置
-    clash_count = write_clash_config(nodes)
-    singbox_count = write_singbox_config(nodes)
+    clash_count = len(proxies)
+    singbox_count = len(outbounds_nodes)
+    write_clash_config(proxies)
+    write_singbox_config(outbounds_nodes)
+    splits = write_clash_splits(proxies)
+
+    # 轻量版：直接复用已过闸的条目，避免对同一批节点重复跑一遍校验
+    light_names = {node['name'] for node in select_light_nodes(nodes)}
+    light_proxies = [proxy for proxy in proxies if proxy['name'] in light_names]
+    light_outbounds = [outbound for outbound in outbounds_nodes
+                       if outbound['tag'] in light_names]
+    write_clash_config(light_proxies, os.path.join(CLASH_OUTPUT_DIR, 'light.yaml'),
+                       write_provider=False)
+    write_singbox_config(light_outbounds, os.path.join(SINGBOX_OUTPUT_DIR, 'light.json'),
+                         write_provider=False)
 
     if skipped:
         logging.info("Unconvertible links: " +
@@ -851,15 +1078,23 @@ async def main():
     sources_ok = sum(1 for _, text in fetched_pages if text)
 
     convert_stats = {'converted': len(nodes), 'clash': clash_count,
-                     'singbox': singbox_count, 'skipped': skipped}
+                     'singbox': singbox_count, 'skipped': skipped,
+                     'health': health_summary, 'light': len(light_proxies),
+                     'xhttp': sum(1 for proxy in proxies
+                                  if proxy.get('network') == 'xhttp')}
     generate_readme(protocol_counts, convert_stats=convert_stats,
                     github_repo_path=GITHUB_REPO_PATH, github_branch=GITHUB_BRANCH)
 
     save_stats(len(all_protocols_combined), len(nodes), clash_count,
-               singbox_count, sources_ok, len(urls), skipped)
+               singbox_count, sources_ok, len(urls), skipped,
+               source_counts=source_counts, source_streaks=source_streaks,
+               health_summary=health_summary, splits=splits,
+               light_count=len(light_proxies))
 
     logging.info(f"Total unique links: {len(all_protocols_combined)}")
-    logging.info(f"Converted nodes: {len(nodes)} (clash={clash_count}, sing-box={singbox_count})")
+    logging.info(f"Converted nodes: {len(nodes)} (clash={clash_count}, "
+                 f"sing-box={singbox_count}, light={len(light_proxies)}, "
+                 f"splits={len(splits)})")
     logging.info(f"Sources: {sources_ok}/{len(urls)} fetched")
     logging.info("--- Script Finished ---")
 

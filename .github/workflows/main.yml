@@ -37,7 +37,10 @@ jobs:
       - name: ⚙️ Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r Files/requirements.txt
+          pip install -r Files/requirements-dev.txt
+
+      - name: 🧬 Run unit tests
+        run: python -m pytest Files/tests -q
 
       - name: 📂 Check input files
         run: |
@@ -49,6 +52,49 @@ jobs:
       - name: 🕸️ Run scraping script
         run: |
           python Files/scrip.py || { echo "Scraper failed, check logs"; exit 1; }  # Run scraping script
+
+      - name: 📊 Append run summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          def load(path, default):
+              try:
+                  with open(path, encoding='utf-8') as f:
+                      return json.load(f)
+              except Exception:
+                  return default
+          stats = load('stats.json', {})
+          status = load('configs/status.json', {})
+          lines = ['## Node-Configs 运行摘要', '']
+          if stats:
+              lines += [
+                  '| 指标 | 数值 |', '|:---|:---|',
+                  f"| 抓取链接 | {stats.get('links', 0)} |",
+                  f"| Clash 可用节点 | {stats.get('clash', 0)} |",
+                  f"| sing-box 可用节点 | {stats.get('singbox', 0)} |",
+                  f"| 轻量版节点 | {stats.get('light', 0)} |",
+                  f"| 分片文件 | {stats.get('splits', 0)} |",
+                  f"| 源 | {stats.get('sources_ok', 0)}/{stats.get('sources_total', 0)} |",
+              ]
+          if status:
+              lines += ['', '存活探测：{alive}/{checked} 可连通（{ratio}），剔除 {dropped}{reason}'.format(
+                  alive=status.get('alive', 0), checked=status.get('checked', 0),
+                  ratio=f"{float(status.get('alive_ratio') or 0):.1%}",
+                  dropped=status.get('dropped', 0),
+                  reason=f"（跳过原因：{status['skipped_reason']}）"
+                         if status.get('skipped_reason') else '')]
+          if stats.get('source_zero_streak'):
+              zero = [u for u, n in stats['source_zero_streak'].items() if n]
+              if zero:
+                  lines += ['', '零产出源：'] + [f'- `{u}`' for u in zero]
+          summary_path = os.environ.get('GITHUB_STEP_SUMMARY')
+          if summary_path:
+              with open(summary_path, 'a', encoding='utf-8') as f:
+                  f.write('\n'.join(lines) + '\n')
+          else:
+              print('\n'.join(lines))
+          PY
 
       - name: 📂 Check directory contents
         run: |
@@ -73,9 +119,11 @@ jobs:
             "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_TAG}/mihomo-linux-amd64-compatible-${MIHOMO_TAG}.gz"; then
             gunzip -f /tmp/mihomo.gz && chmod +x /tmp/mihomo
             mkdir -p /tmp/mihomo-home
-            /tmp/mihomo -t -d /tmp/mihomo-home -f configs/clash/config.yaml \
-              || { echo "mihomo 内核拒绝加载 configs/clash/config.yaml"; exit 1; }
-            echo "mihomo 校验通过"
+            for cfg in configs/clash/config.yaml configs/clash/light.yaml; do
+              /tmp/mihomo -t -d /tmp/mihomo-home -f "$cfg" \
+                || { echo "mihomo 内核拒绝加载 $cfg"; exit 1; }
+              echo "mihomo 校验通过：$cfg"
+            done
           else
             echo "::warning::mihomo 下载失败，跳过真实内核校验（Python 自检已通过）"
           fi
@@ -83,9 +131,11 @@ jobs:
           if curl -fsSL --retry 3 --retry-delay 2 -o /tmp/sing-box.tar.gz \
             "https://github.com/SagerNet/sing-box/releases/download/v${SINGBOX_TAG}/sing-box-${SINGBOX_TAG}-linux-amd64.tar.gz"; then
             tar -xzf /tmp/sing-box.tar.gz -C /tmp
-            "/tmp/sing-box-${SINGBOX_TAG}-linux-amd64/sing-box" check -c configs/singbox/config.json \
-              || { echo "sing-box 内核拒绝加载 configs/singbox/config.json"; exit 1; }
-            echo "sing-box 校验通过"
+            for cfg in configs/singbox/config.json configs/singbox/light.json; do
+              "/tmp/sing-box-${SINGBOX_TAG}-linux-amd64/sing-box" check -c "$cfg" \
+                || { echo "sing-box 内核拒绝加载 $cfg"; exit 1; }
+              echo "sing-box 校验通过：$cfg"
+            done
           else
             echo "::warning::sing-box 下载失败，跳过真实内核校验（Python 自检已通过）"
           fi

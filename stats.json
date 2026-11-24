@@ -1,15 +1,55 @@
 {
-  "updated_at": "2026-11-24 11:24:40",
-  "links": 3172,
-  "converted": 2346,
-  "clash": 2042,
-  "singbox": 2042,
+  "updated_at": "2026-11-24 11:44:53",
+  "links": 3208,
+  "converted": 2322,
+  "clash": 2315,
+  "singbox": 2009,
   "sources_ok": 13,
   "sources_total": 13,
   "skipped": {
-    "Vmess": 3,
+    "Vmess": 4,
     "Vless": 6,
     "ShadowSocks": 14,
     "Hysteria2": 2
+  },
+  "health": {
+    "checked": 2332,
+    "alive": 988,
+    "unreachable": 10,
+    "unknown": 1334,
+    "alive_ratio": 0.4237,
+    "dropped": 10
+  },
+  "light": 905,
+  "splits": 10,
+  "sources": {
+    "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/Best-Results/proxies.txt": 319,
+    "https://raw.githubusercontent.com/Fakeonomics/libre-configs/refs/heads/main/special/anchor": 219,
+    "https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub": 12,
+    "https://raw.githubusercontent.com/PizdukMod/PizdukVPN/refs/heads/main/sub": 25,
+    "https://raw.githubusercontent.com/R3ZARAHIMI/tg-v2ray-configs-every2h/refs/heads/main/Original-Configs.txt": 237,
+    "https://raw.githubusercontent.com/aviamastersgh/vpn-free-russia/main/ru_configs.txt": 119,
+    "https://raw.githubusercontent.com/meroseem/acaesub/refs/heads/main/output/v2ray.txt": 476,
+    "https://raw.githubusercontent.com/mohammadaz2/v2rayConfigsForYou/refs/heads/main/configs.txt": 430,
+    "https://raw.githubusercontent.com/mosapase/v2ray-sub/refs/heads/main/configs.txt": 151,
+    "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt": 110,
+    "https://raw.githubusercontent.com/sky-clear2026/v2ray-sub/refs/heads/main/configs.txt": 94,
+    "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt": 859,
+    "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt": 157
+  },
+  "source_zero_streak": {
+    "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/Best-Results/proxies.txt": 0,
+    "https://raw.githubusercontent.com/Fakeonomics/libre-configs/refs/heads/main/special/anchor": 0,
+    "https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub": 0,
+    "https://raw.githubusercontent.com/PizdukMod/PizdukVPN/refs/heads/main/sub": 0,
+    "https://raw.githubusercontent.com/R3ZARAHIMI/tg-v2ray-configs-every2h/refs/heads/main/Original-Configs.txt": 0,
+    "https://raw.githubusercontent.com/aviamastersgh/vpn-free-russia/main/ru_configs.txt": 0,
+    "https://raw.githubusercontent.com/meroseem/acaesub/refs/heads/main/output/v2ray.txt": 0,
+    "https://raw.githubusercontent.com/mohammadaz2/v2rayConfigsForYou/refs/heads/main/configs.txt": 0,
+    "https://raw.githubusercontent.com/mosapase/v2ray-sub/refs/heads/main/configs.txt": 0,
+    "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt": 0,
+    "https://raw.githubusercontent.com/sky-clear2026/v2ray-sub/refs/heads/main/configs.txt": 0,
+    "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt": 0,
+    "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt": 0
   }
 }

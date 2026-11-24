@@ -59,7 +59,14 @@ SUPPORTED_TYPES = ('vmess', 'vless', 'trojan', 'ss', 'ssr', 'hysteria2', 'tuic')
 # mihomo 的 transport 白名单。Xray/sing-box 的写法跟 mihomo 不完全一致
 # （raw / gun / splithttp …），出现不认识的值时 mihomo 会直接
 # 「unsupported network」整份配置加载失败，所以先归一、再按白名单过滤。
-CLASH_NETWORKS = frozenset({'tcp', 'ws', 'grpc', 'h2', 'httpupgrade'})
+#
+# `xhttp` 从 mihomo v1.19 起支持（实测 v1.19.34 通过），是目前最大的可回收来源：
+# 源站里有几百个 vless 用 xhttp/splithttp 传输，之前被整体丢弃。
+CLASH_NETWORKS = frozenset({'tcp', 'ws', 'grpc', 'h2', 'httpupgrade', 'xhttp'})
+
+# xhttp 的 mode 是 mihomo 逐字匹配的枚举（大小写敏感，Auto/AUTO 都会报
+# `xhttp mode AUTO is not implemented yet`），只有这四个可用。
+XHTTP_MODES = frozenset({'auto', 'packet-up', 'stream-one', 'stream-up'})
 
 # sing-box 的传输层白名单要单独维护：两个内核支持的集合并不一致
 # （mihomo 1.19 起认 `xhttp`，sing-box 没有）。共用一份白名单时，一旦放开
@@ -122,6 +129,13 @@ SINGBOX_TYPES = {'vmess', 'vless', 'trojan', 'ss', 'hysteria2', 'tuic'}
 # sing-box 的 outbound 类型名跟协议名并不完全一致：Shadowsocks 必须写
 # `shadowsocks`，写成 `ss` 会被判定为 unknown outbound type 而拒绝启动。
 SINGBOX_TYPE_NAMES = {'ss': 'shadowsocks'}
+
+# sing-box 里允许出现的出站类型（已换算成 sing-box 的写法）
+SINGBOX_OUTBOUND_TYPES = frozenset(
+    SINGBOX_TYPE_NAMES.get(name, name) for name in SINGBOX_TYPES)
+
+# sing-box 的 transport 类型（`tcp` 表示不写 transport，不在这个集合里）
+SINGBOX_TRANSPORTS = frozenset({'ws', 'grpc', 'http', 'httpupgrade'})
 
 # sing-box 的 shadowsocks 插件只认这几种（写入前已归一为这里的名字）
 SINGBOX_SS_PLUGINS = {'', 'obfs-local', 'v2ray-plugin'}
@@ -314,6 +328,8 @@ def _parse_vless(uri):
     node['network'] = normalize_network(_first(query, 'type'))
     node['path'] = _first(query, 'path') or '/'
     node['host'] = _first(query, 'host')
+    # xhttp / splithttp 的 mode（auto、packet-up、stream-up、stream-one）
+    node['xhttp_mode'] = _first(query, 'mode')
     node['service_name'] = _first(query, 'serviceName', 'servicename') or (
         node['path'] if node['network'] == 'grpc' else '')
     node['sni'] = _first(query, 'sni', 'peer') or node['host']
@@ -345,6 +361,7 @@ def _parse_trojan(uri):
     node['network'] = normalize_network(_first(query, 'type'))
     node['path'] = _first(query, 'path') or '/'
     node['host'] = _first(query, 'host')
+    node['xhttp_mode'] = _first(query, 'mode')
     node['service_name'] = _first(query, 'serviceName') or (
         node['path'] if node['network'] == 'grpc' else '')
     node['sni'] = _first(query, 'sni', 'peer') or node['host']
@@ -580,6 +597,18 @@ def _clash_transport(proxy, node):
         if node.get('host'):
             opts['host'] = [node['host']]
         proxy['h2-opts'] = opts
+    elif network == 'xhttp':
+        proxy['network'] = 'xhttp'
+        opts = {'path': node.get('path') or '/'}
+        # mihomo 的 xhttp-opts.host 必须**是字符串**：写成数组会报
+        # `expected type 'string', got unconvertible type '[]interface {}'`
+        # 而拒绝加载整份配置（与 h2-opts.host 正好相反，别混用）。
+        if node.get('host'):
+            opts['host'] = str(node['host'])
+        mode = str(node.get('xhttp_mode') or '').strip().lower()
+        if mode in XHTTP_MODES:
+            opts['mode'] = mode
+        proxy['xhttp-opts'] = opts
 
 
 def _clash_tls(proxy, node):
@@ -883,6 +912,19 @@ def sanitize_clash_proxy(proxy, node):
     if node_type in ('vmess', 'vless', 'trojan'):
         if (node.get('network') or 'tcp').lower() not in CLASH_NETWORKS:
             return None, f"network:{node.get('network')}"
+        if (node.get('network') or '').lower() == 'xhttp':
+            # 这两个字段写错都是「整份配置拒绝加载」，出口前再兜一次
+            opts = proxy.get('xhttp-opts')
+            if isinstance(opts, dict):
+                if 'host' in opts and not isinstance(opts['host'], str):
+                    opts['host'] = str(opts['host'][0]) if opts['host'] else ''
+                    if not opts['host']:
+                        opts.pop('host')
+                mode = str(opts.get('mode') or '').lower()
+                if mode and mode not in XHTTP_MODES:
+                    opts.pop('mode', None)
+                elif mode:
+                    opts['mode'] = mode
 
     if node_type in ('vmess', 'vless'):
         if not _UUID_DASHED.match(str(proxy.get('uuid') or '')):

@@ -1,0 +1,44 @@
+{
+  "updated_at": "2026-11-24 11:44:49",
+  "enabled": true,
+  "method": "tcp-connect",
+  "timeout_seconds": 3.0,
+  "checked": 2332,
+  "alive": 988,
+  "unreachable": 10,
+  "unknown": 1334,
+  "alive_ratio": 0.4237,
+  "by_protocol": {
+    "hysteria2": {
+      "checked": 60,
+      "alive": 19,
+      "unreachable": 0,
+      "unknown": 41
+    },
+    "ss": {
+      "checked": 289,
+      "alive": 21,
+      "unreachable": 1,
+      "unknown": 267
+    },
+    "trojan": {
+      "checked": 124,
+      "alive": 23,
+      "unreachable": 0,
+      "unknown": 101
+    },
+    "vless": {
+      "checked": 1682,
+      "alive": 892,
+      "unreachable": 9,
+      "unknown": 781
+    },
+    "vmess": {
+      "checked": 177,
+      "alive": 33,
+      "unreachable": 0,
+      "unknown": 144
+    }
+  },
+  "dropped": 10
+}
