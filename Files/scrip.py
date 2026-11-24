@@ -12,10 +12,10 @@ import pytz
 import yaml
 from bs4 import BeautifulSoup
 
+import health
 from converters import (clash_proxy, is_valid_ss, parse_uri,
                         sanitize_clash_proxy, sanitize_singbox_outbound,
                         singbox_outbound)
-import health
 
 # 获取当前脚本所在目录的绝对路径
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -33,6 +33,7 @@ from converters import (  # noqa: E402  (需要在 sys.path 调整之后导入)
     SINGBOX_SS_CIPHERS,
     SINGBOX_SS_PLUGINS,
     SINGBOX_TRANSPORTS,
+    SHORT_ID_RE,
     SSR_OBFS,
     SSR_PROTOCOLS,
     SUPPORTED_TYPES,
@@ -47,8 +48,6 @@ ROOT = (os.path.abspath(sys.argv[1]) if len(sys.argv) > 1
 CLASH_DIR = os.path.join(ROOT, 'configs', 'clash')
 CLASH_SPLIT_DIR = os.path.join(CLASH_DIR, 'split')
 SINGBOX_DIR = os.path.join(ROOT, 'configs', 'singbox')
-
-SHORT_ID_RE = re.compile(r'^(?:[0-9a-fA-F]{2}){0,8}$')
 
 # PyYAML 按 YAML 1.1 决定要不要给字符串加引号，而 mihomo / sing-box 按 YAML 1.2
 # 解析：`short-id: 08` 在 1.2 里是整数 8，客户端会直接拒绝加载整份配置。

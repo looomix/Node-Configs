@@ -213,7 +213,9 @@ def normalize_uuid(value):
     return ''
 
 
-_SHORT_ID = re.compile(r'^(?:[0-9a-fA-F]{2}){0,8}$')
+# REALITY 的 short-id 必须是偶数位十六进制（0~8 字节）
+SHORT_ID_RE = re.compile(r'^(?:[0-9a-fA-F]{2}){0,8}$')
+_SHORT_ID = SHORT_ID_RE
 
 
 def normalize_short_id(value):
