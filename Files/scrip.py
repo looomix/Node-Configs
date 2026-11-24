@@ -488,6 +488,11 @@ def generate_readme(protocol_counts, convert_stats=None,
     raw_clash = f"https://raw.githubusercontent.com/{github_repo_path}/refs/heads/{github_branch}/configs/clash"
     raw_singbox = f"https://raw.githubusercontent.com/{github_repo_path}/refs/heads/{github_branch}/configs/singbox"
 
+    # jsDelivr 镜像：国内访问 raw.githubusercontent.com 不通时的替代地址
+    jsd_clash = f"https://cdn.jsdelivr.net/gh/{github_repo_path}@{github_branch}/configs/clash"
+    jsd_singbox = f"https://cdn.jsdelivr.net/gh/{github_repo_path}@{github_branch}/configs/singbox"
+    jsd_protocols = f"https://cdn.jsdelivr.net/gh/{github_repo_path}@{github_branch}/configs/protocols"
+
     total_configs = sum(protocol_counts.values())
     convert_stats = convert_stats or {}
     converted = convert_stats.get('converted', 0)
@@ -512,21 +517,20 @@ def generate_readme(protocol_counts, convert_stats=None,
 
 复制链接，粘贴到客户端的「订阅 / 远程配置」即可，无需下载文件。
 
-| 客户端 | 订阅链接 | 内容 |
-|:---|:---|:---|
-| **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`]({raw_clash}/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
-| **sing-box** | [`config.json`]({raw_singbox}/config.json) | mixed 入站 + selector / urltest 出站 |
-| **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`]({raw_protocols}/AllProtocols.txt) | 原始分享链接 |
+| 客户端 | 订阅链接 | jsDelivr 镜像 | 内容 |
+|:---|:---|:---|:---|
+| **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`]({raw_clash}/config.yaml) | [`config.yaml`]({jsd_clash}/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
+| **sing-box** | [`config.json`]({raw_singbox}/config.json) | [`config.json`]({jsd_singbox}/config.json) | mixed 入站 + selector / urltest 出站 |
+| **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`]({raw_protocols}/AllProtocols.txt) | [`AllProtocols.txt`]({jsd_protocols}/AllProtocols.txt) | 原始分享链接 |
 
 如果只想复用节点、不想用本项目提供的规则：
 
-- Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) — 可作为 `proxy-provider`
-- sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) — 可合并进已有配置
+- Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) · [jsDelivr]({jsd_clash}/proxies.yaml) — 可作为 `proxy-provider`
+- sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) · [jsDelivr]({jsd_singbox}/outbounds.json) — 可合并进已有配置
 
-> **连不上 `raw.githubusercontent.com`？**（Android 端常报 `EOF` / `connection reset`，并非配置错误）
-> 在链接前加镜像前缀 `https://gh-proxy.com/` 即可，例如 Clash：
+> **两个地址都连不上？**（Android 端常报 `EOF` / `connection reset`，并非配置错误）
+> 在 raw 链接前加镜像前缀 `https://gh-proxy.com/` 或 `https://ghfast.top/`，例如 Clash：
 > `https://gh-proxy.com/https://raw.githubusercontent.com/{github_repo_path}/main/configs/clash/config.yaml`
-> 备选：`https://ghfast.top/` 前缀，或 jsDelivr `https://cdn.jsdelivr.net/gh/{github_repo_path}@main/configs/clash/config.yaml`
 
 ## 🛠️ 客户端配置
 
