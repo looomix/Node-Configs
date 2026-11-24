@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/looomix/Node-Configs/main.yml?style=flat-square&label=update" alt="Update Status" />
-  <img src="https://img.shields.io/badge/nodes-2348-blue?style=flat-square" alt="Nodes" />
-  <img src="https://img.shields.io/badge/links-3174-informational?style=flat-square" alt="Links" />
+  <img src="https://img.shields.io/badge/nodes-1635-blue?style=flat-square" alt="Nodes" />
+  <img src="https://img.shields.io/badge/links-2389-informational?style=flat-square" alt="Links" />
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="Stars" />
@@ -11,26 +11,27 @@
 
 <p align="center">
   从公开来源自动聚合网络节点，转换成 <b>Clash / mihomo</b> 与 <b>sing-box</b> 可直接导入的订阅配置<br>
-  每 12 小时自动更新 · 最后更新 <b>2026-11-24 10:52</b>
+  每 12 小时自动更新 · 最后更新 <b>2026-11-24 11:21</b>
 </p>
 
 ## ⚡ 快速订阅
 
 复制链接，粘贴到客户端的「订阅 / 远程配置」即可，无需下载文件。
 
-| 客户端 | 订阅链接 | jsDelivr 镜像 | 内容 |
+| 客户端 | 订阅链接（raw） | 镜像链接（gh-proxy） | 内容 |
 |:---|:---|:---|:---|
-| **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/config.yaml) | [`config.yaml`](https://cdn.jsdelivr.net/gh/looomix/Node-Configs@main/configs/clash/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
-| **sing-box** | [`config.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/config.json) | [`config.json`](https://cdn.jsdelivr.net/gh/looomix/Node-Configs@main/configs/singbox/config.json) | mixed 入站 + selector / urltest 出站 |
-| **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) | [`AllProtocols.txt`](https://cdn.jsdelivr.net/gh/looomix/Node-Configs@main/configs/protocols/AllProtocols.txt) | 原始分享链接 |
+| **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/config.yaml) | [`config.yaml`](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
+| **sing-box** | [`config.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/config.json) | [`config.json`](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/config.json) | mixed 入站 + selector / urltest 出站 |
+| **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) | [`AllProtocols.txt`](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) | 原始分享链接 |
 
 如果只想复用节点、不想用本项目提供的规则：
 
-- Clash： [`proxies.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/proxies.yaml) · [jsDelivr](https://cdn.jsdelivr.net/gh/looomix/Node-Configs@main/configs/clash/proxies.yaml) — 可作为 `proxy-provider`
-- sing-box： [`outbounds.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/outbounds.json) · [jsDelivr](https://cdn.jsdelivr.net/gh/looomix/Node-Configs@main/configs/singbox/outbounds.json) — 可合并进已有配置
+- Clash： [`proxies.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/proxies.yaml) · [镜像](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/proxies.yaml) — 可作为 `proxy-provider`
+- sing-box： [`outbounds.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/outbounds.json) · [镜像](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/outbounds.json) — 可合并进已有配置
 
-> **两个地址都连不上？**（Android 端常报 `EOF` / `connection reset`，并非配置错误）
-> 在 raw 链接前加镜像前缀 `https://gh-proxy.com/` 或 `https://ghfast.top/`，例如 Clash：
+> **raw 链接导入报 `EOF` / `connection reset`？** 这不是配置错误，是国内直连
+> `raw.githubusercontent.com` 被中断。用右边那列 **gh-proxy 镜像**即可，它的规则就是
+> 「`https://gh-proxy.com/` + 原始 raw 地址」，例如 Clash：
 > `https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/main/configs/clash/config.yaml`
 
 ## 🛠️ 客户端配置
@@ -108,7 +109,8 @@ Clash 改 `mixed-port`（默认 `7890`）与 `external-controller`（默认 `909
 
 这两个客户端遇到不认识的字段值是**拒绝加载整份配置**，而不是跳过单个节点。本仓库在生成时会按 mihomo / sing-box 的白名单过滤（加密方式、UUID、REALITY 密钥、传输层类型等），并在提交前用真实内核跑一遍校验，所以正常情况下不会再有这类报错。
 
-如果仍然遇到，说明拿到的是旧缓存：raw 链接加 `?t=时间戳`，jsDelivr 链接把 `@main` 换成 `@latest` 或稍等 12 小时缓存过期。
+如果仍然遇到，说明拿到的是旧缓存：raw 链接加 `?t=时间戳`（镜像链接同样支持，把
+`?t=` 加在整条地址末尾即可）再导入一次。
 </details>
 
 <details>

@@ -61,6 +61,12 @@ SUPPORTED_TYPES = ('vmess', 'vless', 'trojan', 'ss', 'ssr', 'hysteria2', 'tuic')
 # 「unsupported network」整份配置加载失败，所以先归一、再按白名单过滤。
 CLASH_NETWORKS = frozenset({'tcp', 'ws', 'grpc', 'h2', 'httpupgrade'})
 
+# sing-box 的传输层白名单要单独维护：两个内核支持的集合并不一致
+# （mihomo 1.19 起认 `xhttp`，sing-box 没有）。共用一份白名单时，一旦放开
+# 某个只在 mihomo 存在的值，sing-box 那边会写出「没有 transport 的裸 TCP 节点」，
+# 能加载但必然连不上。
+SINGBOX_NETWORKS = frozenset({'tcp', 'ws', 'grpc', 'h2', 'httpupgrade'})
+
 NETWORK_ALIASES = {
     'raw': 'tcp',
     'none': 'tcp',
@@ -88,6 +94,18 @@ SINGBOX_FLOWS = frozenset({'xtls-rprx-vision'})
 HY2_OBFS_TYPES = frozenset({'salamander'})
 TUIC_CONGESTION = frozenset({'cubic', 'new_reno', 'bbr'})
 TUIC_UDP_RELAY = frozenset({'native', 'quic'})
+
+# SSR 的 protocol / obfs 取值同样是「认不出就整份配置失败」。
+# 下面两份清单是用 mihomo v1.19.34 逐个试出来的（auth_chain_c、verify_sha1、
+# tls_ticket 等都会被判定 unsupported）。
+SSR_PROTOCOLS = frozenset({
+    'origin', 'auth_sha1_v4', 'auth_aes128_md5', 'auth_aes128_sha1',
+    'auth_chain_a', 'auth_chain_b',
+})
+SSR_OBFS = frozenset({
+    'plain', 'http_simple', 'http_post', 'random_head',
+    'tls1.2_ticket_auth', 'tls1.2_ticket_fastauth',
+})
 V2RAY_SECURITY = frozenset({
     'auto', 'none', 'zero', 'aes-128-gcm', 'chacha20-poly1305', 'aes-128-ctr',
 })
@@ -334,6 +352,12 @@ def _parse_trojan(uri):
     node['alpn'] = _alpn_list(_first(query, 'alpn'))
     node['insecure'] = _truthy(_first(query, 'allowInsecure', 'insecure'))
     node['tls'] = (_first(query, 'security') or 'tls').lower() != 'none'
+    # trojan + REALITY 也很常见（security=reality&pbk=...&sid=...）。
+    # 之前只读 security，密钥被丢掉后客户端会拿普通 TLS 去连，必然失败。
+    node['reality_pbk'] = _first(query, 'pbk')
+    node['reality_sid'] = normalize_short_id(_first(query, 'sid'))
+    if node['reality_pbk']:
+        node['tls'] = True
     return node
 
 
@@ -377,6 +401,8 @@ def _parse_tuic(uri):
     else:
         node['uuid'] = userinfo
         node['password'] = unquote(parts.password or '')
+    # 32 位无横线的写法也统一补成标准 UUID，未规范化时留给出口闸判断
+    node['uuid'] = normalize_uuid(node['uuid']) or node['uuid']
     node['sni'] = _first(query, 'sni', 'peer')
     node['alpn'] = _alpn_list(_first(query, 'alpn'))
     node['insecure'] = _truthy(_first(query, 'insecure', 'allowInsecure'))
@@ -387,7 +413,8 @@ def _parse_tuic(uri):
 
 
 def _parse_ss(uri):
-    body = uri[len('ss://'):]
+    # 有的源站用 shadowsocks:// 这个长写法，按固定长度截会切错位置
+    _, body = uri.split('://', 1)
     name = ''
     if '#' in body:
         body, fragment = body.split('#', 1)
@@ -873,6 +900,15 @@ def sanitize_clash_proxy(proxy, node):
         if not ss_key_len_ok(cipher, proxy['password']):
             return None, f'key:{cipher}'
 
+    if node_type == 'ssr':
+        # mihomo 对 SSR 的 protocol / obfs 也是整份配置级别的校验
+        protocol = str(proxy.get('protocol') or 'origin').lower()
+        if protocol not in SSR_PROTOCOLS:
+            return None, f'ssr-protocol:{protocol}'
+        obfs = str(proxy.get('obfs') or 'plain').lower()
+        if obfs not in SSR_OBFS:
+            return None, f'ssr-obfs:{obfs}'
+
     if node_type in ('trojan', 'hysteria2', 'tuic'):
         if not str(proxy.get('password') or ''):
             return None, 'password'
@@ -934,7 +970,7 @@ def sanitize_singbox_outbound(outbound, node):
         return None, 'tag'
 
     if node_type in ('vmess', 'vless', 'trojan'):
-        if (node.get('network') or 'tcp').lower() not in CLASH_NETWORKS:
+        if (node.get('network') or 'tcp').lower() not in SINGBOX_NETWORKS:
             return None, f"network:{node.get('network')}"
 
     if node_type in ('vmess', 'vless'):
@@ -956,6 +992,10 @@ def sanitize_singbox_outbound(outbound, node):
     if node_type in ('trojan', 'hysteria2', 'tuic'):
         if not str(outbound.get('password') or ''):
             return None, 'password'
+
+    if node_type == 'tuic' and not _UUID_DASHED.match(str(outbound.get('uuid') or '')):
+        # sing-box 会在 initialize outbound 阶段报 invalid uuid 并拒绝整份配置
+        return None, 'uuid'
 
     if outbound.get('flow') and outbound['flow'] not in SINGBOX_FLOWS:
         outbound.pop('flow', None)

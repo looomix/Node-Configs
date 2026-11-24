@@ -42,6 +42,13 @@ SINGBOX_FLOWS = {'xtls-rprx-vision'}
 V2RAY_SECURITY = {'auto', 'none', 'zero', 'aes-128-gcm',
                   'chacha20-poly1305', 'aes-128-ctr'}
 
+# SSR 的 protocol / obfs 也是整份配置级别的校验（mihomo 实测）
+SSR_PROTOCOLS = {'origin', 'auth_sha1_v4', 'auth_aes128_md5',
+                 'auth_aes128_sha1', 'auth_chain_a', 'auth_chain_b'}
+SSR_OBFS = {'plain', 'http_simple', 'http_post', 'random_head',
+            'tls1.2_ticket_auth', 'tls1.2_ticket_fastauth'}
+SINGBOX_TRANSPORTS = {'ws', 'grpc', 'http', 'httpupgrade'}
+
 SHORT_ID_RE = re.compile(r'^(?:[0-9a-fA-F]{2}){0,8}$')
 
 # PyYAML 按 YAML 1.1 决定要不要给字符串加引号，而 mihomo / sing-box 按 YAML 1.2
@@ -179,6 +186,11 @@ def check_clash():
             short_id = reality.get('short-id')
             if short_id is not None and not SHORT_ID_RE.match(str(short_id)):
                 fail(f'{where}: reality short-id 非法 {short_id!r}')
+        if ptype == 'ssr':
+            if str(proxy.get('protocol') or 'origin').lower() not in SSR_PROTOCOLS:
+                fail(f'{where}: ssr protocol 不受支持 {proxy.get("protocol")!r}')
+            if str(proxy.get('obfs') or 'plain').lower() not in SSR_OBFS:
+                fail(f'{where}: ssr obfs 不受支持 {proxy.get("obfs")!r}')
         if ptype == 'vmess':
             cipher = str(proxy.get('cipher') or 'auto')
             if cipher not in V2RAY_SECURITY:
@@ -260,6 +272,10 @@ def check_singbox():
         flow = outbound.get('flow')
         if flow and flow not in SINGBOX_FLOWS:
             fail(f'{where}: flow 非法 {flow!r}')
+
+        transport = outbound.get('transport') or {}
+        if transport and transport.get('type') not in SINGBOX_TRANSPORTS:
+            fail(f'{where}: transport 不受支持 {transport.get("type")!r}')
 
         tls = outbound.get('tls') or {}
         utls = tls.get('utls') or {}

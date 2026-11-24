@@ -184,6 +184,10 @@ SCHEME_BOUNDARY = re.compile(
     re.IGNORECASE,
 )
 
+# scheme 名按长度倒序，用于判断某个 `xx://` 是否其实是更长 scheme 的尾巴
+SCHEME_NAMES = ('shadowsocks', 'wireguard', 'hysteria2', 'trojan', 'vless',
+                'vmess', 'tuic5', 'tuic', 'ssr', 'hy2', 'ss')
+
 SCHEME_TO_CATEGORY = {
     'vmess': 'Vmess',
     'vless': 'Vless',
@@ -206,12 +210,43 @@ def category_of(config):
     return SCHEME_TO_CATEGORY.get(config.split('://', 1)[0].lower())
 
 
+def _is_scheme_tail(config, position, token):
+    """判断 position 处的 `token://` 是不是更长 scheme 的尾巴（`vless://` 里的 `ss://`）。"""
+    for name in SCHEME_NAMES:
+        if name == token or not name.endswith(token):
+            continue
+        start = position - (len(name) - len(token))
+        if start < 0:
+            continue
+        if (config[start:position + len(token)].lower() == name
+                and config[position + len(token):position + len(token) + 3] == '://'):
+            return True
+    return False
+
+
 def split_glued_links(config):
-    """源站偶尔把两条链接直接粘在一起，这里按 scheme 边界拆开。"""
+    """源站偶尔把两条链接直接粘在一起，这里按 scheme 边界拆开。
+
+    注意 `vless://` / `vmess://` 的第 4 个字符起就是 `ss://`，直接把零宽断言
+    当分隔符用会把 `vless://a` 切成 `vle` + `ss://a`，两条节点一起报废。
+    所以每个候选位置都要先回看，确认它不是更长 scheme 的尾巴。
+    """
     if config.count('://') < 2:
         return [config]
-    pieces = [piece for piece in SCHEME_BOUNDARY.split(config) if piece]
-    return pieces or [config]
+
+    starts = []
+    for match in SCHEME_BOUNDARY.finditer(config):
+        position = match.start()
+        token = config[position:].split('://', 1)[0].lower()
+        if _is_scheme_tail(config, position, token):
+            continue
+        starts.append(position)
+
+    if not starts:
+        return [config]
+    pieces = [config[start:end]
+              for start, end in zip(starts, starts[1:] + [len(config)])]
+    return [piece for piece in pieces if piece] or [config]
 
 
 async def fetch_url(session, url):
@@ -503,7 +538,7 @@ def write_singbox_config(nodes):
         f.write('\n')
 
     logging.info(f"Saved {len(outbounds_nodes)} outbounds to {config_path}")
-    return len(nodes)
+    return len(outbounds_nodes)
 
 
 def generate_readme(protocol_counts, convert_stats=None,
@@ -517,20 +552,24 @@ def generate_readme(protocol_counts, convert_stats=None,
     raw_clash = f"https://raw.githubusercontent.com/{github_repo_path}/refs/heads/{github_branch}/configs/clash"
     raw_singbox = f"https://raw.githubusercontent.com/{github_repo_path}/refs/heads/{github_branch}/configs/singbox"
 
-    # jsDelivr 镜像：国内访问 raw.githubusercontent.com 不通时的替代地址
-    jsd_clash = f"https://cdn.jsdelivr.net/gh/{github_repo_path}@{github_branch}/configs/clash"
-    jsd_singbox = f"https://cdn.jsdelivr.net/gh/{github_repo_path}@{github_branch}/configs/singbox"
-    jsd_protocols = f"https://cdn.jsdelivr.net/gh/{github_repo_path}@{github_branch}/configs/protocols"
+    # 镜像：国内直连 raw.githubusercontent.com 常被中断（Android 端报 EOF），
+    # 统一走 gh-proxy.com 前缀转发，链接格式就是「镜像前缀 + 原始 raw 地址」。
+    proxy_clash = f"https://gh-proxy.com/{raw_clash}"
+    proxy_singbox = f"https://gh-proxy.com/{raw_singbox}"
+    proxy_protocols = f"https://gh-proxy.com/{raw_protocols}"
 
     total_configs = sum(protocol_counts.values())
     convert_stats = convert_stats or {}
     converted = convert_stats.get('converted', 0)
+    # 徽章展示真正写进配置的节点数：解析出来但被客户端白名单拦掉的节点
+    # （xhttp 传输层、2022 密钥长度不对等）不该算进「可用节点」。
+    available = convert_stats.get('clash') or converted
 
     md = f"""# 🧩 Node-Configs
 
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/{github_repo_path}/main.yml?style=flat-square&label=update" alt="Update Status" />
-  <img src="https://img.shields.io/badge/nodes-{converted}-blue?style=flat-square" alt="Nodes" />
+  <img src="https://img.shields.io/badge/nodes-{available}-blue?style=flat-square" alt="Nodes" />
   <img src="https://img.shields.io/badge/links-{total_configs}-informational?style=flat-square" alt="Links" />
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/github/last-commit/{github_repo_path}?style=flat-square" alt="Last Commit" />
@@ -546,20 +585,21 @@ def generate_readme(protocol_counts, convert_stats=None,
 
 复制链接，粘贴到客户端的「订阅 / 远程配置」即可，无需下载文件。
 
-| 客户端 | 订阅链接 | jsDelivr 镜像 | 内容 |
+| 客户端 | 订阅链接（raw） | 镜像链接（gh-proxy） | 内容 |
 |:---|:---|:---|:---|
-| **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`]({raw_clash}/config.yaml) | [`config.yaml`]({jsd_clash}/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
-| **sing-box** | [`config.json`]({raw_singbox}/config.json) | [`config.json`]({jsd_singbox}/config.json) | mixed 入站 + selector / urltest 出站 |
-| **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`]({raw_protocols}/AllProtocols.txt) | [`AllProtocols.txt`]({jsd_protocols}/AllProtocols.txt) | 原始分享链接 |
+| **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`]({raw_clash}/config.yaml) | [`config.yaml`]({proxy_clash}/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
+| **sing-box** | [`config.json`]({raw_singbox}/config.json) | [`config.json`]({proxy_singbox}/config.json) | mixed 入站 + selector / urltest 出站 |
+| **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`]({raw_protocols}/AllProtocols.txt) | [`AllProtocols.txt`]({proxy_protocols}/AllProtocols.txt) | 原始分享链接 |
 
 如果只想复用节点、不想用本项目提供的规则：
 
-- Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) · [jsDelivr]({jsd_clash}/proxies.yaml) — 可作为 `proxy-provider`
-- sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) · [jsDelivr]({jsd_singbox}/outbounds.json) — 可合并进已有配置
+- Clash： [`proxies.yaml`]({raw_clash}/proxies.yaml) · [镜像]({proxy_clash}/proxies.yaml) — 可作为 `proxy-provider`
+- sing-box： [`outbounds.json`]({raw_singbox}/outbounds.json) · [镜像]({proxy_singbox}/outbounds.json) — 可合并进已有配置
 
-> **两个地址都连不上？**（Android 端常报 `EOF` / `connection reset`，并非配置错误）
-> 在 raw 链接前加镜像前缀 `https://gh-proxy.com/` 或 `https://ghfast.top/`，例如 Clash：
-> `https://gh-proxy.com/https://raw.githubusercontent.com/{github_repo_path}/main/configs/clash/config.yaml`
+> **raw 链接导入报 `EOF` / `connection reset`？** 这不是配置错误，是国内直连
+> `raw.githubusercontent.com` 被中断。用右边那列 **gh-proxy 镜像**即可，它的规则就是
+> 「`https://gh-proxy.com/` + 原始 raw 地址」，例如 Clash：
+> `https://gh-proxy.com/https://raw.githubusercontent.com/{github_repo_path}/{github_branch}/configs/clash/config.yaml`
 
 ## 🛠️ 客户端配置
 
@@ -636,7 +676,8 @@ Clash 改 `mixed-port`（默认 `7890`）与 `external-controller`（默认 `909
 
 这两个客户端遇到不认识的字段值是**拒绝加载整份配置**，而不是跳过单个节点。本仓库在生成时会按 mihomo / sing-box 的白名单过滤（加密方式、UUID、REALITY 密钥、传输层类型等），并在提交前用真实内核跑一遍校验，所以正常情况下不会再有这类报错。
 
-如果仍然遇到，说明拿到的是旧缓存：raw 链接加 `?t=时间戳`，jsDelivr 链接把 `@main` 换成 `@latest` 或稍等 12 小时缓存过期。
+如果仍然遇到，说明拿到的是旧缓存：raw 链接加 `?t=时间戳`（镜像链接同样支持，把
+`?t=` 加在整条地址末尾即可）再导入一次。
 </details>
 
 <details>
@@ -717,8 +758,9 @@ def save_stats(links, converted, clash_count, singbox_count, sources_ok,
 
 async def main():
     if not os.path.exists(URLS_FILE) or not os.path.exists(KEYWORDS_FILE):
-        logging.critical("Input files not found.")
-        return
+        # 静默 return 会让 CI 继续用仓库里的旧配置"通过"校验并提交无变化的空跑
+        logging.critical("Input files not found: %s / %s", URLS_FILE, KEYWORDS_FILE)
+        raise SystemExit(1)
 
     with open(URLS_FILE, 'r', encoding='utf-8') as f:
         urls = [line.strip() for line in f if line.strip()]
