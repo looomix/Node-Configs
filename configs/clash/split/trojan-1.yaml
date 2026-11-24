@@ -1,4 +1,4 @@
-# Node-Configs 分片 trojan 第 1 片，124 个节点，可作为 proxy-provider
+# Node-Configs 分片 trojan 第 1 片，122 个节点，可作为 proxy-provider
 proxies:
 - name: Trojan-001
   type: trojan
@@ -202,14 +202,6 @@ proxies:
   udp: true
   tls: true
   servername: resources.browseseniorrolesandenhanceyourcareertoday.com
-- name: Trojan-019
-  type: trojan
-  server: 169.197.140.214
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.discoverfreshgraduatejobsstartyourprofessionaljourney.com
 - name: 🇺🇸 US-Trojan-020
   type: trojan
   server: 170.101.101.112
@@ -958,14 +950,6 @@ proxies:
   tls: true
   servername: bgsg1.hikigo.com
   skip-cert-verify: true
-- name: Trojan-105
-  type: trojan
-  server: blog.findlocaljobnetworkandbuildcommunityconnections.com
-  port: 443
-  password: dba20dcb635e430fa4d3bfc303a149d2
-  udp: true
-  tls: true
-  servername: blog.findlocaljobnetworkandbuildcommunityconnections.com
 - name: Trojan-106
   type: trojan
   server: de.g-boot.ir

@@ -1,4 +1,4 @@
-# Node-Configs 分片 vmess 第 1 片，177 个节点，可作为 proxy-provider
+# Node-Configs 分片 vmess 第 1 片，175 个节点，可作为 proxy-provider
 proxies:
 - name: 🇧🇷 BR-Vmess-001
   type: vmess
@@ -159,14 +159,6 @@ proxies:
     path: /or3
     headers:
       Host: or3.sfacg.uk
-- name: Vmess-012
-  type: vmess
-  server: 109.70.74.135
-  port: 20402
-  uuid: 6ae9de27-c255-4620-ab40-097dd6a89478
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 🇹🇭 TH-Vmess-013
   type: vmess
   server: 119.46.51.45
@@ -1641,14 +1633,6 @@ proxies:
     path: /ws?ed=2048
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: Vmess-158
-  type: vmess
-  server: dashboard.ojeshop.top
-  port: 5380
-  uuid: 451b7eda-401b-4faf-badb-d52db3d6400e
-  alterId: 0
-  cipher: auto
-  udp: true
 - name: 🇩🇪 DE-Vmess-159
   type: vmess
   server: de.zhou-yufan.com

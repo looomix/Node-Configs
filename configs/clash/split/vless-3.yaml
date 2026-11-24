@@ -1,86 +1,5 @@
 # Node-Configs 分片 vless 第 3 片，300 个节点，可作为 proxy-provider
 proxies:
-- name: Vless-602
-  type: vless
-  server: 188.225.75.52
-  port: 8443
-  uuid: cb73ec56-1faa-491d-b2eb-8edec2e4b12e
-  udp: true
-  flow: xtls-rprx-vision
-  tls: true
-  servername: agent.mperialbank.xyz
-  client-fingerprint: qq
-  reality-opts:
-    public-key: 4_mdROaBWtpQEmgXNbbwO2QzB4gwUYSFnLF3yx7w62I
-    short-id: be28922db425c596
-- name: 🇩🇪 DE-Vless-603
-  type: vless
-  server: 188.225.78.178
-  port: 443
-  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
-  udp: true
-  tls: true
-  servername: cadrin.wtf
-  client-fingerprint: chrome
-  alpn:
-  - h2
-  network: grpc
-  grpc-opts:
-    grpc-service-name: cache.sync.v1
-- name: 🇩🇪 DE-Vless-604
-  type: vless
-  server: 188.225.78.178
-  port: 443
-  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
-  udp: true
-  tls: true
-  servername: cadrin.wtf
-  client-fingerprint: firefox
-  alpn:
-  - h2
-  network: grpc
-  grpc-opts:
-    grpc-service-name: cache.sync.v1
-- name: 🇩🇪 DE-Vless-605
-  type: vless
-  server: 188.225.78.178
-  port: 443
-  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
-  udp: true
-  tls: true
-  servername: cadrin.wtf
-  client-fingerprint: ios
-  alpn:
-  - h2
-  network: grpc
-  grpc-opts:
-    grpc-service-name: cache.sync.v1
-- name: Vless-606
-  type: vless
-  server: 188.225.78.178
-  port: 443
-  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
-  udp: true
-  tls: true
-  servername: cadrin.wtf
-  client-fingerprint: random
-  alpn:
-  - h2
-  network: grpc
-  grpc-opts:
-    grpc-service-name: cache.sync.v1
-- name: 🇩🇪 DE-Vless-607
-  type: vless
-  server: 188.225.78.178
-  port: 443
-  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
-  udp: true
-  tls: true
-  servername: cadrin.wtf
-  client-fingerprint: edge
-  network: grpc
-  grpc-opts:
-    grpc-service-name: cache.sync.v1
 - name: 🇩🇪 DE-Vless-608
   type: vless
   server: 188.225.78.178
@@ -376,17 +295,6 @@ proxies:
   reality-opts:
     public-key: GIe8sesUIyAz8Kq7t9B7tcPgrhYcRGPuGas9SRqMLTI
     short-id: 1c52d1ee7a01fee0
-- name: Vless-632
-  type: vless
-  server: 191.217.244.244
-  port: 443
-  uuid: e1cf85dd-8de4-44de-86f9-86dd81ae677a
-  udp: true
-  flow: xtls-rprx-vision
-  tls: true
-  servername: gmb.bachidze.com
-  reality-opts:
-    public-key: n7jBvniXhdIPJbvDf85x0Q9o067VlnnnJplSJd5KDX8
 - name: Vless-633
   type: vless
   server: 191.217.253.12
@@ -4001,3 +3909,98 @@ proxies:
   reality-opts:
     public-key: P7S4UPFlQbmiBr4txyy8NZIMTrmO3UdxyH16WBU-YzY
     short-id: 19253fae84102271
+- name: 🇨🇭 CH-Vless-903
+  type: vless
+  server: 45.90.59.15
+  port: 443
+  uuid: 3950b45e-740d-4dca-ac95-505ec8534592
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: www.cloudflare.com
+  client-fingerprint: random
+  reality-opts:
+    public-key: P7S4UPFlQbmiBr4txyy8NZIMTrmO3UdxyH16WBU-YzY
+    short-id: 19253fae84102271
+- name: Vless-904
+  type: vless
+  server: 45.90.59.88
+  port: 443
+  uuid: cee05b0b-3d23-4c3b-b87e-def35b7ba460
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: ekaterinburg.supermama.mom
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: W09O4ZqfG3LVnuyQXFRmTNGJIKn7eaFMAoJfC5mm0mk
+- name: Vless-905
+  type: vless
+  server: 45.90.98.236
+  port: 443
+  uuid: cee05b0b-3d23-4c3b-b87e-def35b7ba460
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: shop.supermama.mom
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: 0rr1MydWcoKb7gMSr2Aq-ZpBGv7WtKqoJ2vOyPv_n3M
+- name: 🇷🇺 RU-Vless-906
+  type: vless
+  server: 45.91.54.162
+  port: 43000
+  uuid: 4a923161-156f-4914-8cac-762fb2433bfb
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: 45.91.54.162
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: CG0mVPuvPcfZjplA21zehlqoDpGHihJBK8K_u1zfhgQ
+    short-id: ee4ea980
+- name: Vless-907
+  type: vless
+  server: 45.91.54.162
+  port: 43000
+  uuid: 4a923161-156f-4914-8cac-762fb2433bfb
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: 45.91.54.162
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: CG0mVPuvPcfZjplA21zehlqoDpGHihJBK8K_u1zfhgQ
+    short-id: ee4ea980
+- name: Vless-908
+  type: vless
+  server: 45.95.232.233
+  port: 443
+  uuid: dac0e736-5c69-4b7c-8b1d-27cbbc3bd948
+  udp: true
+  tls: true
+  servername: 1c.hlclub.tech
+  reality-opts:
+    public-key: Y1HhtxYRbW5hHs8AbfIzKG_TU3iHO9ClcYjzKY5DOW4
+    short-id: a5dccceb609d8e2b
+  network: xhttp
+  xhttp-opts:
+    path: /xh
+    host: 1c.hlclub.tech
+    mode: auto
+- name: 🇨🇭 CH-Vless-909
+  type: vless
+  server: 46.148.233.97
+  port: 25035
+  uuid: 62995b2a-8f82-41f8-ac80-dfdfc1253e76
+  udp: true
+  tls: true
+  servername: 96f799r.ch5.h1clayd.click
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: m7pPQqgE5q8qOjHhn9AjNA9sWhBFQ-gXzyGcZTNihUU
+    short-id: eb63581de991f8c8
+  network: xhttp
+  xhttp-opts:
+    path: /astral-edge-h1
+    mode: stream-one

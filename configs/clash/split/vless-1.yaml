@@ -89,21 +89,6 @@ proxies:
     path: /stream/PANEL_ZEUS/9c45f3fee7fb
     headers:
       Host: dzzxiyeku44s.mahdihonarvar5.workers.dev
-- name: Vless-008
-  type: vless
-  server: 103.118.211.72
-  port: 25813
-  uuid: cb7ceae2-6f47-4059-8bf0-371b62a0f0ce
-  udp: true
-  tls: true
-  servername: cz2.jetstoreapp.ru
-  reality-opts:
-    public-key: 3OgnU0DFRoI77NiAwTf2yR9H2gvXl1QIlxJD0uwWtTc
-    short-id: f0bafb4ed8e31c10
-  network: xhttp
-  xhttp-opts:
-    path: /2c4f4def9f3d
-    mode: auto
 - name: Vless-009
   type: vless
   server: 104.16.10.22
@@ -1510,18 +1495,6 @@ proxies:
   reality-opts:
     public-key: _0wM2ep44eAcrgf5PflKaBivknCWT6kMvQBQUoScCkE
     short-id: "83"
-- name: Vless-112
-  type: vless
-  server: 109.70.74.150
-  port: 12585
-  uuid: 487f354c-26a6-4eca-90ab-d965e9843e01
-  udp: true
-  tls: true
-  servername: play.google.com
-  client-fingerprint: chrome
-  reality-opts:
-    public-key: 5U-j9FZ4AhTl281t_Hw355TmbFyT6d5fwIPJM7LfgFQ
-    short-id: 0c9ea88263c7
 - name: 🇷🇺 RU-Vless-113
   type: vless
   server: 116.206.95.231
@@ -1547,15 +1520,6 @@ proxies:
   reality-opts:
     public-key: oW6HMjniDmBJdjGKwhBAIS2zMS1VvHORubh9vdazqQ0
     short-id: ed571d022f7bc3bf
-- name: 🇪🇺 EU-Vless-115
-  type: vless
-  server: 127.0.0.0
-  port: 443
-  uuid: 00000000-0000-0001-0000-000000000000
-  udp: true
-  tls: true
-  servername: 1.1.1.1
-  client-fingerprint: firefox
 - name: 🇮🇳 IN-Vless-117
   type: vless
   server: 13.140.253.35
@@ -2407,18 +2371,6 @@ proxies:
   reality-opts:
     public-key: XFWI_MEMvP6tajJyho0y7JYe5AkDKtNf4b5Bpkwfg0k
     short-id: 1125242fc281d82f
-- name: Vless-183
-  type: vless
-  server: 136.234.9.19
-  port: 443
-  uuid: d92038b6-b470-4267-9c69-2c649bf3f4a4
-  udp: true
-  tls: true
-  servername: 8ba6c3t.nl2.h1clayd.click
-  client-fingerprint: firefox
-  reality-opts:
-    public-key: 43bHrvqzL5Sw8lvtDSE3LAlp_0WbixVc7nYcAf17bhg
-    short-id: 16b6715de8577aaa
 - name: 🇩🇪 DE-Vless-184
   type: vless
   server: 138.124.125.193
@@ -3074,24 +3026,6 @@ proxies:
   reality-opts:
     public-key: M6Ck7wUfOLhQl4582CBnaXwscPEP6SCpdEkUDzoj4Fc
     short-id: 123abcdf
-- name: Vless-235
-  type: vless
-  server: 146.19.254.171
-  port: 8443
-  uuid: 24fb9b5b-43b7-4058-a7e5-a0499ada1fda
-  udp: true
-  flow: xtls-rprx-vision
-  tls: true
-- name: Vless-236
-  type: vless
-  server: 146.19.254.171
-  port: 8443
-  uuid: 24fb9b5b-43b7-4058-a7e5-a0499ada1fda
-  udp: true
-  flow: xtls-rprx-vision
-  tls: true
-  servername: 146.19.254.171
-  client-fingerprint: firefox
 - name: 🇩🇪 DE-Vless-237
   type: vless
   server: 146.75.32.177
@@ -3915,3 +3849,89 @@ proxies:
     path: /api/de1/preview/
     host: paperbirch.merlano.monster
     mode: packet-up
+- name: Vless-302
+  type: vless
+  server: 161.97.160.224
+  port: 443
+  uuid: b81b4d1b-7f20-48f1-82dc-d24bef898cab
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: passport.yandex.ru
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
+    short-id: e6
+- name: Vless-303
+  type: vless
+  server: 161.97.66.16
+  port: 443
+  uuid: 086bf957-9cd0-4e55-8280-bbef10435b41
+  udp: true
+  tls: true
+  servername: www.cloudflare.com
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: R-w7BpNgtryZRBMyRoHx81OnjzAwrKhVtV1EUKLFJzc
+    short-id: 086bf957
+- name: Vless-304
+  type: vless
+  server: 162.159.249.92
+  port: 443
+  uuid: 00c82fcb-2c67-465d-8432-6743a1593efa
+  udp: true
+  tls: true
+  servername: dd-xx.pages.dev
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /?TELEGRAM--MARAMBASHI--MARAMBASHI--MARAMBASHI--MARAMBASHI?ed=2560
+    headers:
+      Host: dd-xx.pages.dev
+- name: Vless-305
+  type: vless
+  server: 162.159.254.201
+  port: 443
+  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
+  udp: true
+  tls: true
+  servername: o685y.save-node.com
+  client-fingerprint: chrome
+  alpn:
+  - http/1.1
+  network: ws
+  ws-opts:
+    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
+    headers:
+      Host: o685y.save-node.com
+- name: 🇺🇸 US-Vless-306
+  type: vless
+  server: 162.159.254.201
+  port: 443
+  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
+  udp: true
+  tls: true
+  servername: o685y.save-node.com
+  client-fingerprint: edge
+  alpn:
+  - http/1.1
+  network: ws
+  ws-opts:
+    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
+    headers:
+      Host: o685y.save-node.com
+- name: Vless-307
+  type: vless
+  server: 162.159.254.201
+  port: 443
+  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
+  udp: true
+  tls: true
+  servername: o685y.save-node.com
+  alpn:
+  - http/1.1
+  network: ws
+  ws-opts:
+    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
+    headers:
+      Host: o685y.save-node.com

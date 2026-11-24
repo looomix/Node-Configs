@@ -1,91 +1,5 @@
 # Node-Configs 分片 vless 第 2 片，300 个节点，可作为 proxy-provider
 proxies:
-- name: Vless-302
-  type: vless
-  server: 161.97.160.224
-  port: 443
-  uuid: b81b4d1b-7f20-48f1-82dc-d24bef898cab
-  udp: true
-  flow: xtls-rprx-vision
-  tls: true
-  servername: passport.yandex.ru
-  client-fingerprint: chrome
-  reality-opts:
-    public-key: 33zaT3jHXjtynSQ0Ucw9bK92-XH2zolJmuIeZ1XyZB0
-    short-id: e6
-- name: Vless-303
-  type: vless
-  server: 161.97.66.16
-  port: 443
-  uuid: 086bf957-9cd0-4e55-8280-bbef10435b41
-  udp: true
-  tls: true
-  servername: www.cloudflare.com
-  client-fingerprint: firefox
-  reality-opts:
-    public-key: R-w7BpNgtryZRBMyRoHx81OnjzAwrKhVtV1EUKLFJzc
-    short-id: 086bf957
-- name: Vless-304
-  type: vless
-  server: 162.159.249.92
-  port: 443
-  uuid: 00c82fcb-2c67-465d-8432-6743a1593efa
-  udp: true
-  tls: true
-  servername: dd-xx.pages.dev
-  client-fingerprint: chrome
-  network: ws
-  ws-opts:
-    path: /?TELEGRAM--MARAMBASHI--MARAMBASHI--MARAMBASHI--MARAMBASHI?ed=2560
-    headers:
-      Host: dd-xx.pages.dev
-- name: Vless-305
-  type: vless
-  server: 162.159.254.201
-  port: 443
-  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
-  udp: true
-  tls: true
-  servername: o685y.save-node.com
-  client-fingerprint: chrome
-  alpn:
-  - http/1.1
-  network: ws
-  ws-opts:
-    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
-    headers:
-      Host: o685y.save-node.com
-- name: 🇺🇸 US-Vless-306
-  type: vless
-  server: 162.159.254.201
-  port: 443
-  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
-  udp: true
-  tls: true
-  servername: o685y.save-node.com
-  client-fingerprint: edge
-  alpn:
-  - http/1.1
-  network: ws
-  ws-opts:
-    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
-    headers:
-      Host: o685y.save-node.com
-- name: Vless-307
-  type: vless
-  server: 162.159.254.201
-  port: 443
-  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
-  udp: true
-  tls: true
-  servername: o685y.save-node.com
-  alpn:
-  - http/1.1
-  network: ws
-  ws-opts:
-    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
-    headers:
-      Host: o685y.save-node.com
 - name: Vless-308
   type: vless
   server: 162.159.254.3
@@ -4054,3 +3968,84 @@ proxies:
   network: grpc
   grpc-opts:
     grpc-service-name: /
+- name: Vless-602
+  type: vless
+  server: 188.225.75.52
+  port: 8443
+  uuid: cb73ec56-1faa-491d-b2eb-8edec2e4b12e
+  udp: true
+  flow: xtls-rprx-vision
+  tls: true
+  servername: agent.mperialbank.xyz
+  client-fingerprint: qq
+  reality-opts:
+    public-key: 4_mdROaBWtpQEmgXNbbwO2QzB4gwUYSFnLF3yx7w62I
+    short-id: be28922db425c596
+- name: 🇩🇪 DE-Vless-603
+  type: vless
+  server: 188.225.78.178
+  port: 443
+  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
+  udp: true
+  tls: true
+  servername: cadrin.wtf
+  client-fingerprint: chrome
+  alpn:
+  - h2
+  network: grpc
+  grpc-opts:
+    grpc-service-name: cache.sync.v1
+- name: 🇩🇪 DE-Vless-604
+  type: vless
+  server: 188.225.78.178
+  port: 443
+  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
+  udp: true
+  tls: true
+  servername: cadrin.wtf
+  client-fingerprint: firefox
+  alpn:
+  - h2
+  network: grpc
+  grpc-opts:
+    grpc-service-name: cache.sync.v1
+- name: 🇩🇪 DE-Vless-605
+  type: vless
+  server: 188.225.78.178
+  port: 443
+  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
+  udp: true
+  tls: true
+  servername: cadrin.wtf
+  client-fingerprint: ios
+  alpn:
+  - h2
+  network: grpc
+  grpc-opts:
+    grpc-service-name: cache.sync.v1
+- name: Vless-606
+  type: vless
+  server: 188.225.78.178
+  port: 443
+  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
+  udp: true
+  tls: true
+  servername: cadrin.wtf
+  client-fingerprint: random
+  alpn:
+  - h2
+  network: grpc
+  grpc-opts:
+    grpc-service-name: cache.sync.v1
+- name: 🇩🇪 DE-Vless-607
+  type: vless
+  server: 188.225.78.178
+  port: 443
+  uuid: a4740bee-81ad-4a58-99c9-eca576ecb6e6
+  udp: true
+  tls: true
+  servername: cadrin.wtf
+  client-fingerprint: edge
+  network: grpc
+  grpc-opts:
+    grpc-service-name: cache.sync.v1

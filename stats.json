@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-24 11:44:53",
+  "updated_at": "2026-11-24 11:47:41",
   "links": 3208,
-  "converted": 2322,
-  "clash": 2315,
-  "singbox": 2009,
+  "converted": 2284,
+  "clash": 2277,
+  "singbox": 1973,
   "sources_ok": 13,
   "sources_total": 13,
   "skipped": {
@@ -14,13 +14,13 @@
   },
   "health": {
     "checked": 2332,
-    "alive": 988,
-    "unreachable": 10,
-    "unknown": 1334,
-    "alive_ratio": 0.4237,
-    "dropped": 10
+    "alive": 2073,
+    "unreachable": 48,
+    "unknown": 211,
+    "alive_ratio": 0.8889,
+    "dropped": 48
   },
-  "light": 905,
+  "light": 873,
   "splits": 10,
   "sources": {
     "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/Best-Results/proxies.txt": 319,
