@@ -1,4 +1,4 @@
-# Node-Configs 分片 ss 第 1 片，281 个节点，可作为 proxy-provider
+# Node-Configs 分片 ss 第 1 片，273 个节点，可作为 proxy-provider
 proxies:
 - name: 🇿🇦 ZA-SS-001
   type: ss
@@ -16,77 +16,77 @@ proxies:
   udp: true
 - name: 🇺🇸 US-SS-003
   type: ss
+  server: 103.232.93.17
+  port: 8443
+  cipher: 2022-blake3-aes-128-gcm
+  password: qT1+kd0KB5v6sUmEyHdVJQ==
+  udp: true
+- name: 🇺🇸 US-SS-004
+  type: ss
   server: 103.238.140.162
   port: 10002
   cipher: 2022-blake3-aes-128-gcm
   password: qryl6xVLkWXZlqD7CccpQw==
   udp: true
-- name: 🇺🇸 US-SS-004
+- name: 🇺🇸 US-SS-005
   type: ss
   server: 104.238.140.45
   port: 11051
   cipher: chacha20-ietf-poly1305
   password: JUXsy78dSs6ROkasikmoaL
   udp: true
-- name: 🇺🇸 US-SS-005
+- name: 🇺🇸 US-SS-006
   type: ss
   server: 107.151.182.197
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇺🇸 US-SS-006
+- name: 🇺🇸 US-SS-007
   type: ss
   server: 107.151.182.253
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: SS-007
+- name: SS-008
   type: ss
   server: 107.161.160.28
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇳🇱 NL-SS-008
+- name: 🇳🇱 NL-SS-009
   type: ss
   server: 109.201.152.181
   port: 443
   cipher: aes-128-cfb
   password: shadowsocks
   udp: true
-- name: SS-009
+- name: SS-010
   type: ss
   server: 115.161.136.145
   port: 10099
   cipher: chacha20-ietf-poly1305
   password: "12242"
   udp: true
-- name: 🇺🇸 US-SS-010
+- name: 🇺🇸 US-SS-011
   type: ss
   server: 129.146.200.42
   port: 50356
   cipher: 2022-blake3-chacha20-poly1305
   password: 1KRWYoNOBU1OXV+dLChiRageSP9uIRY2wsJPieRC7kY=
   udp: true
-- name: 🇺🇸 US-SS-011
+- name: 🇺🇸 US-SS-012
   type: ss
   server: 129.146.200.49
   port: 50356
   cipher: 2022-blake3-chacha20-poly1305
   password: 011mfoSmYFVhBNbKk0V5DxqGs9PwrsqY+9EAhOll+58=
   udp: true
-- name: SS-012
-  type: ss
-  server: 129.151.82.249
-  port: 61312
-  cipher: 2022-blake3-chacha20-poly1305
-  password: L35ZoQjjihDmVI3YcDK0UMgcjpoxdMtVDStV2NH74xw=
-  udp: true
 - name: 🇸🇬 SG-SS-013
   type: ss
-  server: 13.212.176.115
+  server: 13.212.45.108
   port: 8443
   cipher: chacha20-ietf-poly1305
   password: 7e68e32f-8015-4f37-9082-70e8b0b58043
@@ -331,1636 +331,1580 @@ proxies:
   udp: true
 - name: 🇺🇸 US-SS-049
   type: ss
-  server: 15.204.247.124
-  port: 2375
+  server: 15.204.247.206
+  port: 4444
   cipher: aes-256-gcm
-  password: faBAoD54k87UJG7
+  password: pKEW8JPByTVTLtM
   udp: true
 - name: 🇺🇸 US-SS-050
   type: ss
-  server: 15.204.247.206
-  port: 4444
+  server: 15.204.247.244
+  port: 443
   cipher: aes-256-gcm
   password: pKEW8JPByTVTLtM
   udp: true
 - name: 🇺🇸 US-SS-051
   type: ss
   server: 15.204.247.244
-  port: 443
-  cipher: aes-256-gcm
-  password: pKEW8JPByTVTLtM
-  udp: true
-- name: 🇺🇸 US-SS-052
-  type: ss
-  server: 15.204.247.244
   port: 4444
   cipher: aes-256-gcm
   password: pKEW8JPByTVTLtM
   udp: true
-- name: 🇸🇬 SG-SS-053
+- name: 🇸🇬 SG-SS-052
   type: ss
   server: 15.235.164.133
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇸🇬 SG-SS-054
+- name: 🇸🇬 SG-SS-053
   type: ss
   server: 15.235.182.183
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇦🇪 AE-SS-055
+- name: 🇦🇪 AE-SS-054
   type: ss
   server: 151.241.19.29
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇦🇪 AE-SS-056
+- name: 🇦🇪 AE-SS-055
   type: ss
   server: 151.241.19.36
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇦🇹 AT-SS-057
+- name: 🇦🇹 AT-SS-056
   type: ss
   server: 152.53.1.57
   port: 8388
   cipher: chacha20-ietf-poly1305
   password: AdawffFMHymlasRb0VOP3HFf7sTG5sJx
   udp: true
-- name: 🇺🇸 US-SS-058
+- name: 🇺🇸 US-SS-057
   type: ss
   server: 156.146.38.168
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇺🇸 US-SS-059
+- name: 🇺🇸 US-SS-058
   type: ss
   server: 156.146.38.169
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇺🇸 US-SS-060
+- name: 🇺🇸 US-SS-059
   type: ss
   server: 156.146.38.170
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇳🇱 NL-SS-061
+- name: 🇳🇱 NL-SS-060
   type: ss
   server: 156.67.120.205
   port: 51628
   cipher: chacha20-ietf-poly1305
   password: 29ZZXVa34x7sC48w9FKQ54UKHiJJGTVgKFppBRgviLrVCAYVVyKZdD3obbpjCyk31V5b2G2d7xzqmaPBFdcheCVB9UQ4ZghF
   udp: true
-- name: 🇳🇱 NL-SS-062
+- name: 🇳🇱 NL-SS-061
   type: ss
   server: 158.173.20.171
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇳🇱 NL-SS-063
+- name: 🇳🇱 NL-SS-062
   type: ss
   server: 158.173.20.208
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇬🇧 GB-SS-064
+- name: 🇬🇧 GB-SS-063
   type: ss
   server: 158.173.24.73
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: SS-065
+- name: SS-064
   type: ss
   server: 158.180.15.158
   port: 45819
   cipher: 2022-blake3-chacha20-poly1305
   password: fkw1W2oQj+k3UVZq5FrzPbNE0jCdYUvvluFTih3qSh8=
   udp: true
-- name: 🇨🇦 CA-SS-066
+- name: 🇨🇦 CA-SS-065
   type: ss
   server: 158.51.121.221
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-067
+- name: 🇺🇸 US-SS-066
   type: ss
   server: 162.251.62.31
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-068
+- name: 🇫🇷 FR-SS-067
   type: ss
   server: 167.17.64.175
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-069
+- name: 🇫🇷 FR-SS-068
   type: ss
   server: 167.17.64.22
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-070
+- name: 🇫🇷 FR-SS-069
   type: ss
   server: 167.17.64.27
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇪🇸 ES-SS-071
+- name: 🇪🇸 ES-SS-070
   type: ss
   server: 167.17.71.167
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-072
+- name: 🇺🇸 US-SS-071
   type: ss
   server: 167.88.63.39
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇯🇵 JP-SS-073
+- name: 🇯🇵 JP-SS-072
   type: ss
   server: 168.138.205.100
   port: 53758
   cipher: aes-128-gcm
   password: Bwlqh7GcFB
   udp: true
-- name: 🇩🇪 DE-SS-074
+- name: 🇩🇪 DE-SS-073
   type: ss
   server: 169.150.210.233
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇺🇸 US-SS-075
+- name: 🇺🇸 US-SS-074
   type: ss
   server: 169.197.140.247
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-076
-  type: ss
-  server: 169.197.142.68
-  port: 19999
-  cipher: aes-256-gcm
-  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
-  udp: true
-- name: 🇺🇸 US-SS-077
-  type: ss
-  server: 172.111.36.123
-  port: 19999
-  cipher: aes-256-gcm
-  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
-  udp: true
-- name: 🇺🇸 US-SS-078
+- name: 🇺🇸 US-SS-075
   type: ss
   server: 172.111.38.72
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-079
+- name: 🇫🇷 FR-SS-076
   type: ss
   server: 172.99.189.142
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-080
+- name: 🇺🇸 US-SS-077
   type: ss
   server: 173.244.56.6
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇺🇸 US-SS-081
+- name: 🇺🇸 US-SS-078
   type: ss
   server: 173.244.56.9
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇩🇪 DE-SS-082
+- name: 🇩🇪 DE-SS-079
   type: ss
   server: 178.162.254.38
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇳🇱 NL-SS-083
+- name: 🇳🇱 NL-SS-080
   type: ss
   server: 178.83.185.156
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇩🇪 DE-SS-084
+- name: 🇩🇪 DE-SS-081
   type: ss
   server: 18.134.240.81
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: Cg2Dw4OhdBZhqbeO9ZTA3g/Gk/AvsrYZGhAJeGnQIx4=
   udp: true
-- name: 🇩🇪 DE-SS-085
-  type: ss
-  server: 18.171.162.58
-  port: 443
-  cipher: 2022-blake3-chacha20-poly1305
-  password: Cg2Dw4OhdBZhqbeO9ZTA3g/Gk/AvsrYZGhAJeGnQIx4=
-  udp: true
-- name: SS-086
+- name: SS-082
   type: ss
   server: 18.175.121.118
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: Cg2Dw4OhdBZhqbeO9ZTA3g/Gk/AvsrYZGhAJeGnQIx4=
   udp: true
-- name: SS-087
+- name: SS-083
   type: ss
   server: 18.175.238.57
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: Cg2Dw4OhdBZhqbeO9ZTA3g/Gk/AvsrYZGhAJeGnQIx4=
   udp: true
-- name: SS-088
+- name: SS-084
   type: ss
   server: 184.107.106.77
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: SS-089
+- name: SS-085
   type: ss
   server: 184.107.106.78
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇮🇹 IT-SS-090
+- name: 🇮🇹 IT-SS-086
   type: ss
   server: 185.164.175.81
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇩🇪 DE-SS-091
+- name: 🇩🇪 DE-SS-087
   type: ss
   server: 185.176.204.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇬🇧 GB-SS-092
+- name: 🇬🇧 GB-SS-088
   type: ss
   server: 185.176.206.9
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇳🇴 NO-SS-093
+- name: 🇳🇴 NO-SS-089
   type: ss
   server: 185.213.23.63
   port: 990
   cipher: chacha20-ietf-poly1305
   password: ARgvGZywA+gacgGV26Bvmu05+wZmRW/j+AdU+Z8Bt44=
   udp: true
-- name: 🇺🇸 US-SS-094
+- name: 🇺🇸 US-SS-090
   type: ss
   server: 185.215.132.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇩🇪 DE-SS-095
+- name: 🇩🇪 DE-SS-091
   type: ss
   server: 185.226.172.8
   port: 8008
   cipher: aes-256-gcm
   password: XKFKl2rULjIp74
   udp: true
-- name: 🇺🇸 US-SS-096
+- name: 🇺🇸 US-SS-092
   type: ss
   server: 185.230.230.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇨🇭 CH-SS-097
+- name: 🇨🇭 CH-SS-093
   type: ss
   server: 186.190.215.251
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-098
+- name: SS-094
   type: ss
   server: 192.99.151.230
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇩🇪 DE-SS-099
+- name: 🇩🇪 DE-SS-095
   type: ss
   server: 193.108.116.98
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-100
+- name: 🇺🇸 US-SS-096
   type: ss
   server: 193.151.160.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-101
+- name: 🇺🇸 US-SS-097
   type: ss
   server: 193.151.160.9
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-102
+- name: 🇺🇸 US-SS-098
   type: ss
   server: 193.151.163.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇳🇱 NL-SS-103
+- name: 🇳🇱 NL-SS-099
   type: ss
   server: 193.29.139.132
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-104
+- name: 🇳🇱 NL-SS-100
   type: ss
   server: 193.29.139.147
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-105
+- name: 🇳🇱 NL-SS-101
   type: ss
   server: 193.29.139.168
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: QCXDxuDlTTMD7jtgHUjIoj
   udp: true
-- name: 🇳🇱 NL-SS-106
-  type: ss
-  server: 193.29.139.198
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  udp: true
-- name: 🇳🇱 NL-SS-107
+- name: 🇳🇱 NL-SS-103
   type: ss
   server: 193.29.139.212
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: QCXDxuDlTTMD7jtgHUjIoj
   udp: true
-- name: 🇳🇱 NL-SS-108
+- name: 🇳🇱 NL-SS-104
   type: ss
   server: 193.29.139.223
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-109
+- name: 🇳🇱 NL-SS-105
   type: ss
   server: 193.29.139.235
   port: 443
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇫🇷 FR-SS-110
+- name: 🇫🇷 FR-SS-106
   type: ss
   server: 198.244.201.129
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-111
+- name: 🇫🇷 FR-SS-107
   type: ss
   server: 198.244.202.215
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-112
+- name: 🇺🇸 US-SS-108
   type: ss
   server: 198.98.53.130
   port: 443
   cipher: chacha20-ietf-poly1305
   password: eDfN7SODQceIOmIAbtJJtK
   udp: true
-- name: SS-113
+- name: SS-109
   type: ss
   server: 20.123.9.179
   port: 443
   cipher: chacha20-ietf-poly1305
   password: SuKP0kRGC51pT73J
   udp: true
-- name: SS-114
+- name: SS-110
   type: ss
   server: 200.102.179.179
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇮🇹 IT-SS-115
+- name: SS-111
   type: ss
   server: 202.50.253.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-116
+- name: 🇮🇹 IT-SS-112
   type: ss
   server: 202.50.253.27
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-117
+- name: 🇮🇹 IT-SS-113
   type: ss
   server: 202.50.253.36
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-118
+- name: SS-114
   type: ss
   server: 202.50.253.45
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-119
+- name: 🇮🇹 IT-SS-115
   type: ss
   server: 202.50.253.54
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-120
+- name: 🇮🇹 IT-SS-116
   type: ss
   server: 202.50.253.63
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-121
+- name: SS-117
   type: ss
   server: 202.50.253.72
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-122
+- name: 🇮🇹 IT-SS-118
   type: ss
   server: 202.50.253.81
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-123
+- name: SS-119
   type: ss
   server: 202.50.253.90
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-124
+- name: 🇮🇹 IT-SS-120
   type: ss
   server: 202.50.253.99
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-125
+- name: 🇺🇸 US-SS-121
   type: ss
   server: 209.248.57.105
   port: 8388
   cipher: aes-256-gcm
   password: AMok40FfaM+Ikwre16psBpVk6JHxsQZw
   udp: true
-- name: 🇰🇷 KR-SS-126
+- name: 🇰🇷 KR-SS-122
   type: ss
   server: 211.178.105.134
   port: 6123
   cipher: aes-256-cfb
   password: qwerREWQ@@
   udp: true
-- name: 🇭🇰 HK-SS-127
+- name: 🇭🇰 HK-SS-123
   type: ss
   server: 213.176.92.148
   port: 40647
   cipher: aes-256-gcm
   password: DgMywXKqojHXeuXY8hOJaYGPFcjweCIJeD5cdg/cUUY=
   udp: true
-- name: 🇩🇪 DE-SS-128
+- name: 🇩🇪 DE-SS-124
   type: ss
   server: 213.202.208.199
   port: 5000
   cipher: aes-256-gcm
   password: Y6R9pAtvxxzmGC
   udp: true
-- name: 🇩🇪 DE-SS-129
+- name: 🇩🇪 DE-SS-125
   type: ss
   server: 213.202.208.199
   port: 7001
   cipher: aes-256-gcm
   password: RexnBgU7EV5ADxG
   udp: true
-- name: 🇺🇸 US-SS-130
+- name: 🇺🇸 US-SS-126
   type: ss
   server: 216.106.178.169
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-131
+- name: 🇺🇸 US-SS-127
   type: ss
   server: 216.172.144.199
   port: 40643
   cipher: chacha20-ietf-poly1305
   password: Xd4G9xn7AgT88msCYC9MZfavMUqd3dWFNAvswi6KfaD9YcexptMbPn4cSECEMzDgvAMomAWJHyweqJer99ssMVYGH6TK8k4c
   udp: true
-- name: 🇵🇱 PL-SS-132
+- name: 🇵🇱 PL-SS-128
   type: ss
   server: 217.30.10.70
   port: 9064
   cipher: aes-256-cfb
   password: cp8pRSUAyLhTfVWH
   udp: true
-- name: 🇺🇸 US-SS-133
+- name: 🇺🇸 US-SS-129
   type: ss
   server: 23.150.152.38
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-134
+- name: 🇫🇷 FR-SS-130
   type: ss
   server: 23.162.152.22
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇨🇭 CH-SS-135
+- name: 🇨🇭 CH-SS-131
   type: ss
   server: 23.166.88.127
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇨🇭 CH-SS-136
+- name: 🇨🇭 CH-SS-132
   type: ss
   server: 23.166.88.189
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-137
+- name: 🇺🇸 US-SS-133
   type: ss
   server: 23.230.52.119
   port: 42878
   cipher: chacha20-ietf-poly1305
   password: ijoUwfdnkz7mX4pWdkSpmEixTZCt2TRm1JDr4BSaBAWkLxYGoXBHXadFKY5D5ZfoVTwqsx46jCmEUDnQUizJDYrM7B5anhnu
   udp: true
-- name: 🇺🇸 US-SS-138
+- name: 🇺🇸 US-SS-134
   type: ss
   server: 23.251.121.242
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇭🇰 HK-SS-139
+- name: 🇭🇰 HK-SS-135
   type: ss
   server: 27.124.5.86
   port: 8388
   cipher: 2022-blake3-aes-256-gcm
   password: j4DddfVh3zON1s3Wfbmdn2WWhLCWAaOJyKqdeKvxh4A=
   udp: true
-- name: 🇩🇪 DE-SS-140
+- name: 🇰🇷 KR-SS-136
   type: ss
-  server: 3.67.196.112
-  port: 443
-  cipher: 2022-blake3-chacha20-poly1305
-  password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
+  server: 3.38.213.49
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: 7e68e32f-8015-4f37-9082-70e8b0b58043
   udp: true
-- name: SS-141
+- name: SS-137
   type: ss
   server: 3.79.47.19
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇺🇸 US-SS-142
+- name: 🇺🇸 US-SS-138
   type: ss
   server: 37.19.198.160
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇺🇸 US-SS-143
+- name: 🇺🇸 US-SS-139
   type: ss
   server: 37.19.198.236
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇺🇸 US-SS-144
+- name: 🇺🇸 US-SS-140
   type: ss
   server: 37.19.198.243
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: 🇺🇸 US-SS-145
+- name: 🇺🇸 US-SS-141
   type: ss
   server: 37.19.198.244
   port: 443
   cipher: aes-128-gcm
   password: shadowsocks
   udp: true
-- name: SS-146
+- name: SS-142
   type: ss
   server: 37.32.30.203
   port: 9147
   cipher: aes-256-gcm
   password: ODNhZDk0YzE4YTEzZGExNDE1N2E0ZjYwNzA3M2Yx
   udp: true
-- name: 🇫🇷 FR-SS-147
+- name: 🇫🇷 FR-SS-143
   type: ss
   server: 38.109.228.110
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇬🇧 GB-SS-148
+- name: 🇬🇧 GB-SS-144
   type: ss
   server: 38.114.120.221
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-149
+- name: 🇺🇸 US-SS-145
   type: ss
   server: 38.121.43.225
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-150
+- name: 🇺🇸 US-SS-146
   type: ss
   server: 38.121.43.231
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-151
+- name: 🇺🇸 US-SS-147
   type: ss
   server: 38.128.66.32
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-152
+- name: 🇺🇸 US-SS-148
   type: ss
   server: 38.143.66.146
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-153
+- name: 🇺🇸 US-SS-149
   type: ss
   server: 38.22.17.139
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-154
+- name: SS-150
   type: ss
   server: 38.54.59.78
   port: 16676
   cipher: aes-128-gcm
   password: c58938bbf5410f996b13983264fb2229
   udp: true
-- name: 🇺🇸 US-SS-155
+- name: 🇺🇸 US-SS-151
   type: ss
   server: 38.64.138.135
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-156
+- name: 🇺🇸 US-SS-152
   type: ss
   server: 38.91.100.39
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-157
+- name: 🇺🇸 US-SS-153
   type: ss
   server: 38.91.107.188
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-158
+- name: 🇺🇸 US-SS-154
   type: ss
   server: 40.160.86.43
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇸🇬 SG-SS-159
+- name: 🇸🇬 SG-SS-155
   type: ss
   server: 43.160.213.146
   port: 8388
   cipher: 2022-blake3-aes-256-gcm
   password: ClzJLvRzIxivCXbf5X5jnSU0pLg5ffCEUL2AZoeLg94=
   udp: true
-- name: 🇮🇹 IT-SS-160
+- name: 🇮🇹 IT-SS-156
   type: ss
   server: 45.154.96.18
   port: 1349
   cipher: chacha20-ietf-poly1305
   password: pFlEjR_10osoxyR2CnNIhUMpAy4CzfXr
   udp: true
-- name: 🇺🇸 US-SS-161
+- name: 🇺🇸 US-SS-157
   type: ss
   server: 45.86.51.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇩🇪 DE-SS-162
+- name: 🇩🇪 DE-SS-158
   type: ss
   server: 47.245.167.223
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-163
+- name: 🇩🇪 DE-SS-159
   type: ss
   server: 47.245.170.82
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-164
+- name: 🇩🇪 DE-SS-160
   type: ss
   server: 47.245.173.25
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-165
+- name: 🇩🇪 DE-SS-161
   type: ss
   server: 47.245.174.67
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: SS-166
+- name: 🇩🇪 DE-SS-162
   type: ss
   server: 47.254.128.109
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-167
+- name: 🇩🇪 DE-SS-163
   type: ss
   server: 47.254.143.251
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-168
+- name: 🇩🇪 DE-SS-164
   type: ss
   server: 47.254.167.157
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-169
+- name: 🇩🇪 DE-SS-165
   type: ss
   server: 47.254.169.3
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-170
+- name: 🇩🇪 DE-SS-166
   type: ss
   server: 47.254.174.203
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-171
+- name: 🇩🇪 DE-SS-167
   type: ss
   server: 47.254.175.2
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: SS-172
+- name: SS-168
   type: ss
   server: 47.85.201.22
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 3NBsnBLanPfG6i3S2GTHineswr6EeSJPb0PCeMQoGoA=
   udp: true
-- name: 🇩🇪 DE-SS-173
+- name: 🇩🇪 DE-SS-169
   type: ss
   server: 47.85.227.36
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 3NBsnBLanPfG6i3S2GTHineswr6EeSJPb0PCeMQoGoA=
   udp: true
-- name: SS-174
+- name: 🇩🇪 DE-SS-170
   type: ss
   server: 47.85.238.210
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 3NBsnBLanPfG6i3S2GTHineswr6EeSJPb0PCeMQoGoA=
   udp: true
-- name: 🇩🇪 DE-SS-175
+- name: 🇩🇪 DE-SS-171
   type: ss
   server: 47.91.74.232
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇷🇺 RU-SS-176
+- name: 🇷🇺 RU-SS-172
   type: ss
   server: 48.103.218.77
   port: 18443
   cipher: aes-256-gcm
   password: 5mKjXAGrliIAlYwWDeFzkCEMIgQdFQLe
   udp: true
-- name: SS-177
+- name: SS-173
   type: ss
   server: 49.51.39.148
   port: 443
   cipher: chacha20-ietf-poly1305
   password: LCvps-199-168-136-193-bak8443
   udp: true
-- name: 🇨🇦 CA-SS-178
+- name: 🇨🇦 CA-SS-174
   type: ss
   server: 51.222.12.127
   port: 445
   cipher: aes-256-gcm
   password: zDNVedRFPQexG9v
   udp: true
-- name: 🇨🇦 CA-SS-179
+- name: 🇨🇦 CA-SS-175
   type: ss
   server: 51.222.136.236
   port: 8882
   cipher: aes-256-gcm
   password: kDWvXYZoTBcGkC4
   udp: true
-- name: 🇨🇦 CA-SS-180
+- name: 🇨🇦 CA-SS-176
   type: ss
   server: 51.222.141.125
   port: 445
   cipher: aes-256-gcm
   password: zDNVedRFPQexG9v
   udp: true
-- name: 🇨🇦 CA-SS-181
+- name: 🇨🇦 CA-SS-177
   type: ss
   server: 51.222.200.165
   port: 5000
   cipher: aes-256-gcm
   password: Y6R9pAtvxxzmGC
   udp: true
-- name: SS-182
-  type: ss
-  server: 51.38.127.93
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: 2bys77ppnat6w2yg
-  udp: true
-- name: 🇨🇦 CA-SS-183
+- name: 🇨🇦 CA-SS-178
   type: ss
   server: 51.79.85.185
   port: 8118
   cipher: aes-256-gcm
   password: cdBIDV42DCwnfIN
   udp: true
-- name: SS-184
+- name: SS-179
   type: ss
   server: 51.83.192.80
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: SS-185
+- name: SS-180
   type: ss
   server: 51.83.61.102
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: 29irqk0paakcx19v
   udp: true
-- name: SS-186
+- name: SS-181
   type: ss
   server: 57.129.113.16
   port: 8388
   cipher: chacha20-ietf-poly1305
   password: NcAXc0UZI6yQJE1p8QmOv8
   udp: true
-- name: SS-187
+- name: SS-182
   type: ss
   server: 57.129.76.233
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-188
+- name: 🇫🇷 FR-SS-183
   type: ss
   server: 57.129.83.85
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇮🇹 IT-SS-189
+- name: 🇮🇹 IT-SS-184
   type: ss
   server: 57.131.27.21
   port: 8388
   cipher: aes-256-gcm
   password: itzvpn@321
   udp: true
-- name: 🇪🇸 ES-SS-190
+- name: 🇪🇸 ES-SS-185
   type: ss
   server: 62.93.179.117
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇪🇸 ES-SS-191
+- name: SS-186
   type: ss
   server: 62.93.179.97
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇪🇸 ES-SS-192
+- name: 🇪🇸 ES-SS-187
   type: ss
   server: 66.163.118.103
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-193
+- name: 🇺🇸 US-SS-188
   type: ss
   server: 66.163.125.120
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-194
+- name: 🇺🇸 US-SS-189
   type: ss
   server: 67.220.73.178
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-195
+- name: 🇺🇸 US-SS-190
   type: ss
   server: 67.220.73.247
   port: 443
   cipher: chacha20-ietf-poly1305
   password: DGjtV63aPW3E
   udp: true
-- name: 🇸🇬 SG-SS-196
+- name: 🇸🇬 SG-SS-191
   type: ss
   server: 68.183.227.236
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇸🇬 SG-SS-197
+- name: 🇸🇬 SG-SS-192
   type: ss
   server: 68.183.235.122
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: SS-198
+- name: SS-193
   type: ss
   server: 77.221.132.206
   port: 24759
   cipher: chacha20-ietf-poly1305
   password: hCgbUnMaoAfSgvE8IKdnGu
   udp: true
-- name: 🇺🇸 US-SS-199
+- name: 🇺🇸 US-SS-194
   type: ss
   server: 79.110.53.169
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇺🇸 US-SS-200
+- name: 🇺🇸 US-SS-195
   type: ss
   server: 79.110.54.250
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇪🇸 ES-SS-201
+- name: 🇪🇸 ES-SS-196
   type: ss
   server: 79.127.139.242
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇨🇭 CH-SS-202
+- name: 🇨🇭 CH-SS-197
   type: ss
   server: 79.127.184.104
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-203
+- name: SS-198
   type: ss
   server: 79.137.99.183
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇩🇪 DE-SS-204
+- name: 🇩🇪 DE-SS-199
   type: ss
   server: 8.209.106.54
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-205
+- name: 🇩🇪 DE-SS-200
   type: ss
   server: 8.209.117.187
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-206
+- name: 🇩🇪 DE-SS-201
   type: ss
   server: 8.209.73.203
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-207
+- name: 🇩🇪 DE-SS-202
   type: ss
   server: 8.211.53.194
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-208
+- name: 🇩🇪 DE-SS-203
   type: ss
   server: 8.211.57.86
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇩🇪 DE-SS-209
+- name: 🇩🇪 DE-SS-204
   type: ss
   server: 8.220.81.25
   port: 443
   cipher: 2022-blake3-chacha20-poly1305
   password: 8yO3ANWefuuGs1lRKXECQA1FEhxlWFV2ppQMcBaZo5Y=
   udp: true
-- name: 🇦🇹 AT-SS-215
+- name: 🇦🇹 AT-SS-210
   type: ss
   server: 82.110.60.9
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-216
+- name: 🇷🇴 RO-SS-211
+  type: ss
+  server: 82.152.132.211
+  port: 8044
+  cipher: chacha20-ietf-poly1305
+  password: s43Fl9QcqIVSnPZ3S9AB-aZeN41bq0Kd
+  udp: true
+- name: SS-212
   type: ss
   server: 82.38.31.155
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-217
+- name: SS-213
   type: ss
   server: 82.38.31.156
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-218
+- name: 🇳🇱 NL-SS-214
   type: ss
   server: 82.38.31.157
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-219
+- name: 🇳🇱 NL-SS-215
   type: ss
   server: 82.38.31.162
   port: 443
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-220
+- name: 🇳🇱 NL-SS-216
   type: ss
   server: 82.38.31.165
   port: 443
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-221
+- name: 🇳🇱 NL-SS-217
   type: ss
   server: 82.38.31.176
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-222
+- name: 🇳🇱 NL-SS-218
   type: ss
   server: 82.38.31.178
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-223
+- name: 🇳🇱 NL-SS-219
   type: ss
   server: 82.38.31.179
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-224
+- name: 🇳🇱 NL-SS-220
   type: ss
   server: 82.38.31.180
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-225
+- name: 🇳🇱 NL-SS-221
   type: ss
   server: 82.38.31.181
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-226
+- name: 🇳🇱 NL-SS-222
   type: ss
   server: 82.38.31.182
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-227
+- name: 🇳🇱 NL-SS-223
   type: ss
   server: 82.38.31.183
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-228
+- name: 🇳🇱 NL-SS-224
   type: ss
   server: 82.38.31.184
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-229
+- name: 🇳🇱 NL-SS-225
   type: ss
   server: 82.38.31.185
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-230
+- name: 🇳🇱 NL-SS-226
   type: ss
   server: 82.38.31.186
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-231
+- name: 🇳🇱 NL-SS-227
   type: ss
   server: 82.38.31.187
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-232
+- name: 🇳🇱 NL-SS-228
   type: ss
   server: 82.38.31.189
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-233
+- name: 🇳🇱 NL-SS-229
   type: ss
   server: 82.38.31.190
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-234
-  type: ss
-  server: 82.38.31.191
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  udp: true
-- name: 🇳🇱 NL-SS-235
-  type: ss
-  server: 82.38.31.192
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  udp: true
-- name: 🇳🇱 NL-SS-236
-  type: ss
-  server: 82.38.31.193
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  udp: true
-- name: SS-237
+- name: SS-233
   type: ss
   server: 82.38.31.194
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: SS-238
+- name: SS-234
   type: ss
   server: 82.38.31.195
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-239
-  type: ss
-  server: 82.38.31.198
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  udp: true
-- name: 🇳🇱 NL-SS-240
-  type: ss
-  server: 82.38.31.199
-  port: 8080
-  cipher: chacha20-ietf-poly1305
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  udp: true
-- name: 🇳🇱 NL-SS-241
+- name: 🇳🇱 NL-SS-237
   type: ss
   server: 82.38.31.200
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-242
+- name: 🇳🇱 NL-SS-238
   type: ss
   server: 82.38.31.201
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: SS-243
+- name: SS-239
   type: ss
   server: 82.38.31.203
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-244
+- name: 🇳🇱 NL-SS-240
   type: ss
   server: 82.38.31.205
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-245
+- name: 🇳🇱 NL-SS-241
   type: ss
   server: 82.38.31.206
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-246
+- name: 🇳🇱 NL-SS-242
   type: ss
   server: 82.38.31.207
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-247
+- name: 🇳🇱 NL-SS-243
   type: ss
   server: 82.38.31.208
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-248
+- name: 🇳🇱 NL-SS-244
   type: ss
   server: 82.38.31.210
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-249
+- name: 🇳🇱 NL-SS-245
   type: ss
   server: 82.38.31.211
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-250
+- name: 🇳🇱 NL-SS-246
   type: ss
   server: 82.38.31.212
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-251
+- name: 🇳🇱 NL-SS-247
   type: ss
   server: 82.38.31.213
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-252
+- name: 🇳🇱 NL-SS-248
   type: ss
   server: 82.38.31.214
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-253
+- name: 🇳🇱 NL-SS-249
   type: ss
   server: 82.38.31.215
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-254
+- name: 🇳🇱 NL-SS-250
   type: ss
   server: 82.38.31.216
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-255
+- name: 🇳🇱 NL-SS-251
   type: ss
   server: 82.38.31.217
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-256
+- name: 🇳🇱 NL-SS-252
   type: ss
   server: 82.38.31.218
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-257
+- name: 🇳🇱 NL-SS-253
   type: ss
   server: 82.38.31.219
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-258
+- name: 🇳🇱 NL-SS-254
   type: ss
   server: 82.38.31.220
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: SS-259
+- name: SS-255
   type: ss
   server: 82.38.31.3
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: SS-260
+- name: SS-256
   type: ss
   server: 82.38.31.34
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: SS-261
+- name: SS-257
   type: ss
   server: 82.38.31.35
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-262
+- name: 🇳🇱 NL-SS-258
   type: ss
   server: 82.38.31.39
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-263
+- name: 🇳🇱 NL-SS-259
   type: ss
   server: 82.38.31.46
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-264
+- name: 🇳🇱 NL-SS-260
   type: ss
   server: 82.38.31.47
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-265
+- name: 🇳🇱 NL-SS-261
   type: ss
   server: 82.38.31.48
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-266
+- name: 🇳🇱 NL-SS-262
   type: ss
   server: 82.38.31.49
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-267
+- name: 🇳🇱 NL-SS-263
   type: ss
   server: 82.38.31.61
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-268
+- name: 🇳🇱 NL-SS-264
   type: ss
   server: 82.38.31.62
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: SS-269
+- name: SS-265
   type: ss
   server: 82.38.31.66
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇺🇸 US-SS-270
+- name: 🇺🇸 US-SS-266
   type: ss
   server: 84.20.27.183
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇳🇱 NL-SS-271
+- name: 🇳🇱 NL-SS-267
   type: ss
   server: 84.235.178.93
   port: 45819
   cipher: 2022-blake3-chacha20-poly1305
   password: q0ITzwUdzlpmZiYujM5nG485R+PLTOyEaQmfaRBzbB0=
   udp: true
-- name: 🇯🇵 JP-SS-272
+- name: 🇯🇵 JP-SS-268
   type: ss
   server: 84.247.155.196
   port: 80
   cipher: aes-256-gcm
   password: 3eOFeNssde7PYYMv
   udp: true
-- name: 🇯🇵 JP-SS-273
+- name: 🇯🇵 JP-SS-269
   type: ss
   server: 84.247.155.196
   port: 443
   cipher: aes-256-gcm
   password: 3eOFeNssde7PYYMv
   udp: true
-- name: 🇷🇺 RU-SS-275
+- name: 🇷🇺 RU-SS-271
   type: ss
   server: 90.156.203.62
   port: 5112
   cipher: chacha20-ietf-poly1305
   password: VVlAff77CnAU43Aoc5j15Y
   udp: true
-- name: SS-276
+- name: SS-272
   type: ss
   server: 92.5.150.247
   port: 59924
   cipher: 2022-blake3-chacha20-poly1305
   password: igIYdO+UOVn50088y6pqhAzq3VFj/zrFQMKu28vkW0E=
   udp: true
-- name: SS-277
+- name: SS-273
   type: ss
   server: 92.5.55.38
   port: 59924
   cipher: 2022-blake3-chacha20-poly1305
   password: OrqR2DqiahY1fgk5JcZ2N6WOmM0sfz0Ui+pV2aLjA2c=
   udp: true
-- name: 🇬🇧 GB-SS-278
+- name: 🇬🇧 GB-SS-274
   type: ss
   server: 94.156.250.148
   port: 7001
   cipher: aes-256-gcm
   password: RexnBgU7EV5ADxG
   udp: true
-- name: 🇺🇸 US-SS-279
+- name: 🇺🇸 US-SS-275
   type: ss
   server: 95.215.201.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇬🇧 GB-SS-280
+- name: 🇬🇧 GB-SS-276
   type: ss
   server: 98.98.142.161
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇬🇧 GB-SS-281
+- name: 🇬🇧 GB-SS-277
   type: ss
   server: 98.98.207.163
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: SS-282
+- name: SS-278
   type: ss
   server: bbomb.okamii1.ir
   port: 1008
   cipher: chacha20-ietf-poly1305
   password: gg4ze2bpu0wsy6s6
   udp: true
-- name: 🇯🇵 JP-SS-284
+- name: 🇯🇵 JP-SS-280
   type: ss
   server: jpa.123069.xyz
   port: 53758
   cipher: aes-128-gcm
   password: Bwlqh7GcFB
   udp: true
-- name: 🇨🇭 CH-SS-285
+- name: 🇨🇭 CH-SS-281
   type: ss
   server: leviko-ch7709.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇨🇭 CH-SS-286
+- name: 🇨🇭 CH-SS-282
   type: ss
   server: leviko-ch9924.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇸🇬 SG-SS-287
+- name: 🇸🇬 SG-SS-283
   type: ss
   server: leviko-sg2619.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇺🇸 US-SS-288
+- name: 🇺🇸 US-SS-284
   type: ss
   server: news.bushyjenz.cyou
   port: 42878
   cipher: chacha20-ietf-poly1305
   password: ijoUwfdnkz7mX4pWdkSpmEixTZCt2TRm1JDr4BSaBAWkLxYGoXBHXadFKY5D5ZfoVTwqsx46jCmEUDnQUizJDYrM7B5anhnu
   udp: true
-- name: SS-289
+- name: SS-285
+  type: ss
+  server: sw2.thugiping.com
+  port: 443
+  cipher: aes-256-gcm
+  password: 1814e548-140f-480d-bf35-9c947cd1a245
+  udp: true
+- name: SS-286
+  type: ss
+  server: sw4.thugiping.com
+  port: 443
+  cipher: aes-256-gcm
+  password: 1814e548-140f-480d-bf35-9c947cd1a245
+  udp: true
+- name: SS-287
   type: ss
   server: tun-ssl.rovfelo.ir
   port: 2026

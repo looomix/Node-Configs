@@ -1,4 +1,4 @@
-# Node-Configs 分片 vmess 第 1 片，175 个节点，可作为 proxy-provider
+# Node-Configs 分片 vmess 第 1 片，171 个节点，可作为 proxy-provider
 proxies:
 - name: 🇧🇷 BR-Vmess-001
   type: vmess
@@ -22,34 +22,30 @@ proxies:
   servername: xmfhlpy.com
 - name: 🇨🇦 CA-Vmess-003
   type: vmess
-  server: 104.17.0.1
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: or3.sfacg.uk
-  network: ws
-  ws-opts:
-    path: /or3
-    headers:
-      Host: or3.sfacg.uk
-- name: 🇨🇦 CA-Vmess-004
-  type: vmess
-  server: 104.17.136.198
-  port: 443
+  server: 104.17.147.222
+  port: 80
   uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
   alterId: 0
   cipher: auto
   udp: true
-  tls: true
-  servername: vmess.lbw666.dpdns.org
   network: ws
   ws-opts:
     path: /ws?ed=2048
     headers:
       Host: vmess.lbw666.dpdns.org
+- name: 🇨🇦 CA-Vmess-004
+  type: vmess
+  server: 104.17.77.77
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: v2ray1.dozapp.xyz
+  network: ws
+  ws-opts:
+    path: /lMnsZUN4/
 - name: Vmess-005
   type: vmess
   server: 104.17.77.77
@@ -66,7 +62,24 @@ proxies:
     path: /lMnsZUN4/
     headers:
       Host: v2ray1.dozapp.xyz
-- name: Vmess-006
+- name: 🇨🇦 CA-Vmess-006
+  type: vmess
+  server: 104.18.0.1
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: v2ray1.dozapp.xyz
+  alpn:
+  - http/1.1
+  network: ws
+  ws-opts:
+    path: /lMnsZUN4/
+    headers:
+      Host: v2ray1.dozapp.xyz
+- name: 🇨🇦 CA-Vmess-007
   type: vmess
   server: 104.18.42.163
   port: 443
@@ -81,52 +94,48 @@ proxies:
     path: /hls/cctv5phd.m3u8
     headers:
       Host: guanwang.awsno.com
-- name: 🇨🇦 CA-Vmess-007
-  type: vmess
-  server: 104.21.0.1
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: or3.sfacg.uk
-  network: ws
-  ws-opts:
-    path: /or3
-    headers:
-      Host: or3.sfacg.uk
 - name: 🇨🇦 CA-Vmess-008
   type: vmess
-  server: 104.21.50.177
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
+  server: 104.21.15.251
+  port: 443
+  uuid: ba1116e2-8c2f-4e3d-8e50-c954360cf970
   alterId: 0
   cipher: auto
   udp: true
   tls: true
-  servername: or3.sfacg.uk
+  servername: www.windowssearchtools.com
   network: ws
   ws-opts:
-    path: /or3
+    path: /truth
     headers:
-      Host: or3.sfacg.uk
+      Host: www.windowssearchtools.com
 - name: 🇨🇦 CA-Vmess-009
   type: vmess
-  server: 104.21.7.133
+  server: 104.21.3.99
   port: 443
+  uuid: 80be2deb-3b27-4775-9bd1-7f2a2b9c261b
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: www.windowsmsidownloads.com
+  network: ws
+  ws-opts:
+    path: /truth
+- name: 🇨🇦 CA-Vmess-010
+  type: vmess
+  server: 104.21.7.133
+  port: 80
   uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
   alterId: 0
   cipher: auto
   udp: true
-  tls: true
-  servername: vmess.lbw666.dpdns.org
   network: ws
   ws-opts:
     path: /ws
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 🇺🇸 US-Vmess-010
+- name: 🇺🇸 US-Vmess-011
   type: vmess
   server: 104.21.91.53
   port: 8443
@@ -141,37 +150,26 @@ proxies:
     path: /lMnsZUN4/
     headers:
       Host: v2ray1.dozapp.xyz
-- name: 🇨🇦 CA-Vmess-011
+- name: 🇨🇦 CA-Vmess-012
   type: vmess
-  server: 104.25.0.1
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
+  server: 104.24.0.1
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
   alterId: 0
   cipher: auto
   udp: true
   tls: true
-  servername: or3.sfacg.uk
-  client-fingerprint: chrome
-  alpn:
-  - http/1.1
+  servername: v2ray1.dozapp.xyz
   network: ws
   ws-opts:
-    path: /or3
+    path: /lMnsZUN4/
     headers:
-      Host: or3.sfacg.uk
-- name: 🇹🇭 TH-Vmess-013
+      Host: v2ray1.dozapp.xyz
+- name: 🇹🇭 TH-Vmess-014
   type: vmess
   server: 119.46.51.45
   port: 37515
   uuid: 9b76bc31-17a5-4454-934a-8d5fb602cd70
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇺🇸 US-Vmess-014
-  type: vmess
-  server: 129.146.143.80
-  port: 48111
-  uuid: d4603cc2-e0ee-4651-83f5-1db5b7168177
   alterId: 0
   cipher: auto
   udp: true
@@ -185,6 +183,14 @@ proxies:
   udp: true
 - name: 🇺🇸 US-Vmess-016
   type: vmess
+  server: 129.146.143.80
+  port: 48111
+  uuid: d4603cc2-e0ee-4651-83f5-1db5b7168177
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: 🇺🇸 US-Vmess-017
+  type: vmess
   server: 129.146.77.248
   port: 39495
   uuid: f836c736-87fc-4fde-aabc-00857ecdff3e
@@ -194,7 +200,7 @@ proxies:
   network: ws
   ws-opts:
     path: /cctv13.m3u8
-- name: 🇺🇸 US-Vmess-017
+- name: 🇺🇸 US-Vmess-018
   type: vmess
   server: 129.146.77.248
   port: 39495
@@ -207,15 +213,7 @@ proxies:
     path: /cctv13.m3u8
     headers:
       Host: 129.146.77.248
-- name: 🇰🇷 KR-Vmess-018
-  type: vmess
-  server: 129.154.61.196
-  port: 800
-  uuid: a915b1d6-cf28-4dc8-e4b4-e09c48c37ec0
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇸🇬 SG-Vmess-019
+- name: Vmess-019
   type: vmess
   server: 129.226.157.220
   port: 59121
@@ -235,21 +233,8 @@ proxies:
   ws-opts:
     path: /cctv13.m3u8
     headers:
-      Host: 132.145.80.230
-- name: 🇰🇷 KR-Vmess-021
-  type: vmess
-  server: 132.145.80.230
-  port: 80
-  uuid: 5155860e-d07d-46c3-9128-3afbd84626c7
-  alterId: 0
-  cipher: auto
-  udp: true
-  network: ws
-  ws-opts:
-    path: /cctv13.m3u8
-    headers:
       Host: kr02.a0a.xyz
-- name: 🇨🇦 CA-Vmess-022
+- name: 🇨🇦 CA-Vmess-021
   type: vmess
   server: 134.195.196.154
   port: 1270
@@ -259,7 +244,15 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇨🇦 CA-Vmess-023
+- name: 🇨🇦 CA-Vmess-022
+  type: vmess
+  server: 134.195.196.211
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: Vmess-023
   type: vmess
   server: 134.195.196.211
   port: 18000
@@ -291,14 +284,16 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-027
+- name: 🇸🇪 SE-Vmess-027
   type: vmess
-  server: 134.195.196.211
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  server: 138.199.55.230
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
   alterId: 0
   cipher: auto
   udp: true
+  tls: true
+  servername: xmfhlpy.com
 - name: 🇸🇪 SE-Vmess-028
   type: vmess
   server: 138.199.55.230
@@ -309,17 +304,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇸🇪 SE-Vmess-029
-  type: vmess
-  server: 138.199.55.230
-  port: 1270
-  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: xmfhlpy.com
-- name: 🇰🇷 KR-Vmess-030
+- name: 🇰🇷 KR-Vmess-029
   type: vmess
   server: 140.238.2.250
   port: 443
@@ -327,9 +312,19 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇺🇸 US-Vmess-031
+- name: 🇺🇸 US-Vmess-030
   type: vmess
   server: 142.202.48.87
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: xmfhlpy.com
+- name: 🇬🇧 GB-Vmess-031
+  type: vmess
+  server: 142.202.51.42
   port: 1270
   uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
   alterId: 0
@@ -347,17 +342,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇬🇧 GB-Vmess-033
-  type: vmess
-  server: 142.202.51.42
-  port: 1270
-  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: xmfhlpy.com
-- name: 🇫🇷 FR-Vmess-034
+- name: 🇫🇷 FR-Vmess-033
   type: vmess
   server: 145.239.55.210
   port: 80
@@ -370,6 +355,16 @@ proxies:
     path: /
     headers:
       Host: google.whatsapp.snapp.torob.basalam.fortresshost.ir.
+- name: 🇬🇧 GB-Vmess-034
+  type: vmess
+  server: 149.7.16.228
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: xmfhlpy.com
 - name: 🇬🇧 GB-Vmess-035
   type: vmess
   server: 149.7.16.228
@@ -380,17 +375,15 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇬🇧 GB-Vmess-036
+- name: 🇸🇬 SG-Vmess-036
   type: vmess
-  server: 149.7.16.228
-  port: 1270
-  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  server: 149.88.23.202
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
   alterId: 0
   cipher: auto
   udp: true
-  tls: true
-  servername: xmfhlpy.com
-- name: 🇸🇬 SG-Vmess-037
+- name: Vmess-037
   type: vmess
   server: 149.88.23.202
   port: 18000
@@ -406,7 +399,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-039
+- name: 🇸🇬 SG-Vmess-039
   type: vmess
   server: 149.88.23.202
   port: 18000
@@ -470,18 +463,19 @@ proxies:
   network: ws
   ws-opts:
     path: /
-    headers:
-      Host: in-152.67.8.205-0184
-- name: 🇦🇹 AT-Vmess-046
+- name: 🇮🇳 IN-Vmess-046
   type: vmess
-  server: 154.47.19.225
-  port: 1270
-  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  server: 152.67.8.205
+  port: 80
+  uuid: 9db4c708-aef8-4359-821b-38e47990be0d
   alterId: 0
   cipher: auto
   udp: true
-  tls: true
-  servername: xmfhlpy.com
+  network: ws
+  ws-opts:
+    path: /
+    headers:
+      Host: in-152.67.8.205-0184
 - name: 🇦🇹 AT-Vmess-047
   type: vmess
   server: 154.47.19.225
@@ -492,7 +486,17 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇭🇰 HK-Vmess-048
+- name: 🇦🇹 AT-Vmess-048
+  type: vmess
+  server: 154.47.19.225
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: xmfhlpy.com
+- name: 🇪🇺 EU-Vmess-049
   type: vmess
   server: 156.245.232.239
   port: 35043
@@ -503,19 +507,6 @@ proxies:
   network: ws
   ws-opts:
     path: /
-- name: 🇭🇰 HK-Vmess-049
-  type: vmess
-  server: 156.245.232.239
-  port: 35043
-  uuid: b15e481d-17e4-41a8-84c2-23d4f0514d9a
-  alterId: 0
-  cipher: auto
-  udp: true
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: 156.245.232.239
 - name: 🇭🇰 HK-Vmess-050
   type: vmess
   server: 156.245.232.239
@@ -528,8 +519,21 @@ proxies:
   ws-opts:
     path: /
     headers:
+      Host: 156.245.232.239
+- name: 🇭🇰 HK-Vmess-051
+  type: vmess
+  server: 156.245.232.239
+  port: 35043
+  uuid: b15e481d-17e4-41a8-84c2-23d4f0514d9a
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: ws
+  ws-opts:
+    path: /
+    headers:
       Host: www.pubgmobile.com
-- name: 🇨🇦 CA-Vmess-051
+- name: 🇨🇦 CA-Vmess-052
   type: vmess
   server: 158.51.121.246
   port: 1270
@@ -539,17 +543,6 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇩🇪 DE-Vmess-052
-  type: vmess
-  server: 159.69.20.208
-  port: 2946
-  uuid: 14824566-bbfe-43ae-8f7f-c4e144ed89c4
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: filano.zarqivo.ir
-  client-fingerprint: chrome
 - name: 🇯🇵 JP-Vmess-053
   type: vmess
   server: 161.33.20.255
@@ -561,37 +554,7 @@ proxies:
   network: ws
   ws-opts:
     path: /e0856508-d693-450a-a099-455091dc4f25-vm
-- name: 🇺🇸 US-Vmess-054
-  type: vmess
-  server: 162.159.130.234
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: or3.sfacg.uk
-  network: ws
-  ws-opts:
-    path: /or3
-    headers:
-      Host: or3.sfacg.uk
-- name: 🇺🇸 US-Vmess-055
-  type: vmess
-  server: 162.159.135.234
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: or3.sfacg.uk
-  network: ws
-  ws-opts:
-    path: /or3
-    headers:
-      Host: or3.sfacg.uk
-- name: 🇫🇷 FR-Vmess-056
+- name: 🇫🇷 FR-Vmess-054
   type: vmess
   server: 162.19.82.57
   port: 1270
@@ -601,7 +564,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-057
+- name: 🇺🇸 US-Vmess-055
   type: vmess
   server: 162.251.60.97
   port: 1270
@@ -611,7 +574,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-058
+- name: 🇺🇸 US-Vmess-056
   type: vmess
   server: 162.251.61.46
   port: 1270
@@ -621,7 +584,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-059
+- name: 🇺🇸 US-Vmess-057
   type: vmess
   server: 162.251.62.31
   port: 1270
@@ -631,7 +594,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇪🇺 EU-Vmess-060
+- name: 🇪🇺 EU-Vmess-058
   type: vmess
   server: 162.251.62.35
   port: 1270
@@ -641,7 +604,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-061
+- name: 🇺🇸 US-Vmess-059
   type: vmess
   server: 162.251.62.44
   port: 1270
@@ -651,7 +614,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇯🇵 JP-Vmess-062
+- name: 🇯🇵 JP-Vmess-060
   type: vmess
   server: 168.110.63.247
   port: 8081
@@ -662,7 +625,7 @@ proxies:
   network: ws
   ws-opts:
     path: /vless
-- name: 🇯🇵 JP-Vmess-063
+- name: 🇯🇵 JP-Vmess-061
   type: vmess
   server: 168.138.43.75
   port: 80
@@ -675,7 +638,7 @@ proxies:
     path: /cctv13.m3u8
     headers:
       Host: jp01.a0a.xyz
-- name: 🇺🇸 US-Vmess-064
+- name: 🇺🇸 US-Vmess-062
   type: vmess
   server: 169.197.142.22
   port: 18000
@@ -683,7 +646,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇦🇺 AU-Vmess-065
+- name: 🇦🇺 AU-Vmess-063
   type: vmess
   server: 169.197.142.22
   port: 18000
@@ -691,7 +654,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇦🇺 AU-Vmess-066
+- name: 🇦🇺 AU-Vmess-064
   type: vmess
   server: 169.197.142.22
   port: 18000
@@ -699,7 +662,7 @@ proxies:
   alterId: 0
   cipher: "none"
   udp: true
-- name: 🇺🇸 US-Vmess-067
+- name: 🇺🇸 US-Vmess-065
   type: vmess
   server: 172.111.36.126
   port: 1270
@@ -709,7 +672,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-068
+- name: 🇺🇸 US-Vmess-066
   type: vmess
   server: 172.111.36.137
   port: 1270
@@ -719,7 +682,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-069
+- name: 🇺🇸 US-Vmess-067
   type: vmess
   server: 172.111.36.147
   port: 1270
@@ -729,7 +692,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-070
+- name: 🇺🇸 US-Vmess-068
   type: vmess
   server: 172.111.38.246
   port: 1270
@@ -739,7 +702,22 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-071
+- name: 🇨🇦 CA-Vmess-069
+  type: vmess
+  server: 172.64.155.209
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: v2ray1.dozapp.xyz
+  network: ws
+  ws-opts:
+    path: /lMnsZUN4/
+    headers:
+      Host: v2ray1.dozapp.xyz
+- name: 🇺🇸 US-Vmess-070
   type: vmess
   server: 172.64.229.21
   port: 443
@@ -754,41 +732,9 @@ proxies:
     path: /ws
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 🇺🇸 US-Vmess-072
-  type: vmess
-  server: 172.64.80.1
-  port: 8443
-  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: v2ray1.dozapp.xyz
-  network: ws
-  ws-opts:
-    path: /lMnsZUN4/
-    headers:
-      Host: v2ray1.dozapp.xyz
-- name: Vmess-073
+- name: 🇨🇦 CA-Vmess-071
   type: vmess
   server: 172.66.0.1
-  port: 8443
-  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: v2ray1.dozapp.xyz
-  alpn:
-  - http/1.1
-  network: ws
-  ws-opts:
-    path: /lMnsZUN4/
-    headers:
-      Host: v2ray1.dozapp.xyz
-- name: 🇨🇦 CA-Vmess-074
-  type: vmess
-  server: 172.66.203.67
   port: 443
   uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
   alterId: 0
@@ -801,22 +747,52 @@ proxies:
     path: /ws
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 🇨🇦 CA-Vmess-075
+- name: 🇨🇦 CA-Vmess-072
   type: vmess
-  server: 172.67.153.127
+  server: 172.67.156.121
   port: 443
-  uuid: 80be2deb-3b27-4775-9bd1-7f2a2b9c261b
+  uuid: e70a5b70-f63c-4450-af8b-94990cdf80c0
   alterId: 0
   cipher: auto
   udp: true
   tls: true
-  servername: www.windowsmsidownloads.com
+  servername: www.gptcloudai.com
   network: ws
   ws-opts:
     path: /truth
     headers:
-      Host: www.windowsmsidownloads.com
-- name: 🇺🇸 US-Vmess-076
+      Host: www.gptcloudai.com
+- name: 🇨🇦 CA-Vmess-073
+  type: vmess
+  server: 172.67.161.144
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: v2ray1.dozapp.xyz
+  network: ws
+  ws-opts:
+    path: /lMnsZUN4/
+    headers:
+      Host: v2ray1.dozapp.xyz
+- name: 🇨🇦 CA-Vmess-074
+  type: vmess
+  server: 172.67.167.78
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: v2ray1.dozapp.xyz
+  network: ws
+  ws-opts:
+    path: /lMnsZUN4/
+    headers:
+      Host: v2ray1.dozapp.xyz
+- name: 🇺🇸 US-Vmess-075
   type: vmess
   server: 172.67.190.164
   port: 443
@@ -831,6 +807,21 @@ proxies:
     path: /hls/cctv5phd.m3u8
     headers:
       Host: guanwang.awsno.com
+- name: 🇨🇦 CA-Vmess-076
+  type: vmess
+  server: 172.67.221.77
+  port: 443
+  uuid: 83b09a64-1eaf-4c4d-89ed-866d4b6b8115
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: www.ubuntuupdates.com
+  network: ws
+  ws-opts:
+    path: /truth
+    headers:
+      Host: www.ubuntuupdates.com
 - name: 🇩🇪 DE-Vmess-077
   type: vmess
   server: 185.177.229.95
@@ -853,20 +844,33 @@ proxies:
   servername: xmfhlpy.com
 - name: 🇨🇦 CA-Vmess-079
   type: vmess
-  server: 188.114.97.1
+  server: 188.114.96.1
   port: 443
-  uuid: ba1116e2-8c2f-4e3d-8e50-c954360cf970
+  uuid: 80be2deb-3b27-4775-9bd1-7f2a2b9c261b
   alterId: 0
   cipher: auto
   udp: true
   tls: true
-  servername: www.windowssearchtools.com
+  servername: www.windowsmsidownloads.com
   network: ws
   ws-opts:
     path: /truth
     headers:
-      Host: www.windowssearchtools.com
-- name: 🇺🇸 US-Vmess-080
+      Host: www.windowsmsidownloads.com
+- name: 🇨🇦 CA-Vmess-080
+  type: vmess
+  server: 188.114.97.6
+  port: 80
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  network: ws
+  ws-opts:
+    path: /ws?ed
+    headers:
+      Host: vmess.lbw666.dpdns.org
+- name: Vmess-081
   type: vmess
   server: 188.114.99.137
   port: 443
@@ -879,7 +883,7 @@ proxies:
   network: ws
   ws-opts:
     path: /hls/cctv5phd.m3u8
-- name: Vmess-081
+- name: Vmess-082
   type: vmess
   server: 188.114.99.137
   port: 443
@@ -894,22 +898,7 @@ proxies:
     path: /hls/cctv5phd.m3u8
     headers:
       Host: guanwang.awsno.com
-- name: 🇺🇸 US-Vmess-082
-  type: vmess
-  server: 188.114.99.137
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: or3.sfacg.uk
-  network: ws
-  ws-opts:
-    path: /or3
-    headers:
-      Host: or3.sfacg.uk
-- name: Vmess-083
+- name: 🇳🇱 NL-Vmess-083
   type: vmess
   server: 188.166.81.135
   port: 1270
@@ -949,25 +938,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇸🇬 SG-Vmess-087
-  type: vmess
-  server: 195.133.135.238
-  port: 10086
-  uuid: b831381d-6324-4d53-ad4f-8cda48b30811
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇳🇱 NL-Vmess-088
-  type: vmess
-  server: 209.38.42.238
-  port: 1270
-  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: 209.38.42.238
-- name: 🇺🇸 US-Vmess-089
+- name: 🇺🇸 US-Vmess-087
   type: vmess
   server: 216.106.182.225
   port: 1270
@@ -977,7 +948,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇫🇷 FR-Vmess-090
+- name: 🇫🇷 FR-Vmess-088
   type: vmess
   server: 23.162.152.127
   port: 1270
@@ -987,7 +958,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇨🇦 CA-Vmess-091
+- name: 🇨🇦 CA-Vmess-089
   type: vmess
   server: 23.162.200.198
   port: 18000
@@ -995,7 +966,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-092
+- name: Vmess-090
   type: vmess
   server: 23.162.200.198
   port: 18000
@@ -1003,7 +974,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇨🇦 CA-Vmess-093
+- name: Vmess-091
   type: vmess
   server: 23.162.200.198
   port: 18000
@@ -1011,15 +982,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-094
-  type: vmess
-  server: 23.162.200.198
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇺🇸 US-Vmess-095
+- name: 🇺🇸 US-Vmess-092
   type: vmess
   server: 38.107.226.5
   port: 1270
@@ -1029,18 +992,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇰🇿 KZ-Vmess-096
-  type: vmess
-  server: 38.107.234.57
-  port: 80
-  uuid: 567f4be5-12ab-42e1-b8d9-db6fd1fdd31c
-  alterId: 0
-  cipher: auto
-  udp: true
-  network: ws
-  ws-opts:
-    path: /vmess/
-- name: 🇰🇿 KZ-Vmess-097
+- name: 🇰🇿 KZ-Vmess-093
   type: vmess
   server: 38.107.234.57
   port: 80
@@ -1053,7 +1005,7 @@ proxies:
     path: /vmess/
     headers:
       Host: wrmelmwxlf.gktevlrqznwqqozy.fabpfs66gizmnojhcvqxwl.kytrcfzqla87gvgvs6c7kjnrubuh.cc
-- name: 🇺🇸 US-Vmess-098
+- name: 🇺🇸 US-Vmess-094
   type: vmess
   server: 38.11.69.48
   port: 30004
@@ -1068,39 +1020,39 @@ proxies:
     path: /path/1698843555400
     headers:
       Host: www.83761815.xyz
+- name: 🇺🇸 US-Vmess-095
+  type: vmess
+  server: 38.110.1.246
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: Vmess-096
+  type: vmess
+  server: 38.110.1.246
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: Vmess-097
+  type: vmess
+  server: 38.110.1.246
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: Vmess-098
+  type: vmess
+  server: 38.110.1.246
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
 - name: 🇺🇸 US-Vmess-099
-  type: vmess
-  server: 38.110.1.246
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: Vmess-100
-  type: vmess
-  server: 38.110.1.246
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: Vmess-101
-  type: vmess
-  server: 38.110.1.246
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: Vmess-102
-  type: vmess
-  server: 38.110.1.246
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇺🇸 US-Vmess-103
   type: vmess
   server: 38.128.66.212
   port: 1270
@@ -1110,7 +1062,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-104
+- name: 🇺🇸 US-Vmess-100
   type: vmess
   server: 38.128.66.241
   port: 1270
@@ -1120,7 +1072,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-105
+- name: 🇺🇸 US-Vmess-101
   type: vmess
   server: 38.128.66.241
   port: 1270
@@ -1130,7 +1082,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-106
+- name: 🇺🇸 US-Vmess-102
   type: vmess
   server: 38.128.66.249
   port: 1270
@@ -1140,7 +1092,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-107
+- name: 🇺🇸 US-Vmess-103
   type: vmess
   server: 38.22.17.64
   port: 1270
@@ -1150,7 +1102,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-108
+- name: 🇺🇸 US-Vmess-104
   type: vmess
   server: 38.22.17.89
   port: 1270
@@ -1160,7 +1112,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-109
+- name: 🇺🇸 US-Vmess-105
   type: vmess
   server: 38.64.138.135
   port: 1270
@@ -1170,7 +1122,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-110
+- name: 🇺🇸 US-Vmess-106
   type: vmess
   server: 38.64.138.135
   port: 1270
@@ -1180,7 +1132,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-111
+- name: 🇺🇸 US-Vmess-107
   type: vmess
   server: 38.64.138.187
   port: 1270
@@ -1190,7 +1142,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-112
+- name: 🇺🇸 US-Vmess-108
   type: vmess
   server: 38.91.100.16
   port: 1270
@@ -1200,7 +1152,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-113
+- name: 🇺🇸 US-Vmess-109
   type: vmess
   server: 38.91.106.182
   port: 1270
@@ -1210,7 +1162,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-114
+- name: 🇺🇸 US-Vmess-110
   type: vmess
   server: 38.91.107.188
   port: 1270
@@ -1220,7 +1172,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-115
+- name: 🇺🇸 US-Vmess-111
   type: vmess
   server: 38.91.107.49
   port: 18000
@@ -1228,7 +1180,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇺🇸 US-Vmess-116
+- name: Vmess-112
   type: vmess
   server: 38.91.107.49
   port: 18000
@@ -1236,7 +1188,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇪🇺 EU-Vmess-117
+- name: 🇪🇺 EU-Vmess-113
   type: vmess
   server: 38.91.107.49
   port: 18000
@@ -1244,7 +1196,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-118
+- name: Vmess-114
   type: vmess
   server: 38.91.107.49
   port: 18000
@@ -1252,7 +1204,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇦🇺 AU-Vmess-119
+- name: 🇦🇺 AU-Vmess-115
   type: vmess
   server: 38.91.107.49
   port: 18000
@@ -1260,7 +1212,7 @@ proxies:
   alterId: 0
   cipher: "none"
   udp: true
-- name: 🇰🇿 KZ-Vmess-120
+- name: 🇰🇿 KZ-Vmess-116
   type: vmess
   server: 3h-kazakhstan1.09vpn.com
   port: 80
@@ -1271,7 +1223,7 @@ proxies:
   network: ws
   ws-opts:
     path: /vmess/
-- name: 🇫🇷 FR-Vmess-121
+- name: 🇫🇷 FR-Vmess-117
   type: vmess
   server: 46.105.222.153
   port: 1270
@@ -1281,7 +1233,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇫🇷 FR-Vmess-122
+- name: 🇫🇷 FR-Vmess-118
   type: vmess
   server: 46.105.222.155
   port: 1270
@@ -1291,7 +1243,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇫🇷 FR-Vmess-123
+- name: 🇫🇷 FR-Vmess-119
   type: vmess
   server: 46.105.222.155
   port: 1270
@@ -1301,7 +1253,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇫🇷 FR-Vmess-124
+- name: 🇫🇷 FR-Vmess-120
   type: vmess
   server: 46.105.222.156
   port: 1270
@@ -1311,7 +1263,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇫🇷 FR-Vmess-125
+- name: 🇫🇷 FR-Vmess-121
   type: vmess
   server: 46.105.222.157
   port: 1270
@@ -1321,7 +1273,22 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇭🇰 HK-Vmess-126
+- name: 🇭🇰 HK-Vmess-122
+  type: vmess
+  server: 47.243.194.125
+  port: 443
+  uuid: f23bb427-c1f9-4373-876c-2f43e9f790f3
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: nycqg19zkwacpm1b.v.3dns.vip
+  network: ws
+  ws-opts:
+    path: /ws-vmess
+    headers:
+      Host: nycqg19zkwacpm1b.v.3dns.vip
+- name: 🇭🇰 HK-Vmess-123
   type: vmess
   server: 47.244.120.197
   port: 23026
@@ -1334,18 +1301,18 @@ proxies:
     path: /arki
     headers:
       Host: 47.244.120.197
-- name: 🇭🇰 HK-Vmess-127
+- name: 🇭🇰 HK-Vmess-124
   type: vmess
   server: 47.244.120.197
-  port: 36703
-  uuid: 45b83519-9c4f-4052-a11b-02e017b636d4
+  port: 44867
+  uuid: 845e6b08-2919-4290-ade0-5dc7dcea59ca
   alterId: 0
   cipher: auto
   udp: true
   network: ws
   ws-opts:
-    path: /arki?ed=2048
-- name: 🇲🇾 MY-Vmess-128
+    path: /arki
+- name: 🇲🇾 MY-Vmess-125
   type: vmess
   server: 47.250.135.244
   port: 10000
@@ -1353,7 +1320,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇵🇱 PL-Vmess-129
+- name: 🇵🇱 PL-Vmess-126
   type: vmess
   server: 54.37.131.126
   port: 80
@@ -1366,7 +1333,7 @@ proxies:
     path: /
     headers:
       Host: google.whatsapp.snapp.torob.basalam.hesanid8.ir.
-- name: 🇬🇧 GB-Vmess-130
+- name: Vmess-127
   type: vmess
   server: 57.129.132.223
   port: 80
@@ -1379,7 +1346,7 @@ proxies:
     path: /vmess/
     headers:
       Host: google.com
-- name: 🇬🇧 GB-Vmess-131
+- name: 🇬🇧 GB-Vmess-128
   type: vmess
   server: 57.129.132.223
   port: 80
@@ -1392,7 +1359,7 @@ proxies:
     path: /vmess/?ed#
     headers:
       Host: google.com
-- name: 🇸🇪 SE-Vmess-132
+- name: 🇸🇪 SE-Vmess-129
   type: vmess
   server: 62.93.166.184
   port: 1270
@@ -1402,7 +1369,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇫🇮 FI-Vmess-133
+- name: 🇫🇮 FI-Vmess-130
   type: vmess
   server: 65.108.240.210
   port: 39018
@@ -1410,7 +1377,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇺🇸 US-Vmess-134
+- name: 🇺🇸 US-Vmess-131
   type: vmess
   server: 66.163.125.51
   port: 1270
@@ -1420,7 +1387,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-135
+- name: 🇺🇸 US-Vmess-132
   type: vmess
   server: 67.220.74.188
   port: 1270
@@ -1430,7 +1397,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-136
+- name: 🇺🇸 US-Vmess-133
   type: vmess
   server: 67.220.74.197
   port: 1270
@@ -1440,7 +1407,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-137
+- name: 🇺🇸 US-Vmess-134
   type: vmess
   server: 67.220.74.250
   port: 1270
@@ -1450,7 +1417,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: Vmess-138
+- name: Vmess-135
   type: vmess
   server: 67.220.85.46
   port: 18000
@@ -1458,7 +1425,7 @@ proxies:
   alterId: 0
   cipher: aes-128-gcm
   udp: true
-- name: Vmess-139
+- name: Vmess-136
   type: vmess
   server: 67.220.85.46
   port: 18000
@@ -1466,7 +1433,7 @@ proxies:
   alterId: 0
   cipher: aes-128-gcm
   udp: true
-- name: 🇺🇸 US-Vmess-140
+- name: 🇺🇸 US-Vmess-137
   type: vmess
   server: 67.220.85.46
   port: 18000
@@ -1474,9 +1441,33 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-141
+- name: Vmess-138
   type: vmess
   server: 67.220.85.46
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: Vmess-139
+  type: vmess
+  server: 67.220.95.3
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-Vmess-140
+  type: vmess
+  server: 67.220.95.3
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: 🇦🇺 AU-Vmess-141
+  type: vmess
+  server: 67.220.95.3
   port: 18000
   uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
   alterId: 0
@@ -1488,9 +1479,9 @@ proxies:
   port: 18000
   uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
   alterId: 0
-  cipher: aes-128-gcm
+  cipher: auto
   udp: true
-- name: 🇺🇸 US-Vmess-143
+- name: Vmess-143
   type: vmess
   server: 67.220.95.3
   port: 18000
@@ -1498,31 +1489,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇦🇺 AU-Vmess-144
-  type: vmess
-  server: 67.220.95.3
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: Vmess-145
-  type: vmess
-  server: 67.220.95.3
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇺🇸 US-Vmess-146
-  type: vmess
-  server: 67.220.95.3
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: Vmess-147
+- name: Vmess-144
   type: vmess
   server: 67.220.95.3
   port: 18000
@@ -1530,7 +1497,7 @@ proxies:
   alterId: 0
   cipher: "none"
   udp: true
-- name: 🇫🇷 FR-Vmess-148
+- name: 🇫🇷 FR-Vmess-145
   type: vmess
   server: 79.137.99.183
   port: 1270
@@ -1540,7 +1507,7 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-149
+- name: 🇺🇸 US-Vmess-146
   type: vmess
   server: 84.17.41.2
   port: 18000
@@ -1548,7 +1515,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-150
+- name: Vmess-147
   type: vmess
   server: 84.17.41.2
   port: 18000
@@ -1556,7 +1523,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇺🇸 US-Vmess-151
+- name: Vmess-148
   type: vmess
   server: 84.17.41.2
   port: 18000
@@ -1564,15 +1531,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-152
-  type: vmess
-  server: 84.17.41.2
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: Vmess-153
+- name: Vmess-149
   type: vmess
   server: 84.17.41.2
   port: 18000
@@ -1580,7 +1539,7 @@ proxies:
   alterId: 0
   cipher: "none"
   udp: true
-- name: 🇫🇷 FR-Vmess-154
+- name: 🇫🇷 FR-Vmess-150
   type: vmess
   server: 91.134.35.72
   port: 1270
@@ -1590,22 +1549,58 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇺🇸 US-Vmess-155
+- name: 🇮🇷 IR-Vmess-151
   type: vmess
-  server: cdn.sfacg.uk
-  port: 2083
-  uuid: ac251237-576f-40c8-a543-554960c958b1
+  server: anten.deborusgroup.com
+  port: 2087
+  uuid: e60a4b20-f75a-79b5-eb94-6cc23cb91588
   alterId: 0
   cipher: auto
   udp: true
   tls: true
-  servername: or3.sfacg.uk
+  servername: faborus.com
+  client-fingerprint: chrome
+  alpn:
+  - http/1.1
   network: ws
   ws-opts:
-    path: /or3
+    path: /45.76.183.217=49292
     headers:
-      Host: or3.sfacg.uk
-- name: 🇺🇸 US-Vmess-156
+      Host: faborus.com
+- name: 🇮🇷 IR-Vmess-152
+  type: vmess
+  server: anten.deborusgroup.com
+  port: 8443
+  uuid: e60a4b20-f75a-79b5-eb94-6cc23cb91588
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: fintercdn.com
+  client-fingerprint: chrome
+  alpn:
+  - http/1.1
+  network: ws
+  ws-opts:
+    path: /45.76.183.217=49292
+    headers:
+      Host: fintercdn.com
+- name: 🇨🇦 CA-Vmess-153
+  type: vmess
+  server: cf.090227.xyz
+  port: 443
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: vmess.lbw666.dpdns.org
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: vmess.lbw666.dpdns.org
+- name: 🇺🇸 US-Vmess-154
   type: vmess
   server: cf.0sm.com
   port: 80
@@ -1618,22 +1613,7 @@ proxies:
     path: /ws?ed=2048
     headers:
       Host: vmess.lbw666.dpdns.org
-- name: 🇨🇦 CA-Vmess-157
-  type: vmess
-  server: cf.0sm.com
-  port: 443
-  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: vmess.lbw666.dpdns.org
-  network: ws
-  ws-opts:
-    path: /ws?ed=2048
-    headers:
-      Host: vmess.lbw666.dpdns.org
-- name: 🇩🇪 DE-Vmess-159
+- name: 🇩🇪 DE-Vmess-156
   type: vmess
   server: de.zhou-yufan.com
   port: 443
@@ -1643,17 +1623,7 @@ proxies:
   udp: true
   tls: true
   servername: de.zhou-yufan.com
-- name: 🇩🇪 DE-Vmess-160
-  type: vmess
-  server: de.zhou-yufan.com
-  port: 443
-  uuid: f38e591d-d13a-4c30-9763-6be3ad65f3ec
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: de.zhou-yufan.com
-- name: 🇭🇰 HK-Vmess-161
+- name: 🇭🇰 HK-Vmess-157
   type: vmess
   server: dog-hk.kunlun01dns.com
   port: 21022
@@ -1661,7 +1631,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇺🇸 US-Vmess-162
+- name: 🇺🇸 US-Vmess-158
   type: vmess
   server: guanwang.awsno.com
   port: 443
@@ -1676,17 +1646,7 @@ proxies:
     path: /hls/cctv5phd.m3u8
     headers:
       Host: guanwang.awsno.com
-- name: 🇦🇹 AT-Vmess-163
-  type: vmess
-  server: leviko-at3530.shopingggg.ir
-  port: 1270
-  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: xmfhlpy.com
-- name: 🇸🇪 SE-Vmess-164
+- name: 🇸🇪 SE-Vmess-159
   type: vmess
   server: leviko-se4660.shopingggg.ir
   port: 1270
@@ -1696,31 +1656,23 @@ proxies:
   udp: true
   tls: true
   servername: xmfhlpy.com
-- name: 🇮🇷 IR-Vmess-165
+- name: 🇩🇪 DE-Vmess-160
   type: vmess
-  server: pishambaku.hormozmobile10.ir
-  port: 53590
-  uuid: 6ea1049e-f09c-4a8f-8057-791c8f5546d2
+  server: mahdipoktst.iranfilm.space
+  port: 8080
+  uuid: 29968818-bf37-439c-a71d-78f5f6b0da82
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇸🇬 SG-Vmess-166
+- name: 🇮🇷 IR-Vmess-161
   type: vmess
-  server: ww11.levikogjgfdd.ir
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  server: s1.connect.labex.pro
+  port: 1007
+  uuid: d4c556a2-3d61-4b1d-9550-d6d010ff1d3f
   alterId: 0
-  cipher: auto
+  cipher: aes-128-gcm
   udp: true
-- name: 🇦🇺 AU-Vmess-167
-  type: vmess
-  server: ww11.levikogjgfdd.ir
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇦🇺 AU-Vmess-168
+- name: 🇪🇺 EU-Vmess-162
   type: vmess
   server: ww11.levikogjgfdd.ir
   port: 18000
@@ -1728,7 +1680,23 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: Vmess-169
+- name: 🇦🇺 AU-Vmess-163
+  type: vmess
+  server: ww11.levikogjgfdd.ir
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: 🇦🇺 AU-Vmess-164
+  type: vmess
+  server: ww11.levikogjgfdd.ir
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  alterId: 0
+  cipher: auto
+  udp: true
+- name: Vmess-165
   type: vmess
   server: www.gptcloudai.com
   port: 443
@@ -1740,7 +1708,7 @@ proxies:
   network: ws
   ws-opts:
     path: /truth
-- name: 🇺🇸 US-Vmess-170
+- name: 🇺🇸 US-Vmess-166
   type: vmess
   server: www.shopify.com
   port: 443
@@ -1755,7 +1723,52 @@ proxies:
     path: /hls/cctv5phd.m3u8
     headers:
       Host: guanwang.awsno.com
-- name: Vmess-171
+- name: 🇨🇦 CA-Vmess-167
+  type: vmess
+  server: www.speedtest.net
+  port: 443
+  uuid: 83b09a64-1eaf-4c4d-89ed-866d4b6b8115
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: www.ubuntuupdates.com
+  network: ws
+  ws-opts:
+    path: /truth
+    headers:
+      Host: www.ubuntuupdates.com
+- name: 🇨🇦 CA-Vmess-168
+  type: vmess
+  server: www.ubuntuupdates.com
+  port: 443
+  uuid: 83b09a64-1eaf-4c4d-89ed-866d4b6b8115
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: www.ubuntuupdates.com
+  network: ws
+  ws-opts:
+    path: /truth
+    headers:
+      Host: www.ubuntuupdates.com
+- name: 🇨🇦 CA-Vmess-169
+  type: vmess
+  server: www.windowsmsidownloads.com
+  port: 443
+  uuid: 80be2deb-3b27-4775-9bd1-7f2a2b9c261b
+  alterId: 0
+  cipher: auto
+  udp: true
+  tls: true
+  servername: www.windowsmsidownloads.com
+  network: ws
+  ws-opts:
+    path: /truth
+    headers:
+      Host: www.windowsmsidownloads.com
+- name: 🇨🇦 CA-Vmess-170
   type: vmess
   server: www.windowssearchtools.com
   port: 443
@@ -1770,43 +1783,7 @@ proxies:
     path: /truth
     headers:
       Host: www.windowssearchtools.com
-- name: 🇨🇦 CA-Vmess-172
-  type: vmess
-  server: wwww.speedtest.org
-  port: 443
-  uuid: 80be2deb-3b27-4775-9bd1-7f2a2b9c261b
-  alterId: 0
-  cipher: auto
-  udp: true
-  tls: true
-  servername: www.windowsmsidownloads.com
-  client-fingerprint: ios
-  alpn:
-  - h3
-  - h2
-  - http/1.1
-  network: ws
-  ws-opts:
-    path: /truth?TELEGRAM--B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub-B2Hub--TELEGRAM
-    headers:
-      Host: www.windowsmsidownloads.com
-- name: 🇩🇪 DE-Vmess-173
-  type: vmess
-  server: x4.topspeedarash.com
-  port: 42188
-  uuid: 83d6fcc7-bb82-49ce-a955-38757bab22e6
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇩🇪 DE-Vmess-174
-  type: vmess
-  server: x8.topspeedarash.com
-  port: 42188
-  uuid: 614f9509-4222-429a-8a46-8e4871dc40b0
-  alterId: 0
-  cipher: auto
-  udp: true
-- name: 🇭🇰 HK-Vmess-175
+- name: 🇭🇰 HK-Vmess-171
   type: vmess
   server: zfd-hkv1.kunlun01dns.com
   port: 16113
@@ -1814,7 +1791,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇭🇰 HK-Vmess-176
+- name: 🇭🇰 HK-Vmess-172
   type: vmess
   server: zfd-hkv2.kunlun01dns.com
   port: 16113
@@ -1822,7 +1799,7 @@ proxies:
   alterId: 0
   cipher: auto
   udp: true
-- name: 🇭🇰 HK-Vmess-177
+- name: 🇭🇰 HK-Vmess-173
   type: vmess
   server: zfd-hkv2.kunlun01dns.com
   port: 16116
