@@ -574,7 +574,7 @@ proxies:
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇬🇧 GB-SS-084
+- name: 🇩🇪 DE-SS-084
   type: ss
   server: 18.134.240.81
   port: 443

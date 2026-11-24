@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-24 11:47:41",
-  "links": 3208,
-  "converted": 2284,
-  "clash": 2277,
-  "singbox": 1973,
+  "updated_at": "2026-11-24 11:52:08",
+  "links": 3199,
+  "converted": 2277,
+  "clash": 2270,
+  "singbox": 1968,
   "sources_ok": 13,
   "sources_total": 13,
   "skipped": {
@@ -13,20 +13,20 @@
     "Hysteria2": 2
   },
   "health": {
-    "checked": 2332,
-    "alive": 2073,
-    "unreachable": 48,
-    "unknown": 211,
-    "alive_ratio": 0.8889,
-    "dropped": 48
+    "checked": 2328,
+    "alive": 2077,
+    "unreachable": 51,
+    "unknown": 200,
+    "alive_ratio": 0.8922,
+    "dropped": 51
   },
-  "light": 873,
+  "light": 866,
   "splits": 10,
   "sources": {
     "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/Best-Results/proxies.txt": 319,
     "https://raw.githubusercontent.com/Fakeonomics/libre-configs/refs/heads/main/special/anchor": 219,
     "https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub": 12,
-    "https://raw.githubusercontent.com/PizdukMod/PizdukVPN/refs/heads/main/sub": 25,
+    "https://raw.githubusercontent.com/PizdukMod/PizdukVPN/refs/heads/main/sub": 16,
     "https://raw.githubusercontent.com/R3ZARAHIMI/tg-v2ray-configs-every2h/refs/heads/main/Original-Configs.txt": 237,
     "https://raw.githubusercontent.com/aviamastersgh/vpn-free-russia/main/ru_configs.txt": 119,
     "https://raw.githubusercontent.com/meroseem/acaesub/refs/heads/main/output/v2ray.txt": 476,

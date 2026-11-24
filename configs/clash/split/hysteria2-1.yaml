@@ -13,31 +13,37 @@ proxies:
   password: 87bb2ac4-b7a1-0001-b11d-2107709ea6cb
   sni: szqbx-ru-77dc.my-fade.cloud
   skip-cert-verify: true
-- name: 🇳🇱 NL-Hy2-008
+- name: 🇵🇱 PL-Hy2-008
+  type: hysteria2
+  server: 144.31.0.127
+  port: 443
+  password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
+  sni: swifttopic.newbuzideas.org
+- name: 🇳🇱 NL-Hy2-009
   type: hysteria2
   server: 144.31.128.13
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: retryquery.luxe-self.co.uk
-- name: Hy2-009
+- name: 🇵🇱 PL-Hy2-010
   type: hysteria2
   server: 144.31.4.94
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: depotnotify.ratethatrestaurant.org
-- name: Hy2-010
+- name: 🇵🇱 PL-Hy2-011
   type: hysteria2
   server: 144.31.4.99
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: chatharbor.obshock.net
-- name: 🇦🇱 AL-Hy2-011
+- name: 🇦🇱 AL-Hy2-012
   type: hysteria2
   server: 147.45.221.225
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: nl.lucheeebezlimitnoekino.stream
-- name: Hy2-013
+- name: Hy2-014
   type: hysteria2
   server: 152.32.254.68
   port: 5010
@@ -45,7 +51,7 @@ proxies:
   sni: nas.aizhzo.com
   obfs: salamander
   obfs-password: 7M4RXPFcQyQEGbkxBPfXo4bilMhCW2U9
-- name: Hy2-016
+- name: Hy2-017
   type: hysteria2
   server: 159.13.55.48
   port: 20000
@@ -53,26 +59,26 @@ proxies:
   sni: hy2-au2.whuiy.xyz
   obfs: salamander
   obfs-password: b42d90fa667942aebc734d60
-- name: 🇷🇺 RU-Hy2-019
+- name: 🇷🇺 RU-Hy2-020
   type: hysteria2
   server: 176.98.177.129
   port: 443
   password: fdbd8fb8-7d27-4bd8-9da1-1e42c4876835
   sni: ggstream.space
-- name: 🇧🇾 BY-Hy2-020
+- name: Hy2-021
   type: hysteria2
   server: 179.254.191.251
   port: 4444
   password: a35c508f-4d5d-4531-842e-6e9d43c762c0
   sni: bl1.nexfile.net
-- name: 🇺🇸 US-Hy2-021
+- name: 🇺🇸 US-Hy2-022
   type: hysteria2
   server: 179.254.191.251
   port: 4444
   password: a35c508f-4d5d-4531-842e-6e9d43c762c0
   sni: bl1.nexfile.net
   skip-cert-verify: true
-- name: 🇸🇪 SE-Hy2-022
+- name: 🇸🇪 SE-Hy2-023
   type: hysteria2
   server: 185.42.212.207
   port: 26206
@@ -80,44 +86,36 @@ proxies:
   sni: config7x.de5.net
   obfs: salamander
   obfs-password: vxvnmus9agdzduvz
-- name: 🇳🇱 NL-Hy2-025
+- name: 🇳🇱 NL-Hy2-026
   type: hysteria2
   server: 193.233.127.209
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: trendslate.nem-osh-rkp.net
-- name: 🇷🇺 RU-Hy2-026
-  type: hysteria2
-  server: 193.233.248.38
-  port: 443
-  password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
-  sni: replicaruntime.lucheeebezlimitnoekino.stream
 - name: 🇷🇺 RU-Hy2-027
   type: hysteria2
   server: 193.233.248.38
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: replicaruntime.lucheeebezlimitnoekino.stream
-- name: 🇷🇺 RU-Hy2-030
+- name: 🇷🇺 RU-Hy2-028
+  type: hysteria2
+  server: 193.233.248.38
+  port: 443
+  password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
+  sni: replicaruntime.lucheeebezlimitnoekino.stream
+- name: 🇷🇺 RU-Hy2-031
   type: hysteria2
   server: 201.24.53.145
   port: 443
   password: fdbd8fb8-7d27-4bd8-9da1-1e42c4876835
   sni: rutubers.space
-- name: 🇺🇸 US-Hy2-034
+- name: 🇺🇸 US-Hy2-035
   type: hysteria2
   server: 212.18.104.140
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: licensebazaar.comparecarprices.org
-- name: Hy2-036
-  type: hysteria2
-  server: 216.73.157.142
-  port: 443
-  password: 74bec046f0004aa5bc280ecc4ab50465
-  sni: 216.73.157.142
-  obfs: salamander
-  obfs-password: qrl-03E8Q6JaUlAkOPHXQBwN
 - name: Hy2-037
   type: hysteria2
   server: 216.73.157.142
@@ -126,19 +124,27 @@ proxies:
   sni: 216.73.157.142
   obfs: salamander
   obfs-password: qrl-03E8Q6JaUlAkOPHXQBwN
-- name: 🇫🇮 FI-Hy2-039
+- name: Hy2-038
+  type: hysteria2
+  server: 216.73.157.142
+  port: 443
+  password: 74bec046f0004aa5bc280ecc4ab50465
+  sni: 216.73.157.142
+  obfs: salamander
+  obfs-password: qrl-03E8Q6JaUlAkOPHXQBwN
+- name: 🇫🇮 FI-Hy2-040
   type: hysteria2
   server: 31.76.3.52
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: payablemeta.cleanfoodshop.org
-- name: Hy2-040
+- name: Hy2-041
   type: hysteria2
   server: 31.77.142.22
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: footerbalance.lucheeebezlimitnoekino.stream
-- name: 🇳🇱 NL-Hy2-042
+- name: 🇳🇱 NL-Hy2-043
   type: hysteria2
   server: 48.103.144.118
   port: 8443
@@ -146,27 +152,27 @@ proxies:
   sni: static-nl.snobvpn.online
   obfs: salamander
   obfs-password: JGIhnEi-CcIJOfNTqvNxX_5wRAYUZ0J2
-- name: 🇺🇸 US-Hy2-043
+- name: 🇺🇸 US-Hy2-044
   type: hysteria2
   server: 50.7.38.243
   port: 443
   password: d4ca9415f0eac7897472e1e5b86d2e96
   sni: promo.betust.net
-- name: 🇫🇷 FR-Hy2-044
+- name: 🇫🇷 FR-Hy2-045
   type: hysteria2
   server: 62.210.124.146
   port: 22000
   password: dongtaiwang.com
   sni: www.microsoft.com
   skip-cert-verify: true
-- name: 🇺🇸 US-Hy2-045
+- name: 🇺🇸 US-Hy2-046
   type: hysteria2
   server: 66.94.121.46
   port: 443
   password: gf1:gfhysteria2024
   sni: 66.94.121.46
   skip-cert-verify: true
-- name: 🇸🇬 SG-Hy2-046
+- name: 🇸🇬 SG-Hy2-047
   type: hysteria2
   server: 77.93.89.197
   port: 443
@@ -174,32 +180,32 @@ proxies:
   sni: bgsg2.hikigo.com
   obfs: salamander
   obfs-password: sj1awrdwnn5lbuno
-- name: 🇯🇵 JP-Hy2-047
+- name: 🇯🇵 JP-Hy2-048
   type: hysteria2
   server: 8.211.175.236
   port: 8443
   password: u63SxILNwtrQZ7Y1ZrFaZfsA
   sni: 8.211.175.236
   skip-cert-verify: true
-- name: 🇵🇱 PL-Hy2-048
+- name: 🇵🇱 PL-Hy2-049
   type: hysteria2
   server: 82.40.37.115
   port: 443
   password: lvu_fb79ddb9bbda86f657cf34ee5dbe40bd_cf1aff9abf2b3945664fd63a07229839:np2.1.Q6bg95HDIqzwSQwdlbeS4-tGJpT8yFUcNQd7KGxqbXU
   sni: n34.neproxy.net
-- name: Hy2-049
+- name: Hy2-050
   type: hysteria2
   server: 87.121.112.83
   port: 443
   password: 9a9f167d-b461-466f-be50-f0ffd598a6f8
   sni: bulghys.live
-- name: 🇩🇪 DE-Hy2-050
+- name: 🇩🇪 DE-Hy2-051
   type: hysteria2
   server: 91.196.32.63
   port: 443
   password: d283bbfe-d5cd-4576-bc1a-630a7a5ad829
   sni: remotebuild.lucheeebezlimitnoekino.stream
-- name: 🇸🇬 SG-Hy2-052
+- name: 🇸🇬 SG-Hy2-053
   type: hysteria2
   server: bgsg2.hikigo.com
   port: 443
@@ -208,18 +214,12 @@ proxies:
   skip-cert-verify: true
   obfs: salamander
   obfs-password: sj1awrdwnn5lbuno
-- name: Hy2-054
+- name: Hy2-055
   type: hysteria2
   server: ggstream.space
   port: 443
   password: fdbd8fb8-7d27-4bd8-9da1-1e42c4876835
   sni: ggstream.space
-- name: 🇵🇱 PL-Hy2-055
-  type: hysteria2
-  server: kraw-pl-1.fantoff.online
-  port: 443
-  password: 302fa49c-7d08-4600-8bc3-a3e21baebdd1
-  sni: kraw-pl-1.fantoff.online
 - name: Hy2-056
   type: hysteria2
   server: russtremers.space
