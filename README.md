@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/looomix/Node-Configs/main.yml?style=flat-square&label=update" alt="Update Status" />
-  <img src="https://img.shields.io/badge/nodes-2366-blue?style=flat-square" alt="Nodes" />
-  <img src="https://img.shields.io/badge/links-3314-informational?style=flat-square" alt="Links" />
+  <img src="https://img.shields.io/badge/nodes-2196-blue?style=flat-square" alt="Nodes" />
+  <img src="https://img.shields.io/badge/links-3072-informational?style=flat-square" alt="Links" />
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/github/last-commit/looomix/Node-Configs?style=flat-square" alt="Last Commit" />
   <img src="https://img.shields.io/github/stars/looomix/Node-Configs?style=social" alt="Stars" />
@@ -11,8 +11,8 @@
 
 <p align="center">
   从公开来源自动聚合网络节点，转换成 <b>Clash / mihomo</b> 与 <b>sing-box</b> 可直接导入的订阅配置<br>
-  每 12 小时自动更新 · 最后更新 <b>2026-11-25 06:16</b><br>
-  <sub>最近一次 TCP 探测：2218/2448 可连通（<b>91%</b>），已剔除 78 个拒绝连接的地址</sub>
+  每 12 小时自动更新 · 最后更新 <b>2026-11-25 16:10</b><br>
+  <sub>最近一次 TCP 探测：2066/2254 可连通（<b>92%</b>），已剔除 57 个拒绝连接的地址</sub>
 </p>
 
 ## ⚡ 快速订阅
@@ -24,7 +24,7 @@
 | **Clash / mihomo**<br><sub>Clash Verge · ClashX Meta · FlClash</sub> | [`config.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/config.yaml) | [`config.yaml`](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/config.yaml) | 节点 + 策略组 + 规则，导入即用 |
 | **sing-box** | [`config.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/config.json) | [`config.json`](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/config.json) | mixed 入站 + selector / urltest 出站 |
 | **v2rayN / v2rayNG**<br><sub>NekoRay · Karing · Hiddify</sub> | [`AllProtocols.txt`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) | [`AllProtocols.txt`](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/protocols/AllProtocols.txt) | 原始分享链接 |
-| **轻量版**（905 节点）<br><sub>只含 hy2 / tuic / vless-reality</sub> | [`light.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/light.yaml) · [`light.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/light.json) | [Clash](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/light.yaml) · [sing-box](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/light.json) | 弱网 / 移动端首选，解析最快 |
+| **轻量版**（912 节点）<br><sub>只含 hy2 / tuic / vless-reality</sub> | [`light.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/light.yaml) · [`light.json`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/light.json) | [Clash](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/light.yaml) · [sing-box](https://gh-proxy.com/https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/singbox/light.json) | 弱网 / 移动端首选，解析最快 |
 
 如果只想复用节点、不想用本项目提供的规则：
 
@@ -45,7 +45,7 @@
 2. 策略组选 `🚀 节点选择`（手动）或 `♻️ 自动选择`（每 5 分钟测速取最快）；
 3. 规则为「局域网与国内直连，其余走 `🐟 漏网之鱼`」。
 
-> 配置里含 <b>329</b> 个 `network: xhttp` 节点（Xray 的 splithttp 传输）。
+> 配置里含 <b>264</b> 个 `network: xhttp` 节点（Xray 的 splithttp 传输）。
 > **需要 mihomo ≥ 1.19**（Clash Verge Rev 1.7+、FlClash 0.8+ 均已内置）；
 > 低于这个版本的客户端会因 `unsupported network` 拒绝加载整份配置，请改用「轻量版」。
 
@@ -116,7 +116,7 @@ Node-Configs/
 <details>
 <summary><b>报 <code>unsupported network: xhttp</code> 怎么办？</b></summary>
 
-配置里有 329 个 xhttp（splithttp）节点，需要 mihomo ≥ 1.19。老版本客户端遇到不认识的传输层会**拒绝加载整份配置**，改用 [`light.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/light.yaml)（不含 xhttp）即可，或升级到 Clash Verge Rev 1.7+ / FlClash 0.8+。
+配置里有 264 个 xhttp（splithttp）节点，需要 mihomo ≥ 1.19。老版本客户端遇到不认识的传输层会**拒绝加载整份配置**，改用 [`light.yaml`](https://raw.githubusercontent.com/looomix/Node-Configs/refs/heads/main/configs/clash/light.yaml)（不含 xhttp）即可，或升级到 Clash Verge Rev 1.7+ / FlClash 0.8+。
 </details>
 
 <details>
