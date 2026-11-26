@@ -1,0 +1,100 @@
+# Node-Configs 分片 ss 第 2 片，14 个节点，可作为 proxy-provider
+proxies:
+- name: 🇳🇱 NL-SS-302
+  type: ss
+  server: 82.38.31.61
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: oZIoA69Q8yhcQV8ka3Pa3A
+  udp: true
+- name: 🇳🇱 NL-SS-303
+  type: ss
+  server: 82.38.31.62
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: oZIoA69Q8yhcQV8ka3Pa3A
+  udp: true
+- name: SS-304
+  type: ss
+  server: 82.38.31.66
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: oZIoA69Q8yhcQV8ka3Pa3A
+  udp: true
+- name: 🇺🇸 US-SS-305
+  type: ss
+  server: 84.20.27.183
+  port: 19999
+  cipher: aes-256-gcm
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  udp: true
+- name: SS-307
+  type: ss
+  server: 91.206.92.158
+  port: 18443
+  cipher: aes-256-gcm
+  password: cCMJgJTA3BA489YUYrFq7XHXSiSpWlLa
+  udp: true
+- name: 🇬🇧 GB-SS-308
+  type: ss
+  server: 94.156.250.148
+  port: 7001
+  cipher: aes-256-gcm
+  password: RexnBgU7EV5ADxG
+  udp: true
+- name: 🇺🇸 US-SS-309
+  type: ss
+  server: 95.215.201.18
+  port: 19999
+  cipher: aes-256-gcm
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  udp: true
+- name: 🇬🇧 GB-SS-310
+  type: ss
+  server: 98.98.142.161
+  port: 8080
+  cipher: rc4-md5
+  password: 14fFPrbezE3HDZzsMOr6
+  udp: true
+- name: 🇬🇧 GB-SS-311
+  type: ss
+  server: 98.98.207.163
+  port: 8080
+  cipher: rc4-md5
+  password: 14fFPrbezE3HDZzsMOr6
+  udp: true
+- name: 🇯🇵 JP-SS-313
+  type: ss
+  server: jpa.123069.xyz
+  port: 53758
+  cipher: aes-128-gcm
+  password: Bwlqh7GcFB
+  udp: true
+- name: 🇸🇬 SG-SS-315
+  type: ss
+  server: sg1.ssobfs.site
+  port: 8388
+  cipher: chacha20-ietf-poly1305
+  password: MmFkN
+  udp: true
+- name: SS-316
+  type: ss
+  server: tun-ssl.rovfelo.ir
+  port: 2026
+  cipher: chacha20-ietf-poly1305
+  password: bwfHn5C5Jz8oZcqD_XuhqyPWtIp6d16D
+  udp: true
+- name: 🇬🇧 GB-SS-317
+  type: ss
+  server: waic.pro.main.sys-metric-report.com
+  port: 28014
+  cipher: chacha20-ietf-poly1305
+  password: abc62f00-95a8-4c2e-a85d-36a2cdc977da
+  udp: true
+- name: 🇩🇪 DE-SS-318
+  type: ss
+  server: yalandema.pet0er23mh21qq.com
+  port: 1080
+  cipher: chacha20-ietf-poly1305
+  password: N8EmvDqpvSPOCi1eBayPdGJffGkP0b9e
+  udp: true
