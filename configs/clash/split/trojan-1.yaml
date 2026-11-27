@@ -1,19 +1,6 @@
-# Node-Configs 分片 trojan 第 1 片，133 个节点，可作为 proxy-provider
+# Node-Configs 分片 trojan 第 1 片，51 个节点，可作为 proxy-provider
 proxies:
 - name: Trojan-001
-  type: trojan
-  server: 104.19.45.195
-  port: 443
-  password: pH[]S[Bh:_:D6T4k
-  udp: true
-  tls: true
-  servername: AZaDneT-692.PagEs.DEv
-  skip-cert-verify: true
-  client-fingerprint: chrome
-  network: ws
-  ws-opts:
-    path: /trsVu9Ualb1DOfGjpw
-- name: Trojan-002
   type: trojan
   server: 104.25.239.113
   port: 2053
@@ -24,24 +11,15 @@ proxies:
   network: ws
   ws-opts:
     path: /
+- name: Trojan-002
+  type: trojan
+  server: 139.84.231.142
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: explorecareerpathsandunlockprofessionalsuccesstoday.com
 - name: Trojan-003
-  type: trojan
-  server: 139.84.231.142
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: explorecareerpathsandunlockprofessionalsuccesstoday.com
-- name: 🇿🇦 ZA-Trojan-004
-  type: trojan
-  server: 139.84.231.142
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: explorecareerpathsandunlockprofessionalsuccesstoday.com
-  client-fingerprint: chrome
-- name: Trojan-005
   type: trojan
   server: 144.31.252.100
   port: 8443
@@ -54,97 +32,52 @@ proxies:
     path: /
     headers:
       Host: api.85s.me
-- name: 🇺🇸 US-Trojan-006
+- name: Trojan-004
   type: trojan
-  server: 167.88.61.175
+  server: 146.75.59.186
   port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  password: Z-jckziI1rW4yrUMorrv0Q
   udp: true
   tls: true
-  servername: blog.browseseniorrolesandenhanceyourcareertoday.com
+  servername: cdn.akamai.steamstatic.com
+  network: ws
+  ws-opts:
+    path: /TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER
+    headers:
+      Host: looasaaaboijji.global.ssl.fastly.net.
+- name: Trojan-005
+  type: trojan
+  server: 167.82.101.251
+  port: 443
+  password: Mitivpn
+  udp: true
+  tls: true
+  servername: ssl.fastly.com
   skip-cert-verify: true
+- name: Trojan-006
+  type: trojan
+  server: 167.82.76.7
+  port: 443
+  password: MiTiVPN
+  udp: true
+  tls: true
+  servername: ssl.fastly.com
+  alpn:
+  - http/1.1
+  network: ws
+  ws-opts:
+    path: /---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/NLSs---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN
+    headers:
+      Host: mitivpn---ss--s---mitivpn-33.global.ssl.fastly.net
 - name: Trojan-007
   type: trojan
-  server: 167.88.61.175
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.browseseniorrolesandenhanceyourcareertoday.com
-  client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-008
-  type: trojan
-  server: 167.88.61.193
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: browseseniorrolesandenhanceyourcareertoday.com
-- name: 🇺🇸 US-Trojan-009
-  type: trojan
-  server: 167.88.61.20
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: api.browseseniorrolesandenhanceyourcareertoday.com
-- name: Trojan-010
-  type: trojan
-  server: 167.88.61.52
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.browseseniorrolesandenhanceyourcareertoday.com
-- name: 🇺🇸 US-Trojan-011
-  type: trojan
-  server: 167.88.61.85
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: resources.browseseniorrolesandenhanceyourcareertoday.com
-- name: 🇺🇸 US-Trojan-012
-  type: trojan
-  server: 169.197.140.169
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: api.discoverfreshgraduatejobsstartyourprofessionaljourney.com
-- name: Trojan-013
-  type: trojan
   server: 169.197.140.214
   port: 443
   password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
   udp: true
   tls: true
   servername: courses.discoverfreshgraduatejobsstartyourprofessionaljourney.com
-- name: 🇺🇸 US-Trojan-014
-  type: trojan
-  server: 169.197.140.214
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.discoverfreshgraduatejobsstartyourprofessionaljourney.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-015
-  type: trojan
-  server: 169.197.140.218
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: learn.discoverfreshgraduatejobsstartyourprofessionaljourney.com
-- name: 🇺🇸 US-Trojan-016
-  type: trojan
-  server: 169.197.140.245
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: Trojan-017
+- name: Trojan-008
   type: trojan
   server: 169.197.140.245
   port: 443
@@ -152,7 +85,7 @@ proxies:
   udp: true
   tls: true
   servername: www.discoverfreshgraduatejobsstartyourprofessionaljourney.com
-- name: Trojan-018
+- name: Trojan-009
   type: trojan
   server: 170.101.101.112
   port: 443
@@ -161,38 +94,7 @@ proxies:
   tls: true
   servername: resources.explorecreativejobsandenhanceyourcareerportfolio.com
   client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-019
-  type: trojan
-  server: 170.101.101.131
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: 🇺🇸 US-Trojan-020
-  type: trojan
-  server: 170.101.101.19
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: learn.explorecreativejobsandenhanceyourcareerportfolio.com
-- name: Trojan-021
-  type: trojan
-  server: 170.101.101.237
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.explorecreativejobsandenhanceyourcareerportfolio.com
-- name: Trojan-022
-  type: trojan
-  server: 170.101.101.53
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.explorecreativejobsandenhanceyourcareerportfolio.com
-- name: Trojan-023
+- name: Trojan-010
   type: trojan
   server: 170.101.101.53
   port: 443
@@ -201,69 +103,22 @@ proxies:
   tls: true
   servername: www.explorecreativejobsandenhanceyourcareerportfolio.com
   client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-024
-  type: trojan
-  server: 170.101.101.67
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.explorecreativejobsandenhanceyourcareerportfolio.com
-- name: 🇲🇩 MD-Trojan-025
+- name: 🇸🇬 SG-Trojan-011
   type: trojan
   server: 172.67.199.12
   port: 443
   password: 963A4918-A630-29DA-A873-093CDF8AD784
   udp: true
   tls: true
-  servername: dry-snowflake-b29f.vpnetwork3567.workers.dev
+  servername: lingering-fire-1fe9.vpnetwork3567.workers.dev
   alpn:
   - http/1.1
   network: ws
   ws-opts:
     path: /
     headers:
-      Host: dry-snowflake-b29f.vpnetwork3567.workers.dev
-- name: 🇩🇪 DE-Trojan-026
-  type: trojan
-  server: 193.108.119.134
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: api.iloverussia2026.com
-- name: 🇩🇪 DE-Trojan-027
-  type: trojan
-  server: 193.108.119.15
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.iloverussia2026.com
-- name: 🇩🇪 DE-Trojan-028
-  type: trojan
-  server: 193.108.119.193
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: resources.iloverussia2026.com
-- name: 🇩🇪 DE-Trojan-029
-  type: trojan
-  server: 193.108.119.29
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.iloverussia2026.com
-- name: 🇩🇪 DE-Trojan-030
-  type: trojan
-  server: 193.108.119.78
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: 🇩🇪 DE-Trojan-031
+      Host: lingering-fire-1fe9.vpnetwork3567.workers.dev
+- name: Trojan-012
   type: trojan
   server: 193.108.119.96
   port: 443
@@ -271,145 +126,7 @@ proxies:
   udp: true
   tls: true
   servername: learn.iloverussia2026.com
-- name: 🇨🇭 CH-Trojan-032
-  type: trojan
-  server: 208.69.78.158
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: 🇨🇭 CH-Trojan-033
-  type: trojan
-  server: 208.69.78.158
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: api.yourultimateprofessionalcareerhub.com
-- name: Trojan-034
-  type: trojan
-  server: 208.69.78.19
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.yourultimateprofessionalcareerhub.com
-- name: Trojan-035
-  type: trojan
-  server: 208.69.78.208
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: resources.yourultimateprofessionalcareerhub.com
-- name: 🇨🇭 CH-Trojan-036
-  type: trojan
-  server: 208.69.78.222
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: yourultimateprofessionalcareerhub.com
-  client-fingerprint: chrome
-- name: 🇨🇭 CH-Trojan-037
-  type: trojan
-  server: 208.69.78.29
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: learn.yourultimateprofessionalcareerhub.com
-- name: 🇨🇭 CH-Trojan-038
-  type: trojan
-  server: 208.69.78.33
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.yourultimateprofessionalcareerhub.com
-- name: 🇨🇭 CH-Trojan-039
-  type: trojan
-  server: 208.69.78.33
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.yourultimateprofessionalcareerhub.com
-  client-fingerprint: chrome
-- name: 🇨🇭 CH-Trojan-040
-  type: trojan
-  server: 208.69.78.60
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.yourultimateprofessionalcareerhub.com
-- name: 🇨🇭 CH-Trojan-041
-  type: trojan
-  server: 208.69.78.60
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.yourultimateprofessionalcareerhub.com
-  client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-042
-  type: trojan
-  server: 216.106.186.32
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.findlocaljobnetworkandbuildcommunityconnections.com
-- name: 🇺🇸 US-Trojan-043
-  type: trojan
-  server: 216.106.186.32
-  port: 443
-  password: dba20dcb635e430fa4d3bfc303a149d2
-  udp: true
-  tls: true
-  servername: blog.findlocaljobnetworkandbuildcommunityconnections.com
-- name: 🇺🇸 US-Trojan-044
-  type: trojan
-  server: 216.106.186.33
-  port: 443
-  password: f0eb8c92ce8946aaba856569cff1a16b
-  udp: true
-  tls: true
-  servername: resources.findlocaljobnetworkandbuildcommunityconnections.com
-- name: 🇺🇸 US-Trojan-045
-  type: trojan
-  server: 216.106.186.46
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: 🇺🇸 US-Trojan-046
-  type: trojan
-  server: 216.106.186.46
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.findlocaljobnetworkandbuildcommunityconnections.com
-  client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-047
-  type: trojan
-  server: 216.106.186.82
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.findlocaljobnetworkandbuildcommunityconnections.com
-  client-fingerprint: chrome
-- name: 🇨🇦 CA-Trojan-048
-  type: trojan
-  server: 216.152.147.152
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: Trojan-049
+- name: Trojan-013
   type: trojan
   server: 216.152.147.152
   port: 443
@@ -417,7 +134,7 @@ proxies:
   udp: true
   tls: true
   servername: learn.connectingpeoplewithgreatjobs.com
-- name: Trojan-050
+- name: Trojan-014
   type: trojan
   server: 216.152.147.48
   port: 443
@@ -426,14 +143,7 @@ proxies:
   tls: true
   servername: courses.connectingpeoplewithgreatjobs.com
   client-fingerprint: chrome
-- name: 🇨🇦 CA-Trojan-051
-  type: trojan
-  server: 216.152.147.74
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: Trojan-052
+- name: Trojan-015
   type: trojan
   server: 216.152.147.74
   port: 443
@@ -441,7 +151,7 @@ proxies:
   udp: true
   tls: true
   servername: api.connectingpeoplewithgreatjobs.com
-- name: 🇨🇦 CA-Trojan-053
+- name: Trojan-016
   type: trojan
   server: 216.152.147.79
   port: 443
@@ -449,32 +159,7 @@ proxies:
   udp: true
   tls: true
   servername: blog.connectingpeoplewithgreatjobs.com
-- name: 🇨🇦 CA-Trojan-054
-  type: trojan
-  server: 216.152.147.79
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.connectingpeoplewithgreatjobs.com
-  client-fingerprint: firefox
-- name: Trojan-055
-  type: trojan
-  server: 216.152.147.85
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.connectingpeoplewithgreatjobs.com
-- name: Trojan-056
-  type: trojan
-  server: 216.152.147.89
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.connectingpeoplewithgreatjobs.com
-- name: Trojan-057
+- name: Trojan-017
   type: trojan
   server: 216.152.147.93
   port: 443
@@ -482,15 +167,7 @@ proxies:
   udp: true
   tls: true
   servername: connectingpeoplewithgreatjobs.com
-- name: Trojan-058
-  type: trojan
-  server: 216.152.155.131
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.nextjobopportunityandclaimyouridealrole.com
-- name: Trojan-059
+- name: Trojan-018
   type: trojan
   server: 216.152.155.158
   port: 443
@@ -498,7 +175,7 @@ proxies:
   udp: true
   tls: true
   servername: resources.nextjobopportunityandclaimyouridealrole.com
-- name: Trojan-060
+- name: Trojan-019
   type: trojan
   server: 216.152.155.176
   port: 443
@@ -506,32 +183,7 @@ proxies:
   udp: true
   tls: true
   servername: blog.nextjobopportunityandclaimyouridealrole.com
-- name: Trojan-061
-  type: trojan
-  server: 216.152.155.23
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.nextjobopportunityandclaimyouridealrole.com
-- name: 🇺🇸 US-Trojan-062
-  type: trojan
-  server: 216.152.155.50
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.nextjobopportunityandclaimyouridealrole.com
-- name: 🇺🇸 US-Trojan-063
-  type: trojan
-  server: 216.152.155.50
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.nextjobopportunityandclaimyouridealrole.com
-  client-fingerprint: chrome
-- name: Trojan-064
+- name: Trojan-020
   type: trojan
   server: 216.152.155.54
   port: 443
@@ -539,7 +191,7 @@ proxies:
   udp: true
   tls: true
   servername: learn.nextjobopportunityandclaimyouridealrole.com
-- name: Trojan-065
+- name: Trojan-021
   type: trojan
   server: 216.152.155.59
   port: 443
@@ -547,7 +199,7 @@ proxies:
   udp: true
   tls: true
   servername: api.nextjobopportunityandclaimyouridealrole.com
-- name: Trojan-066
+- name: Trojan-022
   type: trojan
   server: 216.152.156.159
   port: 443
@@ -555,34 +207,7 @@ proxies:
   udp: true
   tls: true
   servername: resources.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-- name: Trojan-067
-  type: trojan
-  server: 216.152.156.212
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-  client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-068
-  type: trojan
-  server: 216.152.156.42
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-069
-  type: trojan
-  server: 216.152.156.49
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: api.unlockyourfuturefindyourperfectcareer.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-070
+- name: Trojan-023
   type: trojan
   server: 216.152.156.65
   port: 443
@@ -590,32 +215,7 @@ proxies:
   udp: true
   tls: true
   servername: learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-- name: Trojan-071
-  type: trojan
-  server: 216.152.156.81
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
-- name: 🇧🇷 BR-Trojan-072
-  type: trojan
-  server: 216.238.104.154
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: findtemporaryworkandfreelancerprojectsonlineplatform.com
-- name: 🇧🇷 BR-Trojan-073
-  type: trojan
-  server: 216.238.104.154
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: findtemporaryworkandfreelancerprojectsonlineplatform.com
-  client-fingerprint: ios
-- name: Trojan-074
+- name: Trojan-024
   type: trojan
   server: 216.238.80.100
   port: 443
@@ -624,28 +224,7 @@ proxies:
   tls: true
   servername: connectwithtopemployersandfindidealjobs.com
   client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-075
-  type: trojan
-  server: 3x-sub.linzhonghong.com
-  port: 443
-  password: c48qMRRfLJ3kwD4P_XpgfIq6
-  udp: true
-  tls: true
-  servername: 3x-sub.linzhonghong.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /tjbbb7eab89c9a
-- name: 🇸🇬 SG-Trojan-076
-  type: trojan
-  server: 43.156.36.253
-  port: 443
-  password: WvH8ooM9hom4KOOJHFJz1x5umE0aV4R0
-  udp: true
-  tls: true
-  servername: 43.156.36.253
-  skip-cert-verify: true
-- name: Trojan-077
+- name: Trojan-025
   type: trojan
   server: 45.80.111.7
   port: 443
@@ -656,148 +235,14 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
-- name: 🇲🇾 MY-Trojan-078
+- name: 🇲🇾 MY-Trojan-026
   type: trojan
   server: 47.250.84.25
   port: 443
   password: 5931134d1cde66bf83a54acdfebe7ab2
   udp: true
   tls: true
-- name: Trojan-079
-  type: trojan
-  server: 5.101.51.138
-  port: 2095
-  password: cWM5aWtWR9
-  udp: true
-  tls: true
-  servername: ru-1.krugvpn.me
-  client-fingerprint: ios
-  alpn:
-  - h2
-- name: Trojan-080
-  type: trojan
-  server: 5.101.51.138
-  port: 8443
-  password: cWM5aWtWR9
-  udp: true
-  tls: true
-  servername: ru-1.krugvpn.me
-  client-fingerprint: chrome
-  alpn:
-  - h2
-- name: 🇫🇷 FR-Trojan-081
-  type: trojan
-  server: 5.101.51.138
-  port: 8443
-  password: cWM5aWtWR9
-  udp: true
-  tls: true
-  servername: ru-1.krugvpn.me
-  client-fingerprint: safari
-  alpn:
-  - h2
-- name: 🇺🇸 US-Trojan-082
-  type: trojan
-  server: 66.163.112.121
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.unlockyourfuturefindyourperfectcareer.com
-- name: 🇺🇸 US-Trojan-083
-  type: trojan
-  server: 66.163.112.13
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.unlockyourfuturefindyourperfectcareer.com
-- name: 🇺🇸 US-Trojan-084
-  type: trojan
-  server: 66.163.112.13
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: 66.163.112.13
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-085
-  type: trojan
-  server: 66.163.112.142
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.unlockyourfuturefindyourperfectcareer.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-086
-  type: trojan
-  server: 66.163.112.242
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: resources.unlockyourfuturefindyourperfectcareer.com
-- name: 🇺🇸 US-Trojan-087
-  type: trojan
-  server: 66.163.112.31
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: unlockyourfuturefindyourperfectcareer.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-088
-  type: trojan
-  server: 66.163.114.106
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.findconnectwithemployersandbuildprofessionalnetwork.com
-- name: 🇺🇸 US-Trojan-089
-  type: trojan
-  server: 66.163.114.114
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: learn.findconnectwithemployersandbuildprofessionalnetwork.com
-- name: 🇺🇸 US-Trojan-090
-  type: trojan
-  server: 66.163.114.114
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-091
-  type: trojan
-  server: 66.163.114.114
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: learn.findconnectwithemployersandbuildprofessionalnetwork.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-092
-  type: trojan
-  server: 66.163.114.126
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: resources.findconnectwithemployersandbuildprofessionalnetwork.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-093
-  type: trojan
-  server: 66.163.114.166
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.findconnectwithemployersandbuildprofessionalnetwork.com
-- name: 🇺🇸 US-Trojan-094
+- name: Trojan-027
   type: trojan
   server: 66.163.114.166
   port: 443
@@ -806,25 +251,7 @@ proxies:
   tls: true
   servername: blog.findconnectwithemployersandbuildprofessionalnetwork.com
   skip-cert-verify: true
-- name: Trojan-095
-  type: trojan
-  server: 66.163.114.166
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.findconnectwithemployersandbuildprofessionalnetwork.com
-  skip-cert-verify: true
-  client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-096
-  type: trojan
-  server: 66.163.114.45
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: cdn.findconnectwithemployersandbuildprofessionalnetwork.com
-- name: Trojan-097
+- name: Trojan-028
   type: trojan
   server: 66.163.118.115
   port: 443
@@ -833,14 +260,7 @@ proxies:
   tls: true
   servername: discovergreatjobsandadvanceyourcareer.com
   client-fingerprint: chrome
-- name: Trojan-098
-  type: trojan
-  server: 66.163.118.203
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: Trojan-099
+- name: Trojan-029
   type: trojan
   server: 66.163.118.203
   port: 443
@@ -848,15 +268,7 @@ proxies:
   udp: true
   tls: true
   servername: blog.discovergreatjobsandadvanceyourcareer.com
-- name: 🇪🇸 ES-Trojan-100
-  type: trojan
-  server: 66.163.118.244
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: api.discovergreatjobsandadvanceyourcareer.com
-- name: Trojan-101
+- name: Trojan-030
   type: trojan
   server: 66.163.118.40
   port: 443
@@ -865,15 +277,7 @@ proxies:
   tls: true
   servername: cdn.discovergreatjobsandadvanceyourcareer.com
   client-fingerprint: chrome
-- name: 🇪🇸 ES-Trojan-102
-  type: trojan
-  server: 66.163.118.62
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: courses.discovergreatjobsandadvanceyourcareer.com
-- name: Trojan-103
+- name: Trojan-031
   type: trojan
   server: 66.163.122.113
   port: 443
@@ -881,7 +285,7 @@ proxies:
   udp: true
   tls: true
   servername: api.searchnationwidecareerchangehelperandguidancetoday.com
-- name: Trojan-104
+- name: Trojan-032
   type: trojan
   server: 66.163.122.25
   port: 443
@@ -889,15 +293,7 @@ proxies:
   udp: true
   tls: true
   servername: cdn.searchnationwidecareerchangehelperandguidancetoday.com
-- name: 🇺🇸 US-Trojan-105
-  type: trojan
-  server: 66.163.122.26
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: blog.searchnationwidecareerchangehelperandguidancetoday.com
-- name: Trojan-106
+- name: Trojan-033
   type: trojan
   server: 66.163.122.30
   port: 443
@@ -905,41 +301,7 @@ proxies:
   udp: true
   tls: true
   servername: resources.searchnationwidecareerchangehelperandguidancetoday.com
-- name: 🇺🇸 US-Trojan-107
-  type: trojan
-  server: 66.163.122.30
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: resources.searchnationwidecareerchangehelperandguidancetoday.com
-  client-fingerprint: chrome
-- name: 🇺🇸 US-Trojan-108
-  type: trojan
-  server: 66.163.122.46
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: searchnationwidecareerchangehelperandguidancetoday.com
-- name: Trojan-109
-  type: trojan
-  server: 66.163.122.46
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: searchnationwidecareerchangehelperandguidancetoday.com
-  client-fingerprint: chrome
-- name: Trojan-110
-  type: trojan
-  server: 66.163.122.7
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.searchnationwidecareerchangehelperandguidancetoday.com
-- name: Trojan-111
+- name: Trojan-034
   type: trojan
   server: 66.163.127.107
   port: 443
@@ -947,16 +309,7 @@ proxies:
   udp: true
   tls: true
   servername: blog.indyourperfectremotetechjobfromthecomfortofhome.com
-- name: 🇳🇱 NL-Trojan-112
-  type: trojan
-  server: 66.163.127.154
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: www.indyourperfectremotetechjobfromthecomfortofhome.com
-  client-fingerprint: chrome
-- name: Trojan-113
+- name: Trojan-035
   type: trojan
   server: 66.163.127.155
   port: 443
@@ -964,14 +317,7 @@ proxies:
   udp: true
   tls: true
   servername: indyourperfectremotetechjobfromthecomfortofhome.com
-- name: 🇳🇱 NL-Trojan-114
-  type: trojan
-  server: 66.163.127.215
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-- name: Trojan-115
+- name: Trojan-036
   type: trojan
   server: 66.163.127.215
   port: 443
@@ -979,7 +325,7 @@ proxies:
   udp: true
   tls: true
   servername: courses.indyourperfectremotetechjobfromthecomfortofhome.com
-- name: 🇳🇱 NL-Trojan-116
+- name: Trojan-037
   type: trojan
   server: 66.163.127.225
   port: 443
@@ -987,15 +333,7 @@ proxies:
   udp: true
   tls: true
   servername: cdn.indyourperfectremotetechjobfromthecomfortofhome.com
-- name: 🇳🇱 NL-Trojan-117
-  type: trojan
-  server: 66.163.127.44
-  port: 443
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  udp: true
-  tls: true
-  servername: learn.indyourperfectremotetechjobfromthecomfortofhome.com
-- name: 🇺🇸 US-Trojan-118
+- name: 🇺🇸 US-Trojan-038
   type: trojan
   server: 66.23.203.21
   port: 59689
@@ -1004,7 +342,7 @@ proxies:
   tls: true
   servername: 66.23.203.21
   skip-cert-verify: true
-- name: 🇺🇸 US-Trojan-119
+- name: 🇺🇸 US-Trojan-039
   type: trojan
   server: 69.164.240.85
   port: 50875
@@ -1013,16 +351,7 @@ proxies:
   tls: true
   servername: 69.164.240.85
   skip-cert-verify: true
-- name: Trojan-120
-  type: trojan
-  server: 94.130.237.57
-  port: 27154
-  password: d9d02f3e-c877-4a1f-990e-f2418777f745
-  udp: true
-  network: grpc
-  grpc-opts:
-    grpc-service-name: Telegram=@AmyraxVPN
-- name: Trojan-121
+- name: Trojan-040
   type: trojan
   server: blog.findlocaljobnetworkandbuildcommunityconnections.com
   port: 443
@@ -1030,20 +359,16 @@ proxies:
   udp: true
   tls: true
   servername: blog.findlocaljobnetworkandbuildcommunityconnections.com
-- name: Trojan-122
+- name: Trojan-041
   type: trojan
-  server: fastly2.dunnexa.ir
-  port: 443
-  password: jcTG9WSWMJAmR4rv10xpww
+  server: gary04.1688848.xyz
+  port: 37233
+  password: nCKwZIFgBH
   udp: true
   tls: true
-  servername: cdn.akamai.steamstatic.com
-  network: ws
-  ws-opts:
-    path: /TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER
-    headers:
-      Host: copy_az_channel_NUFiLTER_17i.global.ssl.fastly.net.
-- name: Trojan-123
+  servername: www.bing.com
+  skip-cert-verify: true
+- name: Trojan-042
   type: trojan
   server: ipfast.kingmna.com
   port: 443
@@ -1056,7 +381,7 @@ proxies:
     path: /TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER
     headers:
       Host: filasi554.global.ssl.fastly.net.
-- name: Trojan-124
+- name: Trojan-043
   type: trojan
   server: ipfast.kingmna.com
   port: 443
@@ -1069,7 +394,7 @@ proxies:
     path: /TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER
     headers:
       Host: looasaaaboijji.global.ssl.fastly.net.
-- name: Trojan-125
+- name: Trojan-044
   type: trojan
   server: ipfast.kingmna.com
   port: 443
@@ -1082,7 +407,7 @@ proxies:
     path: /TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER-TELEGRAM-@NUFiLTER
     headers:
       Host: pirebepo646.global.ssl.fastly.net.
-- name: Trojan-126
+- name: Trojan-045
   type: trojan
   server: leviko-ca4436.shopingggg.ir
   port: 443
@@ -1090,7 +415,7 @@ proxies:
   udp: true
   tls: true
   servername: blog.connectingpeoplewithgreatjobs.com
-- name: 🇩🇪 DE-Trojan-127
+- name: Trojan-046
   type: trojan
   server: leviko-de5094.shopingggg.ir
   port: 443
@@ -1098,7 +423,7 @@ proxies:
   udp: true
   tls: true
   servername: courses.iloverussia2026.com
-- name: Trojan-128
+- name: Trojan-047
   type: trojan
   server: leviko-nl8252.shopingggg.ir
   port: 443
@@ -1106,7 +431,7 @@ proxies:
   udp: true
   tls: true
   servername: indyourperfectremotetechjobfromthecomfortofhome.com
-- name: Trojan-129
+- name: Trojan-048
   type: trojan
   server: ru-1.krugvpn.me
   port: 2095
@@ -1117,18 +442,7 @@ proxies:
   client-fingerprint: safari
   alpn:
   - h2
-- name: 🇺🇸 US-Trojan-130
-  type: trojan
-  server: ru-1.krugvpn.me
-  port: 2097
-  password: cWM5aWtWR9
-  udp: true
-  tls: true
-  servername: ru-1.krugvpn.me
-  client-fingerprint: android
-  alpn:
-  - h2
-- name: Trojan-131
+- name: Trojan-049
   type: trojan
   server: ru-1.krugvpn.me
   port: 8443
@@ -1139,20 +453,19 @@ proxies:
   client-fingerprint: chrome
   alpn:
   - h2
-- name: Trojan-132
+- name: Trojan-050
   type: trojan
-  server: us-1.gsafevpnapi.com
-  port: 44370
-  password: 5416ef6f-b8e5-48e9-87e4-3d5649b2e3e0
+  server: sclass-00.catcat321.com
+  port: 20103
+  password: d9064589-74af-432a-9390-5d8a9da281bf
   udp: true
   tls: true
-  servername: www.yahoo.com
-- name: Trojan-133
+  servername: hk.catxstar.com
+- name: Trojan-051
   type: trojan
-  server: xvxn1hkzf.mateflora.com
-  port: 443
-  password: 57beeeb0-03fc-4fc9-94da-7604488a7134
+  server: sclass-00.catcat321.com
+  port: 20123
+  password: d9064589-74af-432a-9390-5d8a9da281bf
   udp: true
   tls: true
-  servername: xvxn1hkzf.mateflora.com
-  client-fingerprint: chrome
+  servername: hk.catxstar.com
