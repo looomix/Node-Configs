@@ -1,44 +1,44 @@
 {
-  "updated_at": "2026-11-27 05:20:55",
+  "updated_at": "2026-11-27 16:00:02",
   "enabled": true,
   "method": "tcp-connect",
   "timeout_seconds": 3.0,
-  "checked": 1874,
-  "alive": 1702,
-  "unreachable": 57,
-  "unknown": 115,
-  "alive_ratio": 0.9082,
+  "checked": 2116,
+  "alive": 1967,
+  "unreachable": 48,
+  "unknown": 101,
+  "alive_ratio": 0.9296,
   "by_protocol": {
     "hysteria2": {
-      "checked": 32,
-      "alive": 2,
-      "unreachable": 20,
-      "unknown": 10
+      "checked": 40,
+      "alive": 7,
+      "unreachable": 26,
+      "unknown": 7
     },
     "ss": {
-      "checked": 318,
-      "alive": 299,
-      "unreachable": 3,
-      "unknown": 16
+      "checked": 332,
+      "alive": 315,
+      "unreachable": 2,
+      "unknown": 15
     },
     "trojan": {
-      "checked": 160,
-      "alive": 156,
-      "unreachable": 1,
-      "unknown": 3
+      "checked": 133,
+      "alive": 131,
+      "unreachable": 0,
+      "unknown": 2
     },
     "vless": {
-      "checked": 1202,
-      "alive": 1087,
-      "unreachable": 31,
-      "unknown": 84
+      "checked": 1443,
+      "alive": 1352,
+      "unreachable": 18,
+      "unknown": 73
     },
     "vmess": {
-      "checked": 162,
-      "alive": 158,
+      "checked": 168,
+      "alive": 162,
       "unreachable": 2,
-      "unknown": 2
+      "unknown": 4
     }
   },
-  "dropped": 57
+  "dropped": 48
 }

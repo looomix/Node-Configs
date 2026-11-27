@@ -1,13 +1,13 @@
-# Node-Configs 分片 hysteria2 第 1 片，12 个节点，可作为 proxy-provider
+# Node-Configs 分片 hysteria2 第 1 片，14 个节点，可作为 proxy-provider
 proxies:
-- name: 🇨🇭 CH-Hy2-006
+- name: 🇨🇭 CH-Hy2-009
   type: hysteria2
   server: 140.238.213.114
   port: 50160
   password: 84a506ca5aca505696a454d828420b3f
   sni: www.bing.com
   skip-cert-verify: true
-- name: Hy2-008
+- name: 🇭🇰 HK-Hy2-011
   type: hysteria2
   server: 152.32.254.68
   port: 5010
@@ -15,19 +15,20 @@ proxies:
   sni: nas.aizhzo.com
   obfs: salamander
   obfs-password: 7M4RXPFcQyQEGbkxBPfXo4bilMhCW2U9
-- name: 🇵🇱 PL-Hy2-013
+- name: 🇺🇸 US-Hy2-017
   type: hysteria2
   server: 194.87.224.137
-  port: 9443
+  port: 14443
   password: lvu_3390f238bef4e3058ac47c87473755cf_07cd5acf7265adf5c1210040ca46facf:np2.1.HJjJucZ0-OZZUq5Njkl48v1gYx7ol9rXjxYXZUxrQdM
-  sni: n34.neproxy.net
-- name: 🇩🇪 DE-Hy2-015
+  sni: n37.neproxy.net
+  skip-cert-verify: true
+- name: 🇺🇸 US-Hy2-022
   type: hysteria2
-  server: 195.209.217.251
-  port: 30443
-  password: 0c66ef78-33b9-4f88-9529-50db9919fd33
-  sni: dlfd3b.static.tv-av.fun
-- name: Hy2-020
+  server: 212.18.104.25
+  port: 443
+  password: b1490307-d693-4392-8f32-a3f7cc139202
+  sni: ledgerclient.newbuzideas.org
+- name: Hy2-024
   type: hysteria2
   server: 216.73.157.142
   port: 443
@@ -35,49 +36,60 @@ proxies:
   sni: 216.73.157.142
   obfs: salamander
   obfs-password: qrl-03E8Q6JaUlAkOPHXQBwN
-- name: 🇺🇸 US-Hy2-022
+- name: Hy2-028
+  type: hysteria2
+  server: 4f070970.con.metricdraft.tech
+  port: 443
+  password: 030e421e-9317-4cb8-8fbe-a07a565ad3db
+  sni: 4f070970.con.metricdraft.tech
+- name: 🇺🇸 US-Hy2-029
   type: hysteria2
   server: 50.7.38.243
   port: 443
   password: d4ca9415f0eac7897472e1e5b86d2e96
   sni: promo.betust.net
   skip-cert-verify: true
-- name: 🇫🇷 FR-Hy2-023
+- name: 🇳🇱 NL-Hy2-030
   type: hysteria2
-  server: 62.210.124.146
-  port: 22000
-  password: dongtaiwang.com
-  sni: www.microsoft.com
-  skip-cert-verify: true
-- name: 🇺🇸 US-Hy2-024
+  server: 62.212.79.76
+  port: 443
+  password: d3895603-3164-4003-b85c-70f171ab30b5
+  sni: 62-212-79-76.sslip.io
+- name: 🇺🇸 US-Hy2-032
   type: hysteria2
   server: 66.94.121.46
   port: 443
   password: gf1:gfhysteria2024
   sni: 66.94.121.46
   skip-cert-verify: true
-- name: 🇱🇹 LT-Hy2-025
+- name: 🇯🇵 JP-Hy2-033
   type: hysteria2
-  server: 88.119.176.49
-  port: 443
-  password: c0742f77-5495-43bf-b007-88d368774d7c
-  sni: litual3.harcho.shop
-- name: 🇳🇱 NL-Hy2-027
+  server: 8.211.175.236
+  port: 8443
+  password: u63SxILNwtrQZ7Y1ZrFaZfsA
+  sni: bing.com
+  skip-cert-verify: true
+- name: 🇳🇱 NL-Hy2-035
   type: hysteria2
   server: 94.183.164.119
   port: 24403
   password: 549766c3-fa5f-471e-8031-ffc1f8d5064f
   sni: docs.blog-forme.ru
-- name: Hy2-029
+- name: 🇫🇮 FI-Hy2-036
   type: hysteria2
-  server: n49.neproxy.net
+  server: canaryform.ratethatrestaurant.org
   port: 443
-  password: lvu_3390f238bef4e3058ac47c87473755cf_07cd5acf7265adf5c1210040ca46facf:np2.1.HJjJucZ0-OZZUq5Njkl48v1gYx7ol9rXjxYXZUxrQdM
-  sni: n49.neproxy.net
-- name: 🇰🇷 KR-Hy2-032
+  password: b1490307-d693-4392-8f32-a3f7cc139202
+  sni: canaryform.ratethatrestaurant.org
+- name: 🇨🇭 CH-Hy2-037
   type: hysteria2
-  server: www.ddsos.cc
-  port: 7788
-  password: c8aa4ba6a243ddfdeb67515aa849624b
-  sni: www.ddsos.cc
-  skip-cert-verify: true
+  server: dutycedar.lucheeebezlimitnoekino.stream
+  port: 443
+  password: b1490307-d693-4392-8f32-a3f7cc139202
+  sni: dutycedar.lucheeebezlimitnoekino.stream
+- name: 🇳🇱 NL-Hy2-039
+  type: hysteria2
+  server: trendslate.nem-osh-rkp.net
+  port: 443
+  password: b1490307-d693-4392-8f32-a3f7cc139202
+  sni: trendslate.nem-osh-rkp.net
