@@ -1,85 +1,120 @@
-# Node-Configs 分片 ss 第 2 片，46 个节点，可作为 proxy-provider
+# Node-Configs 分片 ss 第 2 片，69 个节点，可作为 proxy-provider
 proxies:
-- name: 🇳🇱 NL-SS-305
+- name: 🇳🇱 NL-SS-302
   type: ss
-  server: 82.38.31.198
+  server: 82.38.31.191
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
+- name: SS-303
+  type: ss
+  server: 82.38.31.192
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
+- name: SS-304
+  type: ss
+  server: 82.38.31.194
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
+- name: SS-305
+  type: ss
+  server: 82.38.31.195
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
 - name: 🇳🇱 NL-SS-306
   type: ss
+  server: 82.38.31.198
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
+- name: 🇳🇱 NL-SS-307
+  type: ss
   server: 82.38.31.199
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: SS-307
+- name: SS-308
   type: ss
   server: 82.38.31.200
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-308
+- name: 🇳🇱 NL-SS-309
   type: ss
   server: 82.38.31.201
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-309
+- name: 🇳🇱 NL-SS-310
   type: ss
   server: 82.38.31.202
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-310
+- name: 🇳🇱 NL-SS-311
   type: ss
   server: 82.38.31.203
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-311
+- name: 🇳🇱 NL-SS-312
   type: ss
   server: 82.38.31.204
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-312
+- name: 🇳🇱 NL-SS-313
   type: ss
   server: 82.38.31.205
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-313
+- name: 🇳🇱 NL-SS-314
   type: ss
   server: 82.38.31.206
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-314
+- name: 🇳🇱 NL-SS-315
   type: ss
   server: 82.38.31.207
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: SS-315
+- name: 🇳🇱 NL-SS-316
   type: ss
   server: 82.38.31.208
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
+- name: 🇳🇱 NL-SS-317
+  type: ss
+  server: 82.38.31.210
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
 - name: 🇳🇱 NL-SS-318
   type: ss
-  server: 82.38.31.212
+  server: 82.38.31.211
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
@@ -119,203 +154,329 @@ proxies:
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: 🇳🇱 NL-SS-324
+- name: SS-324
+  type: ss
+  server: 82.38.31.218
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
+- name: 🇳🇱 NL-SS-325
   type: ss
   server: 82.38.31.219
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: k1dBOmOB4oqi7Ump37a1bQ
   udp: true
-- name: SS-325
+- name: 🇳🇱 NL-SS-326
+  type: ss
+  server: 82.38.31.220
+  port: 8080
+  cipher: chacha20-ietf-poly1305
+  password: k1dBOmOB4oqi7Ump37a1bQ
+  udp: true
+- name: SS-327
   type: ss
   server: 82.38.31.3
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: SS-326
+- name: SS-328
   type: ss
   server: 82.38.31.34
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: SS-327
+- name: SS-329
   type: ss
   server: 82.38.31.35
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-328
+- name: 🇳🇱 NL-SS-330
   type: ss
   server: 82.38.31.39
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-329
+- name: 🇳🇱 NL-SS-331
   type: ss
   server: 82.38.31.46
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-330
+- name: 🇳🇱 NL-SS-332
   type: ss
   server: 82.38.31.47
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-331
+- name: 🇳🇱 NL-SS-333
   type: ss
   server: 82.38.31.48
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-332
+- name: 🇳🇱 NL-SS-334
   type: ss
   server: 82.38.31.49
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-333
+- name: 🇳🇱 NL-SS-335
   type: ss
   server: 82.38.31.61
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇳🇱 NL-SS-334
+- name: 🇳🇱 NL-SS-336
   type: ss
   server: 82.38.31.62
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: SS-335
+- name: SS-337
   type: ss
   server: 82.38.31.66
   port: 8080
   cipher: chacha20-ietf-poly1305
   password: oZIoA69Q8yhcQV8ka3Pa3A
   udp: true
-- name: 🇺🇸 US-SS-336
+- name: 🇺🇸 US-SS-338
   type: ss
   server: 84.20.27.183
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-337
+- name: 🇩🇪 DE-SS-339
   type: ss
   server: 85.155.226.213
   port: 2089
   cipher: chacha20-ietf-poly1305
   password: DVlt-OeAV4RiLMwT9e0T72nnFtMG2W3o
   udp: true
-- name: 🇬🇧 GB-SS-339
+- name: 🇷🇺 RU-SS-341
   type: ss
-  server: 89.238.165.92
-  port: 12021
-  cipher: aes-128-gcm
-  password: U/UPtOr5/R1CilCW0X/FMPnd008IWuBt
+  server: 90.156.203.62
+  port: 5112
+  cipher: chacha20-ietf-poly1305
+  password: VVlAff77CnAU43Aoc5j15Y
   udp: true
-- name: 🇬🇧 GB-SS-340
+- name: 🇬🇧 GB-SS-342
   type: ss
   server: 94.156.250.148
   port: 7001
   cipher: aes-256-gcm
   password: RexnBgU7EV5ADxG
   udp: true
-- name: 🇺🇸 US-SS-341
+- name: 🇺🇸 US-SS-343
   type: ss
   server: 95.215.201.18
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇬🇧 GB-SS-342
+- name: 🇬🇧 GB-SS-344
   type: ss
   server: 98.98.142.161
   port: 8080
   cipher: rc4-md5
   password: 14fFPrbezE3HDZzsMOr6
   udp: true
-- name: 🇯🇵 JP-SS-345
+- name: 🇬🇧 GB-SS-345
+  type: ss
+  server: 98.98.207.163
+  port: 8080
+  cipher: rc4-md5
+  password: 14fFPrbezE3HDZzsMOr6
+  udp: true
+- name: 🇮🇷 IR-SS-346
+  type: ss
+  server: Ir.wbzo.ir
+  port: 2060
+  cipher: chacha20-ietf-poly1305
+  password: pmZmPZcbrauTSbfdc6-RLIaR_F7bW3H1
+  udp: true
+- name: 🇩🇪 DE-SS-347
+  type: ss
+  server: S23.fusetea.ir
+  port: 2089
+  cipher: chacha20-ietf-poly1305
+  password: DVlt-OeAV4RiLMwT9e0T72nnFtMG2W3o
+  udp: true
+- name: 🇩🇪 DE-SS-348
+  type: ss
+  server: S23.fusetea.ir
+  port: 2089
+  cipher: chacha20-ietf-poly1305
+  password: R02KmzzSD7PeZ_DosF87xZ7zIn8jLtyP
+  udp: true
+- name: 🇩🇪 DE-SS-349
+  type: ss
+  server: at-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇩🇪 DE-SS-350
+  type: ss
+  server: be-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇩🇪 DE-SS-351
+  type: ss
+  server: de-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇩🇪 DE-SS-352
+  type: ss
+  server: es-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇩🇪 DE-SS-353
+  type: ss
+  server: fi-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇩🇪 DE-SS-355
+  type: ss
+  server: info-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇯🇵 JP-SS-356
   type: ss
   server: jpa.123069.xyz
   port: 53758
   cipher: aes-128-gcm
   password: Bwlqh7GcFB
   udp: true
-- name: 🇨🇭 CH-SS-346
+- name: 🇨🇭 CH-SS-357
   type: ss
   server: leviko-ch0322.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-347
+- name: 🇨🇭 CH-SS-358
+  type: ss
+  server: leviko-ch5965.shopingggg.ir
+  port: 19999
+  cipher: aes-256-gcm
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  udp: true
+- name: 🇨🇭 CH-SS-359
   type: ss
   server: leviko-ch7340.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇫🇷 FR-SS-348
+- name: 🇫🇷 FR-SS-360
   type: ss
   server: leviko-fr1459.shopingggg.ir
   port: 443
   cipher: chacha20-ietf-poly1305
   password: ySGkGhr2sKHV
   udp: true
-- name: 🇫🇷 FR-SS-349
+- name: 🇫🇷 FR-SS-361
   type: ss
   server: leviko-fr5418.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: 🇸🇬 SG-SS-350
+- name: SS-362
+  type: ss
+  server: leviko-it8672.shopingggg.ir
+  port: 8388
+  cipher: aes-256-gcm
+  password: itzvpn@321
+  udp: true
+- name: 🇸🇬 SG-SS-363
   type: ss
   server: leviko-sg3063.shopingggg.ir
   port: 19999
   cipher: aes-256-gcm
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   udp: true
-- name: SS-351
+- name: 🇪🇺 EU-SS-364
   type: ss
   server: news.bushyjenz.cyou
   port: 42878
   cipher: chacha20-ietf-poly1305
   password: ijoUwfdnkz7mX4pWdkSpmEixTZCt2TRm1JDr4BSaBAWkLxYGoXBHXadFKY5D5ZfoVTwqsx46jCmEUDnQUizJDYrM7B5anhnu
   udp: true
-- name: SS-353
+- name: 🇩🇪 DE-SS-365
+  type: ss
+  server: nl-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: SS-366
   type: ss
   server: s23.fusetea.ir
   port: 2089
   cipher: chacha20-ietf-poly1305
   password: DVlt-OeAV4RiLMwT9e0T72nnFtMG2W3o
   udp: true
-- name: 🇹🇷 TR-SS-354
+- name: 🇩🇪 DE-SS-367
   type: ss
-  server: tr99.sarzaminshadi13.ir
-  port: 2060
+  server: se-ss.pasar2.avqu.ir
+  port: 8443
   cipher: chacha20-ietf-poly1305
-  password: bRCP9bbup_dtcFoO_SvGMPQUNyaTUhmm
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
   udp: true
-- name: SS-355
+- name: 🇩🇪 DE-SS-368
+  type: ss
+  server: tr-ss.pasar2.avqu.ir
+  port: 8443
+  cipher: chacha20-ietf-poly1305
+  password: xlipBmmLMbSvuDMhHlG7BAv9hgBi_ttx
+  udp: true
+- name: 🇹🇷 TR-SS-369
+  type: ss
+  server: tr.subscriptionservice.ir
+  port: 2089
+  cipher: chacha20-ietf-poly1305
+  password: lZZzfo1mqH7PqnloAogdi2XBhlgiofMy
+  udp: true
+- name: SS-370
   type: ss
   server: tun-ssl.rovfelo.ir
   port: 2026
   cipher: chacha20-ietf-poly1305
   password: bwfHn5C5Jz8oZcqD_XuhqyPWtIp6d16D
   udp: true
-- name: 🇭🇰 HK-SS-356
+- name: 🇫🇷 FR-SS-371
+  type: ss
+  server: uk.fusetea.ir
+  port: 154
+  cipher: chacha20-ietf-poly1305
+  password: eCUs1n3b2Fh9b6WATvkNILLBzYbruQ_X
+  udp: true
+- name: SS-372
   type: ss
   server: waic.pro.main.sys-metric-report.com
   port: 28014
